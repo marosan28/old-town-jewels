@@ -49,6 +49,7 @@ INSTALLED_APPS = [
     'cloudinary',
     'shop.apps.ShopConfig',
     'cart.apps.CartConfig',
+    'orders.apps.OrdersConfig',
 ]
 
 MIDDLEWARE = [
