@@ -14,6 +14,9 @@ from pathlib import Path
 import os
 import dj_database_url
 
+if os.path.isfile("env.py"):
+   import env
+
 development = os.environ.get('DEVELOPMENT', False)
 
 
@@ -148,6 +151,7 @@ STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 
 MEDIA_URL = '/media/'
 DEFAULT_FILE_STORAGE = 'cloudinary_storage.storage.MediaCloudinaryStorage'
+CLOUDINARY_URL = os.environ.get('CLOUDINARY_URL')
 
 
 # Default primary key field type
