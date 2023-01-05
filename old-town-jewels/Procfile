@@ -1,1 +1,2 @@
 web: gunicorn old-town-jewels.myshop.wsgi
+web: python old-town-jewels.py
