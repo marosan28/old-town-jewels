@@ -48,6 +48,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'cloudinary',
     'shop.apps.ShopConfig',
+    'cart.apps.CartConfig',
 ]
 
 MIDDLEWARE = [
@@ -156,3 +157,5 @@ CLOUDINARY_URL = os.environ.get('CLOUDINARY_URL')
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 CSRF_TRUSTED_ORIGINS = ['old-town-jewels.herokuapp.com']
+
+CART_SESSION_ID = 'cart'
