@@ -23,6 +23,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 
 TEMPLATES_DIR = os.path.join(BASE_DIR, 'templates')
 
+
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/3.2/howto/deployment/checklist/
 
@@ -64,7 +65,7 @@ ROOT_URLCONF = 'myshop.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-         'DIRS': [TEMPLATES_DIR],
+        'DIRS': [TEMPLATES_DIR],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
