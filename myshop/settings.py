@@ -37,7 +37,7 @@ DEBUG = development
 
 ALLOWED_HOSTS = ["old-town-jewels.herokuapp.com", "localhost"]
 
-
+WSGI_APPLICATION = 'myshop.wsgi.application'
 # Application definition
 
 INSTALLED_APPS = [
