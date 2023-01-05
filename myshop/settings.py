@@ -82,8 +82,6 @@ TEMPLATES = [
     },
 ]
 
-WSGI_APPLICATION = 'myshop.wsgi.application'
-
 
 # Database
 # https://docs.djangoproject.com/en/3.2/ref/settings/#databases
@@ -156,3 +154,4 @@ CLOUDINARY_URL = os.environ.get('CLOUDINARY_URL')
 # https://docs.djangoproject.com/en/3.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+CSRF_TRUSTED_ORIGINS = ['old-town-jewels.herokuapp.com']
