@@ -161,3 +161,11 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 CSRF_TRUSTED_ORIGINS = ['old-town-jewels.herokuapp.com']
 
 CART_SESSION_ID = 'cart'
+
+EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+
+# Stripe settings
+STRIPE_PUBLISHABLE_KEY = 'pk_test_51Jg7sVL3uZcnLwgf39FXn4SGNbSs8r0IblnzO7qwWLUnsUlhSVkURC95EokRMunVIjKlDFfCgTTJHAXHS1bHGRiX00lfCBazpe'
+STRIPE_SECRET_KEY = 'sk_test_51Jg7sVL3uZcnLwgfivUtGbwXDPLTw0eVKKRnfx8Xmg3R8mdii1ydK30V7kmDlT2a9zrG4E3GnXSpTAowH8HlOFZy00rmKbEzXK'      
+STRIPE_API_VERSION = '2022-11-15'
+
