@@ -166,7 +166,6 @@ CART_SESSION_ID = 'cart'
 EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 
 # Stripe settings
-STRIPE_PUBLISHABLE_KEY = 'pk_test_51Jg7sVL3uZcnLwgf39FXn4SGNbSs8r0IblnzO7qwWLUnsUlhSVkURC95EokRMunVIjKlDFfCgTTJHAXHS1bHGRiX00lfCBazpe'
-STRIPE_SECRET_KEY = 'sk_test_51Jg7sVL3uZcnLwgfivUtGbwXDPLTw0eVKKRnfx8Xmg3R8mdii1ydK30V7kmDlT2a9zrG4E3GnXSpTAowH8HlOFZy00rmKbEzXK'      
+STRIPE_PUBLISHABLE_KEY = 'pk_test_51MN0bDAQpwLvviS09rUz6F4sU7hualrvE6rowj4zHO12tY1Bq3oeFewVmmLHRCU915xbXEAx8NulcNbCentqiEAn00GeagOLMY'
+STRIPE_SECRET_KEY = 'sk_test_51MN0bDAQpwLvviS0lm4Udq5tvakxkurNwMHn2ZldJ8ABrNuKHpZqtAuW78KAWkNc1t9aCLRBcqiIm4gLk8m4t2eS00qdVdMxHv'     
 STRIPE_API_VERSION = '2022-11-15'
-
