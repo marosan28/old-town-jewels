@@ -25,7 +25,7 @@ class Order(models.Model):
     discount = models.IntegerField(default=0,
                                    validators=[MinValueValidator(0),
                                        MaxValueValidator(100)])
-                                       
+
     def get_total_cost_before_discount(self):
         return sum(item.get_cost() for item in self.items.all())
     def get_discount(self):
@@ -43,7 +43,9 @@ class Order(models.Model):
     def __str__(self):
         return f'Order {self.id}'
     def get_total_cost(self):
-        return sum(item.get_cost() for item in self.items.all())
+        total_cost = self.get_total_cost_before_discount()
+        return total_cost - self.get_discount()
+        
     def get_stripe_url(self):
         if not self.stripe_id:
             # no payment associated
