@@ -25,6 +25,14 @@ class Order(models.Model):
     discount = models.IntegerField(default=0,
                                    validators=[MinValueValidator(0),
                                        MaxValueValidator(100)])
+                                       
+    def get_total_cost_before_discount(self):
+        return sum(item.get_cost() for item in self.items.all())
+    def get_discount(self):
+        total_cost = self.get_total_cost_before_discount()
+        if self.discount:
+            return total_cost * (self.discount / Decimal(100))
+        return Decimal(0)
 
 
     class Meta:
