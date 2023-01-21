@@ -15,8 +15,7 @@ def payment_process(request):
     order = get_object_or_404(Order, id=order_id)
 
     if request.method == 'POST':
-        success_url = request.build_absolute_uri(
-                        reverse('payment:completed'))
+        success_url = "https://8000-marosan28-oldtownjewels-xahe51drv5g.ws-eu83.gitpod.io/payment/completed/"
         cancel_url = request.build_absolute_uri(
                         reverse('payment:canceled'))
 
