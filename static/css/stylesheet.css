@@ -164,15 +164,6 @@ form p input {
     border-radius: 4px;
 }
 
-ul.errorlist {
-    float: left;
-    color: #ff0000;
-    clear: both;
-    font-size: 13px;
-    margin: 0 0 0 10px;
-    padding: 10px 0;
-}
-
 #header {
     padding: 10px 100px;
     font-size: 18px;
@@ -316,74 +307,10 @@ color: wheat;
     color: #dc1616;
 }
 
-/* braintree hosted fields */
-form div.field {
-    font-size: 13px;
-    color: #666;
-    width: 300px;
-    height: 22px;
-    margin-bottom: 10px;
-    padding: 6px 12px;
-    border: 0;
-    background: #efefef;
-    color: #666;
-    border-radius: 4px;
-}
+/* Media queries for small screen sizes */
 
-/* Log in */
-.log-in {
-    display: flex;
-    flex-direction: column;
-    flex-wrap: wrap;
-    align-content: center;
-    align-items: flex-end;
-    position: relative;
-    margin: 20px 0 30px;
-    left: 40%;
-}
-
-.navbar-collapse {
-    text-align: right;
-}
-
-.d-block.w-100 {
-    width: 200px;
-    height: 200px;
-}
-
-p.login-name {
-    width: max-content;
-    position: relative;
-    margin: 20px;
-    color: white;
-}
-
-.pull-right {
-    float: right;
-    padding: 0.5em 1em;
-    border: none;
-    border-radius: 0.25em;
-    background-color: #4caf7fb8;
-    color: white;
-    text-decoration: none;
-    position: relative;
-    top: 10px;
-    margin-right: 5px;
-}
-
-.pull-right:hover {
-    background-color: #3e8e41;
-}
-.bg-image-vertical {
-    position: relative;
-    overflow: hidden;
-    background-repeat: no-repeat;
-    background-position: right center;
-    background-size: auto 100%;
+@media only screen and (max-width: 700px) {
+    p.product-description {
+        flex-wrap: wrap !important;
     }
-    
-    @media (min-width: 1025px) {
-    .h-custom-2 {
-    height: 100%;
-    }
-    }
+}
