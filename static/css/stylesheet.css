@@ -59,6 +59,7 @@ a.button.light {
 /* navbar */
 nav.navbar {
     background-color: #111 !important;
+    margin-bottom: 50px;
 }
 .navbar-light .navbar-brand, i.fa-gem {
     color: white !important;

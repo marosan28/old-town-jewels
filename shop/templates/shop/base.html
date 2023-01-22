@@ -40,7 +40,7 @@
       </ul>
     </div>
   </nav>
- 
+  {% if user.is_authenticated %}
   <div id="subheader">
     <div class="cart">
       {% with total_items=cart|length %}
@@ -56,10 +56,12 @@
       {% endwith %}
     </div>
   </div>
+  {% endif %}
   <div id="content">
     {% block content %}
     {% endblock %}
   </div>
+ 
 
  
   <!-- Footer-->
