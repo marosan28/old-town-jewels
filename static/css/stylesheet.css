@@ -3,10 +3,10 @@
 body {
     margin: 0;
     padding: 0;
-    font-family: italiana, sans-serif;
-}
-p, h, a {
     font-family: Caudex, sans-serif;
+}
+h1, h2, h3 {
+    font-family: Italiana, sans-serif;
 }
 
 .title {
@@ -218,7 +218,7 @@ form p input {
 #sidebar ul li.selected a {
     color: #fff;
 }
-p.product-description {
+span.product-description {
     margin-top: 10px;
     display: flex;
     flex-wrap: nowrap;
@@ -257,7 +257,7 @@ p.product-description {
 
 .product-detail img {
     width: 50%;
-    padding-right: 24px;
+    padding: 10px 0;
 }
 
 .product-detail h1 {
@@ -310,7 +310,7 @@ color: wheat;
 /* Media queries for small screen sizes */
 
 @media only screen and (max-width: 700px) {
-    p.product-description {
-        flex-wrap: wrap !important;
+    span.product-description {
+        flex-wrap: wrap;
     }
 }
