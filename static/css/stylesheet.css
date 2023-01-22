@@ -325,6 +325,9 @@ footer.bg-dark {
     bottom: 0;
     width: 100%;
   }
+.second-img {
+    padding: 0 100px;
+}
 /* Media queries for small screen sizes */
 
 @media only screen and (max-width: 700px) {
