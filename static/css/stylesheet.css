@@ -30,7 +30,7 @@ p {
 
 a {
     text-decoration: none;
-    color: #666;
+    color: #111;
 }
 
 input.remove {
@@ -44,7 +44,7 @@ a:hover {
 a.button,
 input[type="submit"] {
     color: #fff;
-    background: #666;
+    background: #111;
     border-radius: 4px;
     padding: 10px 20px;
     font-size: 14px;
@@ -52,13 +52,13 @@ input[type="submit"] {
 }
 
 a.button.light {
-    color: #666;
+    color: #111;
     background: #ededed;
 }
 
 /* navbar */
 nav.navbar {
-    background-color: #666 !important;
+    background-color: #111 !important;
 }
 .navbar-light .navbar-brand, i.fa-gem {
     color: white !important;
@@ -121,7 +121,7 @@ tbody tr.subtotal {
 
 thead th,
 tbody tr.total {
-    background: #666;
+    background: #111;
     color: black;
 }
 
@@ -160,7 +160,7 @@ form p input {
     padding: 10px 12px;
     border: 0;
     background: #efefef;
-    color: #666;
+    color: #111;
     border-radius: 4px;
 }
 
@@ -211,7 +211,7 @@ form p input {
 }
 
 #sidebar ul li.selected {
-    background: #666;
+    background: #111;
     border-radius: 4px;
 }
 
@@ -278,14 +278,14 @@ span.product-description {
     background: #efefef;
     padding: 10px 20px;
     color: #333;
-    border-bottom: 4px solid #666;
+    border-bottom: 4px solid #111;
 }
 button.btn  {
 background-color: #4caf7fb8;
 color: wheat;
 }
 .order-info h3 {
-    color: #666;
+    color: #111;
 }
 
 .order-info ul li {
@@ -307,6 +307,13 @@ color: wheat;
     color: #dc1616;
 }
 
+.text-black {
+    background-color:  #ecececb4;
+    margin-top: 200px;
+}
+.bg-image-full {
+    background-size: cover;
+}
 /* Media queries for small screen sizes */
 
 @media only screen and (max-width: 700px) {
