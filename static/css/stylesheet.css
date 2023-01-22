@@ -227,6 +227,13 @@ ul.errorlist {
 #sidebar ul li.selected a {
     color: #fff;
 }
+p.product-description {
+    margin-top: 10px;
+    display: flex;
+    flex-wrap: nowrap;
+    justify-content: center;
+    flex-direction: row;
+}
 .product-list {
     display: flex;
     flex-wrap: wrap;
@@ -258,8 +265,8 @@ ul.errorlist {
 }
 
 .product-detail img {
-    width: auto;
-    padding: 20px;
+    width: 50%;
+    padding-right: 24px;
 }
 
 .product-detail h1 {
