@@ -29,7 +29,7 @@ def register(request):
             new_user = form.save()
             # Log the user in and then redirect him to homepage.
             login(request, new_user)
-            return redirect('shop:index')
+            return redirect('shop:home')
 
     # Display a blank or invalid form.
     context = {'form': form}

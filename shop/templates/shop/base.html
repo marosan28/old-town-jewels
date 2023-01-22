@@ -36,11 +36,11 @@
           <a class="nav-link" href="{% url 'users:login' %}">Log in</a></li>
         <li class="nav-item">
           <a class="nav-link" href="{% url 'users:register' %}">Register</a>
-        {% endif %}
+          {% endif %}
       </ul>
     </div>
   </nav>
-
+ 
   <div id="subheader">
     <div class="cart">
       {% with total_items=cart|length %}
@@ -56,16 +56,18 @@
       {% endwith %}
     </div>
   </div>
-      <div id="content">
-        {% block content %}
-        {% endblock %}
-      </div>
+  <div id="content">
+    {% block content %}
+    {% endblock %}
+  </div>
 
-
-      <!-- Footer-->
-      <footer class="py-5 bg-dark">
-          <div class="container"><p class="m-0 text-center text-white">Copyright &copy; Old Town Jewels 2023</p></div>
-      </footer>
+ 
+  <!-- Footer-->
+  <footer class="py-5 bg-dark">
+    <div class="container">
+      <p class="m-0 text-center text-white">Copyright &copy; Old Town Jewels 2023</p>
+    </div>
+  </footer>
 </body>
 <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
   integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
