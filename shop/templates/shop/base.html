@@ -23,13 +23,24 @@
       <span class="navbar-toggler-icon"></span>
     </button>
     <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
-      <div class="navbar-nav">
-        <a class="nav-item nav-link active" href="">Home<span class="sr-only">(current)</span></a>
-        <a class="nav-item nav-link" href="#">About</a>
-        <a class="nav-item nav-link" href="#">Shop</a>
-      </div>
+      <ul class="navbar-nav">
+        {% if user.is_authenticated %}
+        <li class="nav-item">
+          <span class="navbar-text">Welcome, {{ user.username }}.</span>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="{% url 'users:logout' %}">Log out</a>
+        </li>
+        {% else %}
+        <li class="nav-item">
+          <a class="nav-link" href="{% url 'users:login' %}">Log in</a></li>
+        <li class="nav-item">
+          <a class="nav-link" href="{% url 'users:register' %}">Register</a>
+        {% endif %}
+      </ul>
     </div>
   </nav>
+
   <div id="subheader">
     <div class="cart">
       {% with total_items=cart|length %}
@@ -45,40 +56,12 @@
       {% endwith %}
     </div>
   </div>
-         <header class="py-5 bg-image-full" style="background-image: url('https://res.cloudinary.com/dd9o1h7oh/image/upload/v1674412791/model-img_vaw23r.jpg')">
-          <div style="height: 10rem" class="text-center">
-              <h1 class="text-black fs-3 fw-bolder">Welcome to Old Town Jewels</h1>
-          </div>
-        </div>
-      </header>
-      <!-- Content section-->
-      <section class="py-5">
-          <div class="container my-5">
-              <div class="row justify-content-center">
-                  <div class="col-lg-6">
-                      <h2>Full Width Backgrounds</h2>
-                      <p class="lead">A single, lightweight helper class allows you to add engaging, full width background images to sections of your page.</p>
-                      <p class="mb-0">The universe is almost 14 billion years old, and, wow! Life had no problem starting here on Earth! I think it would be inexcusably egocentric of us to suggest that we're alone in the universe.</p>
-                  </div>
-              </div>
-          </div>
-      </section>
-
-      <div class="py-5 bg-image-full" style="background-image: url('https://res.cloudinary.com/dd9o1h7oh/image/upload/v1674413928/edgar-soto-gb0BZGae1Nk-unsplash_pitob7.jpg')">
-          <div style="height: 20rem"></div>
+      <div id="content">
+        {% block content %}
+        {% endblock %}
       </div>
-      <!-- Content section-->
-      <section class="py-5">
-          <div class="container my-5">
-              <div class="row justify-content-center">
-                  <div class="col-lg-6">
-                      <h2>Engaging Background Images</h2>
-                      <p class="lead">The background images used in this template are sourced from Unsplash and are open source and free to use.</p>
-                      <p class="mb-0">I can't tell you how many people say they were turned off from science because of a science teacher that completely sucked out all the inspiration and enthusiasm they had for the course.</p>
-                  </div>
-              </div>
-          </div>
-      </section>
+
+
       <!-- Footer-->
       <footer class="py-5 bg-dark">
           <div class="container"><p class="m-0 text-center text-white">Copyright &copy; Old Town Jewels 2023</p></div>

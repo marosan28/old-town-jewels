@@ -53,6 +53,7 @@ INSTALLED_APPS = [
     'payment.apps.PaymentConfig',
     'coupons.apps.CouponsConfig',
     'bootstrap4',
+    'users.apps.UsersConfig',
 ]
 
 MIDDLEWARE = [

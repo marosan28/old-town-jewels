@@ -317,6 +317,14 @@ color: wheat;
 .bg-dark {
     background-color: black!important;
 }
+
+footer.bg-dark {
+    position: relative;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    width: 100%;
+  }
 /* Media queries for small screen sizes */
 
 @media only screen and (max-width: 700px) {
