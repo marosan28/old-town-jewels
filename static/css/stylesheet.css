@@ -314,6 +314,9 @@ color: wheat;
 .bg-image-full {
     background-size: cover;
 }
+.bg-dark {
+    background-color: black!important;
+}
 /* Media queries for small screen sizes */
 
 @media only screen and (max-width: 700px) {
