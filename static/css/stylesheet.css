@@ -227,12 +227,16 @@ ul.errorlist {
 #sidebar ul li.selected a {
     color: #fff;
 }
-
+.product-list {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    align-items: baseline;
+}
 
 .product-list .item {
-    width: 25%;
+    width: min-content;
     padding: 10px 20px 10px 0;
-    display: grid;
     line-height: 1.2;
 }
 
