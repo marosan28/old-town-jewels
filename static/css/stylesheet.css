@@ -282,8 +282,8 @@ span.product-description {
     border-bottom: 4px solid #111;
 }
 button.btn  {
-background-color: #4caf7fb8;
-color: wheat;
+    background-color: pink;
+    color: black;
 }
 .order-info h3 {
     color: #111;
@@ -329,6 +329,42 @@ footer.bg-dark {
 .second-img {
     padding: 0 100px;
 }
+/* Log in page */ 
+
+.container-login{
+    height: 100%;
+    align-content: center;
+    }
+    
+    .card{
+    height: 370px;
+    margin-top: auto;
+    margin-bottom: auto;
+    width: 400px;
+    background-color: black !important;
+    }
+
+    .card-header h3{
+    background-color: rgba(0, 0, 0, 0.782)!important;
+    color: white;
+    }
+    
+    input:focus{
+    outline: 0 0 0 0  !important;
+    box-shadow: 0 0 0 0 !important;
+    
+    }
+    
+    .login-btn:hover{
+    color: black;
+    background-color: white;
+    }
+
+
+.form {
+    color: white;
+}
+    
 /* Media queries for small screen sizes */
 
 @media only screen and (max-width: 700px) {
