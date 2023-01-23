@@ -3,7 +3,9 @@ from cart.forms import CartAddProductForm
 from .models import Category, Product
 
 def home(request):
-    return render(request, 'shop/base.html')
+    category_slug = None
+    products = product_list(request, category_slug)
+    return render(request, 'shop/base.html', {'product_list': products})
 
 def index(request):
     """The ladning page"""
@@ -22,8 +24,6 @@ def product_list(request, category_slug=None):
                   {'category': category,
                    'categories': categories,
                    'products': products})
-
-
 
 def product_detail(request, id, slug):
     product = get_object_or_404(Product, id=id, slug=slug, available=True)

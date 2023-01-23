@@ -59,6 +59,15 @@
   {% endif %}
   <div id="content">
     {% block content %}
+    {% for product in product_list %}
+    <div class="product-card">
+        <h2>{{ product.name }}</h2>
+        <img src="{{ product.image.url }}" alt="{{ product.name }}">
+        <p>{{ product.price }}</p>
+        <a href="{% url 'shop:product_detail' product.id product.slug %}">View product</a>
+    </div>
+{% endfor %}
+
     {% endblock %}
   </div>
  
