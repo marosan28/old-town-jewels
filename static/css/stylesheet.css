@@ -229,7 +229,7 @@ span.product-description {
 .product-list {
     display: flex;
     flex-wrap: wrap;
-    justify-content: space-around;
+    justify-content: flex-start;
     align-items: baseline;
 }
 
