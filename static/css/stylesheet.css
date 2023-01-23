@@ -341,11 +341,10 @@ footer.bg-dark {
     margin-top: auto;
     margin-bottom: auto;
     width: 400px;
-    background-color: black !important;
+    background-color: grey!important;
     }
 
     .card-header h3{
-    background-color: rgba(0, 0, 0, 0.782)!important;
     color: white;
     }
     
@@ -370,5 +369,12 @@ footer.bg-dark {
 @media only screen and (max-width: 700px) {
     span.product-description {
         flex-wrap: wrap;
+    }
+
+    #content {
+        padding: 0 20px;
+    }
+    .second-img {
+        padding: 0 20px;
     }
 }
