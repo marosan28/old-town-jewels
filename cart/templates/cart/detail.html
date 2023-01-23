@@ -5,6 +5,7 @@ Your shopping cart
 {% endblock %}
 {% block content %}
 <h1>Your shopping cart</h1>
+<div class="table-responsive">
 <table class="cart">
   <thead>
     <tr>
@@ -70,6 +71,7 @@ Your shopping cart
     </tr>
   </tbody>
 </table>
+</div>
 <p>Apply a coupon:</p>
 <form action="{% url 'coupons:apply' %}" method="post">
   {{ coupon_apply_form }}

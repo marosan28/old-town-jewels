@@ -123,7 +123,7 @@ tbody tr.subtotal {
 thead th,
 tbody tr.total {
     background: #111;
-    color: black;
+    color: white;
 }
 
 table.cart {
@@ -372,9 +372,20 @@ footer.bg-dark {
     }
 
     #content {
-        padding: 0 20px;
+        padding: 0 20px 20px;
     }
     .second-img {
         padding: 0 20px;
     }
+
+    .container-login {
+        padding-bottom: 110px;
+    }
+    .product-detail img {
+        width: 100%;
+    }
+    .product-detail h1 {
+        margin-top: 20px;
+        font-size: x-large;
+}
 }
