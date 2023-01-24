@@ -181,6 +181,7 @@ form p input {
     color: #444;
     padding: 15px 100px;
     overflow: auto;
+    margin: 20px 0;
 }
 
 #header .logo {
@@ -324,13 +325,34 @@ button.btn  {
 .bg-dark {
     background-color: black!important;
 }
-
+/*------------Footer----------------*/
 footer.bg-dark {
     position: relative;
     bottom: 0;
     width: 100%;
     margin-top: 200px
   }
+
+
+  a:hover {
+    color: pink;
+    text-decoration: none;
+  }
+  
+  ::selection {
+    background: pink;
+    text-shadow: none;
+  }
+  
+  .copyright {
+    color: white;
+  }
+  
+  .fab {
+    color: white;
+    padding: 2rem 0;
+  }
+
 .second-img {
     padding: 0 100px;
 }
