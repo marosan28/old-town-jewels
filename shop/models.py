@@ -1,7 +1,6 @@
 from django.db import models
 from django.urls import reverse
 from cloudinary.models import CloudinaryField
-from django.utils import timezone
 
 # Category
 class Category(models.Model):
@@ -52,12 +51,3 @@ class Product(models.Model):
     def get_absolute_url(self):
         return reverse('shop:product_detail',
                        args=[self.id, self.slug])
-
-# Subscribed users 
-class SubscribedUsers(models.Model):
-    name = models.CharField(max_length=100)
-    email = models.EmailField(unique=True, max_length=100)
-    created_date = models.DateTimeField('Date created', default=timezone.now)
-
-    def __str__(self):
-        return self.email
