@@ -326,9 +326,7 @@ button.btn  {
 }
 
 footer.bg-dark {
-    position: relative;
-    left: 0;
-    right: 0;
+    position: sticky;
     bottom: 0;
     width: 100%;
   }
@@ -381,6 +379,9 @@ footer.bg-dark {
  .register-form {
     display: inline-grid;
     justify-items: start;
+ }
+ .login-bottom-text {
+    margin-bottom: 200px;
  }
 /* Media queries for small screen sizes */
 
