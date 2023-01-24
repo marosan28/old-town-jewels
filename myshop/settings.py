@@ -109,7 +109,7 @@ else:
 if development:
     ALLOWED_HOSTS = ['localhost']
 else:
-    ALLOWED_HOSTS = ["old-town-jewels.herokuapp.com"]
+    ALLOWED_HOSTS = [os.environ.get('HEROKU_HOSTNAME')]
 
 
 # Password validation
