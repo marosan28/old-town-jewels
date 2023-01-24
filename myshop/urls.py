@@ -23,5 +23,7 @@ urlpatterns = [
     path('orders/', include('orders.urls', namespace='orders')),
     path('payment/', include('payment.urls', namespace='payment')),
     path('coupons/', include('coupons.urls', namespace='coupons')),
+    path('tinymce/', include('tinymce.urls')),
     path('', include('shop.urls', namespace='shop')),
+
 ]

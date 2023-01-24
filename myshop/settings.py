@@ -53,6 +53,7 @@ INSTALLED_APPS = [
     'coupons.apps.CouponsConfig',
     'bootstrap4',
     'users.apps.UsersConfig',
+    'tinymce',
     'crispy_forms',
 ]
 
