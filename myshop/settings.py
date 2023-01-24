@@ -14,7 +14,8 @@ from pathlib import Path
 import os
 import dj_database_url
 
-ENV_FILE = os.path.join(os.path.abspath(os.path.dirname(__file__)), '..', 'env.py')
+ENV_FILE = os.path.join(os.path.abspath(
+    os.path.dirname(__file__)), '..', 'env.py')
 if os.path.isfile(ENV_FILE):
     import env
 
@@ -111,7 +112,7 @@ else:
 if development:
     ALLOWED_HOSTS = ['localhost']
 else:
-    ALLOWED_HOSTS = ['old-town-jewels.herokuapp.com']
+    ALLOWED_HOSTS = [os.environ.get('HEROKU_HOSTNAME')]
 
 
 # Password validation
