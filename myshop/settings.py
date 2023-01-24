@@ -19,7 +19,7 @@ if os.path.isfile(ENV_FILE):
     import env
 
 
-development = os.environ.get('DEVELOPMENT')
+development = os.environ.get('DEVELOPMENT', False)
 
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -111,7 +111,7 @@ else:
 if development:
     ALLOWED_HOSTS = ['localhost']
 else:
-    ALLOWED_HOSTS = ['old-town-jewels.herokuapp.com', '*']
+    ALLOWED_HOSTS = ['old-town-jewels.herokuapp.com']
 
 
 # Password validation
