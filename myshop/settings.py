@@ -15,7 +15,7 @@ import os
 import dj_database_url
 
 if os.path.isfile("env.py"):
-   import env
+    import env
 
 development = os.environ.get('DEVELOPMENT', False)
 
@@ -110,7 +110,8 @@ else:
 if development:
     ALLOWED_HOSTS = ['localhost']
 else:
-    ALLOWED_HOSTS = [os.environ.get('HEROKU_HOSTNAME', 'old-town-jewels.herokuapp.com')]
+    ALLOWED_HOSTS = [os.environ.get(
+        'HEROKU_HOSTNAME', 'old-town-jewels.herokuapp.com')]
 
 
 # Password validation
