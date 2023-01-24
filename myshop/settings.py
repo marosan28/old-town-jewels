@@ -14,8 +14,7 @@ from pathlib import Path
 import os
 import dj_database_url
 
-ENV_FILE = os.path.join(os.path.abspath(
-    os.path.dirname(__file__)), '..', 'env.py')
+ENV_FILE = os.path.join(os.path.abspath(os.path.dirname(__file__)), '../../', 'env.py')
 if os.path.isfile(ENV_FILE):
     import env
 
