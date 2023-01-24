@@ -1,8 +1,13 @@
 @import url('https://fonts.googleapis.com/css2?family=Caudex&family=Italiana&display=swap');
 
-body {
+html, body {
+    height: 100%;
+    width: 100%;
     margin: 0;
     padding: 0;
+}
+
+body {
     font-family: Caudex, sans-serif;
 }
 h1, h2, h3 {
@@ -284,6 +289,7 @@ span.product-description {
 button.btn  {
     background-color: pink;
     color: black;
+    margin: 20px;
 }
 .order-info h3 {
     color: #111;
@@ -363,7 +369,19 @@ footer.bg-dark {
 .form {
     color: white;
 }
-    
+
+ .helptext {
+    display: block;
+    color: #9c9a9a;
+}
+ ul {
+    padding-left: 0;
+ }
+ 
+ .register-form {
+    display: inline-grid;
+    justify-items: start;
+ }
 /* Media queries for small screen sizes */
 
 @media only screen and (max-width: 700px) {
