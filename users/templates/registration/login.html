@@ -2,7 +2,9 @@
 {% load crispy_forms_tags %}
 {% load static %}
 {% block content %}
-
+<div class="d-flex justify-content-center links">
+	Don't have an account?<a href="{% url 'users:register' %}">Sign Up</a>
+</div>
 <div class="container-login">
 	<div class="d-flex justify-content-center h-100">
 		<div class="card">
@@ -30,11 +32,8 @@
 					</div>
 				</form>
 			</div>
-			<div class="login-bottom-text">
-				<div class="d-flex justify-content-center links">
-					Don't have an account?<a href="{% url 'users:register' %}">Sign Up</a>
-				</div>
-			</div>
+		
+			
 		</div>
 	</div>
 </div>

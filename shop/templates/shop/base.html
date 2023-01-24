@@ -11,6 +11,7 @@
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css"
     integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
   <link href="{% static 'css/stylesheet.css' %}" rel="stylesheet">
+  <script src="https://kit.fontawesome.com/aba9c8794f.js" crossorigin="anonymous"></script>
 </head>
 
 <body>
@@ -82,7 +83,44 @@
   <!-- Footer-->
   <footer class="py-5 bg-dark">
     <div class="container">
-      <p class="m-0 text-center text-white">Copyright &copy; Old Town Jewels 2023</p>
+      <div class="text-center"><i class="fas fa-ellipsis-h"></i></div>
+    
+      <div class="row text-center">
+        <div class="col-md-4 box">
+          <span class="copyright quick-links">Copyright &copy; Old Town Jewels <script>document.write(new Date().getFullYear())</script>
+          </span>
+        </div>
+        <div class="col-md-4 box">
+          <ul class="list-inline social-buttons">
+            <li class="list-inline-item">
+              <a href="#">
+              <i class="fab fa-twitter"></i>
+            </a>
+            </li>
+            <li class="list-inline-item">
+              <a href="#">
+              <i class="fab fa-facebook-f"></i>
+            </a>
+            </li>
+            <li class="list-inline-item">
+              <a href="#">
+              <i class="fab fa-linkedin-in"></i>
+            </a>
+            </li>
+          </ul>
+        </div>
+        <div class="col-md-4 box">
+          <ul class="list-inline quick-links">
+            <li class="list-inline-item">
+              <a href="#">Privacy Policy</a>
+            </li>
+            <li class="list-inline-item">
+              <a href="#">Terms of Use</a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
     </div>
   </footer>
 </body>
