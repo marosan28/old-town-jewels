@@ -386,6 +386,8 @@ footer.bg-dark {
  }
  .discount-code {
     background-color: red;
+    padding: 10px;
+    margin: 20px 0;
  }
 /* Media queries for small screen sizes */
 
