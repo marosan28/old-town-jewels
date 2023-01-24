@@ -326,7 +326,7 @@ button.btn  {
 }
 
 footer.bg-dark {
-    position: sticky;
+    position: fixed;
     bottom: 0;
     width: 100%;
   }
