@@ -20,7 +20,8 @@ if os.path.isfile(ENV_FILE):
 
 
 development = os.environ.get('DEVELOPMENT')
-
+print(development)
+print(os.environ.get('HEROKU_HOSTNAME'))
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))

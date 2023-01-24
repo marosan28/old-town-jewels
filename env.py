@@ -6,3 +6,4 @@ os.environ["CLOUDINARY_URL"] = "cloudinary://522695269739824:oa4_FiNurIBFcShGyu3
 os.environ["BROKER_URL"] = "amqps://wkwlhded:HQKjWXS3rKL4Tw379eB6EkDlqVKshDVh@crow.rmq.cloudamqp.com/wkwlhded"
 os.environ["CELERY_RESULT_BACKEND"] = "rpc://wkwlhded:HQKjWXS3rKL4Tw379eB6EkDlqVKshDVh@crow.rmq.cloudamqp.com/wkwlhded"
 os.environ['DEVELOPMENT'] = 'True'
+os.environ['HEROKU_HOSTNAME'] = 'old-town-jewels.herokuapp.com'
