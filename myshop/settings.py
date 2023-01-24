@@ -15,10 +15,9 @@ import os
 import dj_database_url
 
 if os.path.isfile("env.py"):
-   import env
+    import env
 
 development = os.environ.get('DEVELOPMENT', False)
-
 
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -72,7 +71,7 @@ ROOT_URLCONF = 'myshop.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-         'DIRS': [
+        'DIRS': [
             os.path.join(BASE_DIR, 'templates'),
             os.path.join(BASE_DIR, 'templates', 'allauth'),
             TEMPLATES_DIR,
@@ -106,6 +105,11 @@ else:
     DATABASES = {
         'default': dj_database_url.parse(os.environ.get('DATABASE_URL'))
     }
+
+DATABASES = {
+    'default': dj_database_url.parse(os.environ.get('DATABASE_URL'))
+}
+
 if development:
     ALLOWED_HOSTS = ['localhost']
 else:
@@ -130,6 +134,7 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
+AUTHENTICATION_BACKENDS = ['django.contrib.auth.backends.ModelBackend']
 
 # Internationalization
 # https://docs.djangoproject.com/en/3.2/topics/i18n/
@@ -155,7 +160,7 @@ STATICFILES_DIRS = [os.path.join(BASE_DIR, 'static')]
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 
 MEDIA_URL = '/media/'
-MEDIA_ROOT = os.path.join(BASE_DIR, 'media')	
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 DEFAULT_FILE_STORAGE = 'cloudinary_storage.storage.MediaCloudinaryStorage'
 CLOUDINARY_URL = os.environ.get('CLOUDINARY_URL')
 
@@ -172,7 +177,7 @@ EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 
 # Stripe settings
 STRIPE_PUBLISHABLE_KEY = 'pk_test_51MN0bDAQpwLvviS09rUz6F4sU7hualrvE6rowj4zHO12tY1Bq3oeFewVmmLHRCU915xbXEAx8NulcNbCentqiEAn00GeagOLMY'
-STRIPE_SECRET_KEY = 'sk_test_51MN0bDAQpwLvviS0lm4Udq5tvakxkurNwMHn2ZldJ8ABrNuKHpZqtAuW78KAWkNc1t9aCLRBcqiIm4gLk8m4t2eS00qdVdMxHv'     
+STRIPE_SECRET_KEY = 'sk_test_51MN0bDAQpwLvviS0lm4Udq5tvakxkurNwMHn2ZldJ8ABrNuKHpZqtAuW78KAWkNc1t9aCLRBcqiIm4gLk8m4t2eS00qdVdMxHv'
 STRIPE_API_VERSION = '2022-11-15'
 STRIPE_WEBHOOK_SECRET = 'whsec_95b6cd4d10f48c4600383fb14f47c5b5917be5cb11467310e4b49b81713c8ac9'
 
@@ -180,4 +185,3 @@ STRIPE_WEBHOOK_SECRET = 'whsec_95b6cd4d10f48c4600383fb14f47c5b5917be5cb11467310e
 
 BROKER_URL = os.environ.get('CLOUDAMQP_URL')
 CELERY_RESULT_BACKEND = os.environ.get('CLOUDAMQP_URL')
-
