@@ -108,10 +108,7 @@ else:
         'default': dj_database_url.parse(os.environ.get('DATABASE_URL'))
     }
 
-if development:
-    ALLOWED_HOSTS = ['localhost']
-else:
-    ALLOWED_HOSTS = ['old-town-jewels.herokuapp.com']
+ALLOWED_HOSTS = ['old-town-jewels.herokuapp.com', 'localhost']
 
 
 # Password validation
