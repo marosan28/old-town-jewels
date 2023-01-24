@@ -326,9 +326,10 @@ button.btn  {
 }
 
 footer.bg-dark {
-    position: fixed;
+    position: relative;
     bottom: 0;
     width: 100%;
+    margin-top: 200px
   }
 .second-img {
     padding: 0 100px;
@@ -382,6 +383,9 @@ footer.bg-dark {
  }
  .login-bottom-text {
     margin-bottom: 200px;
+ }
+ .discount-code {
+    background-color: red;
  }
 /* Media queries for small screen sizes */
 
