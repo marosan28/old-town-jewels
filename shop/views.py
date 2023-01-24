@@ -1,6 +1,10 @@
-from django.shortcuts import render, get_object_or_404
+from django.shortcuts import render, get_object_or_404, redirect
 from cart.forms import CartAddProductForm
 from .models import Category, Product
+from .forms import NewsletterForm
+from django.core.mail import EmailMessage
+from django.contrib import messages
+from users.models import SubscribedUsers
 
 def home(request):
     category_slug = None
@@ -30,4 +34,30 @@ def product_detail(request, id, slug):
     cart_product_form = CartAddProductForm()
     return render(request, 'shop/product/detail.html', {'product': product,
                                                         'cart_product_form': cart_product_form})
+
+def newsletter(request):
+    if request.method == 'POST':
+        form = NewsletterForm(request.POST)
+        if form.is_valid():
+            subject = form.cleaned_data.get('subject')
+            receivers = form.cleaned_data.get('receivers').split(',')
+            email_message = form.cleaned_data.get('message')
+
+            mail = EmailMessage(subject, email_message, f"Online Jewels <{request.user.email}>", bcc=receivers)
+            mail.content_subtype = 'html'
+
+            if mail.send():
+                messages.success(request, "Email sent succesfully")
+            else:
+                messages.error(request, "There was an error sending email")
+
+        else:
+            for error in list(form.errors.values()):
+                messages.error(request, error)
+
+        return redirect('/')
+
+    form = NewsletterForm()
+    form.fields['receivers'].initial = ','.join([active.email for active in SubscribedUsers.objects.all()])
+    return render(request=request, template_name='shop/newsletter.html', context={'form': form})
 

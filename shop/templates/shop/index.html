@@ -69,5 +69,28 @@
     <div class="discount-code">
         <h3>Use code <strong>JANUARY20</strong> for exlusive <strong>20%</strong> off. Valid unitl the end of January.</h3>
     </div>
+    <form action="{% url 'users:subscribe' %}" method="post">
+        <div class="row d-flex justify-content-center">
+        {% csrf_token %}
+
+            <div class="col-auto">
+                <p class="pt-2">Subscribe for our newsletter</p>
+            </div>
+
+            <div class="col-auto">
+                <input id="name" name="name" class="form-control" placeholder="Your Name">
+            </div>
+
+            <div class="col-auto">
+                <input id="email" name="email" type="email" class="form-control" placeholder="Email address">
+            </div>
+
+            <div class="col-auto">
+                <button type="submit" class="btn btncolor">
+                    <i class="fa fa-arrow-circle-right fa-lg"></i>
+                </button>
+            </div>
+        </div>
+    </form>
 </section>
 {% endblock %}
