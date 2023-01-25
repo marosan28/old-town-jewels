@@ -24,7 +24,10 @@ Whether you're looking for a special piece of jewellery for yourself or a gift f
 - [Scope](#scope)
 
 - [Structure](#structure)
-    - [Wireframes](#wireframes)
+    - [Design](#design)
+        - [Wireframes](#wireframes)
+        - [Color Schema](#color-schema)
+        - [Model Schema](#model-schema)
 
 [Marketing Strategies](#marketing-strategies)
 
@@ -141,7 +144,7 @@ By providing these features, Old Town Jewels aims to create a positive shopping 
 
 # Structure
 
-This project is structured with a homepage with the website's logo and a message that greets the user with a clear navigation bar at the top of the page where the user can login or sign up. Old Town Jewels shop enables clients to browse products, add them to the cart, apply discount codes, go through the checkout process, pay with a credit card, and obtain an invoice.
+This project is structured with a homepage with the website's logo and a message that greets the user with a clear navigation bar at the top of the page where the user can login or sign up. Old Town Jewels shop enables clients to browse products, add them to the cart, apply discount codes, go through the checkout process and pay with a credit a card.
 
 **The website is made of the following apps**:
 
@@ -153,4 +156,26 @@ This project is structured with a homepage with the website's logo and a message
 6. Orders
 7. Payment
 8. Shop
+
+## Design
+The website is created to draw users' attention and be easy to use, making it possible for an user to browse and buy things of interest quickly. In order to plan the site's layout, wireframes for desktop, tablet, and mobile views were made and only few colors were used to maintain consistency of the website.
+
+- ## Wireframes
+wireframes for the project were created using [Balsamiq](https://balsamiq.com/)
+
+- ## Model Schema
+
+Our application uses two different databases: SQLite for local development and Postgres for the deployed app on Heroku. SQLite is a lightweight, file-based database that is easy to set up and use for development purposes. Postgres is a more powerful and feature-rich relational database that is well suited for production environments.
+
+For local development, we use SQLite as the database. SQLite is included in Python's standard library and requires no additional setup.
+
+For the deployed app on Heroku, we use Postgres as the database. Postgres is a powerful, open-source relational database that is well suited for production environments. It offers robust data integrity and security features, as well as advanced performance and scalability.
+
+We have created a separate data model for each of the databases, which defines the tables, fields, and relationships used in the application. The data model for SQLite is designed for local development and is optimized for ease of use and rapid development. The data model for Postgres is designed for production and is optimized for performance, scalability, and data integrity.
+
+To set up the databases, you will need to install SQLite and Postgres on your local machine and configure the appropriate settings in the application's configuration file. Once the databases are set up, you can use any SQL client to interact with the databases, such as the SQLite command-line tool or pgAdmin for Postgres.
+
+Keep in mind that SQLite is file-based while Postgres is server-based, so you will have to configure the appropriate settings in the application's configuration file to connect the app to the right database depending on the environment, local or production.
+
+Please note that the SQLite database will be created automatically when you run the application for the first time in local environment and the Postgres database should be created manually in Heroku before you deploy your app.
 
