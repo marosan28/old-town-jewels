@@ -181,9 +181,7 @@ Cart Detail Page
 
 Pay Now Page
 
-![App Screenshot](static/images/pay now.png)
-
-
+![App Screenshot](static/images/pay-now.png)
 
 
 
