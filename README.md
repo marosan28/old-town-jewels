@@ -221,7 +221,6 @@ The **Category** model has a one-to-many relationship with the **Product model**
 # Marketing Strategies
 
 Three social websites have been made as a part of this project to reach out to more audience and get more customers. 
-Facebook 
 [Facebook](https://www.facebook.com/people/Old-Town-Jewels/100089850577128// "Facebook Link")
 [Instagram](https://www.instagram.com/ot__jewels/ "Instagram Link")
 [Twitter](https://twitter.com/old_townjewels "Twitter Link")
