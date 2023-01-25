@@ -46,6 +46,8 @@
       </ul>
     </div>
   </nav>
+  {% block header %}
+  {% endblock %}
   {% include 'shop/includes/messages.html' %}
   {% if user.is_authenticated %}
   <div id="subheader">
@@ -64,6 +66,7 @@
     </div>
   </div>
   {% endif %}
+
   <div id="content">
     {% block content %}
     {% for product in product_list %}

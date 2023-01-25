@@ -1,9 +1,14 @@
 {% extends "shop/base.html" %}
-
+{% block header %}
+<div class="discount-code">
+    <h3>Use code <strong>JANUARY20</strong> for exlusive <strong>20%</strong> off. Valid unitl the end of January.</h3>
+</div>
+{% endblock %}
 {% block content %}
 <!-- Content section-->
+
 <div class="py-5 bg-image-full"
-    style="background-image: url('https://res.cloudinary.com/dd9o1h7oh/image/upload/v1674412791/model-img_vaw23r.jpg')">
+    style="background-image: url('https://res.cloudinary.com/dd9o1h7oh/image/upload/v1674638742/model-img_vaw23r_1_enq27p.jpg')">
     <div style="height: 10rem" class="text-center">
         <h1 class="text-black fs-3 fw-bolder">Welcome to Old Town Jewels</h1>
     </div>
@@ -26,7 +31,7 @@
 </section>
 <div class="second-img">
     <div class="py-5 bg-image-full"
-        style="background-image: url('https://res.cloudinary.com/dd9o1h7oh/image/upload/v1674413928/edgar-soto-gb0BZGae1Nk-unsplash_pitob7.jpg')">
+        style="background-image: url('https://res.cloudinary.com/dd9o1h7oh/image/upload/v1674638886/edgar-soto-gb0BZGae1Nk-unsplash_pitob7_1_yvh54e.jpg')">
         <div style="height: 20rem"></div>
     </div>
 </div>
@@ -47,7 +52,7 @@
 </section>
 <div class="second-img">
     <div class="py-5 bg-image-full"
-        style="background-image: url('https://res.cloudinary.com/dd9o1h7oh/image/upload/v1674594886/pexels-marta-branco-1395306_ygwied.jpg')">
+        style="background-image: url('https://res.cloudinary.com/dd9o1h7oh/image/upload/v1674638934/pexels-marta-branco-1395306_ygwied_1_gnnlhm.jpg')">
         <div style="height: 20rem"></div>
     </div>
 </div>
@@ -66,9 +71,7 @@
         </div>
 
     </div>
-    <div class="discount-code">
-        <h3>Use code <strong>JANUARY20</strong> for exlusive <strong>20%</strong> off. Valid unitl the end of January.</h3>
-    </div>
+   
     <form action="{% url 'users:subscribe' %}" method="post">
         <div class="row d-flex justify-content-center">
         {% csrf_token %}

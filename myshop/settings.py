@@ -13,8 +13,6 @@ https://docs.djangoproject.com/en/3.2/ref/settings/
 from pathlib import Path
 import os
 import dj_database_url
-import djcelery
-djcelery.setup_loader()
 
 if os.path.isfile("env.py"):
     import env
@@ -57,7 +55,6 @@ INSTALLED_APPS = [
     'users.apps.UsersConfig',
     'tinymce',
     'crispy_forms',
-    'djcelery',
 ]
 
 MIDDLEWARE = [
