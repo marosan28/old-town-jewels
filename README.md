@@ -222,6 +222,10 @@ The **Category** model has a one-to-many relationship with the **Product model**
 |    Add to cart button                         | User input     |  Product successfully updates the cart                    | PASS          |
 |    Checkout                                   | User input     |  Product successfully updates the cart                    | PASS          |
 |    Apply a coupon                             | User input     |  Coupon applies successfully to the cart                  | PASS          |
+|    Continue Shopping Button                   | User input     |  Redirects to products categories                         | PASS          |
+|    Checkout button                            | User input     |  Correctly displays form after clicking                   | PASS          |
+|    Pay now button                             | User input     |  Correctly displays form after clicking                   | PASS          |
+
 
 
 

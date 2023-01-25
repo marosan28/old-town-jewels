@@ -13,6 +13,8 @@ https://docs.djangoproject.com/en/3.2/ref/settings/
 from pathlib import Path
 import os
 import dj_database_url
+import djcelery
+djcelery.setup_loader()
 
 if os.path.isfile("env.py"):
     import env
@@ -55,6 +57,7 @@ INSTALLED_APPS = [
     'users.apps.UsersConfig',
     'tinymce',
     'crispy_forms',
+    'djcelery',
 ]
 
 MIDDLEWARE = [
@@ -181,5 +184,13 @@ STRIPE_WEBHOOK_SECRET = 'whsec_95b6cd4d10f48c4600383fb14f47c5b5917be5cb11467310e
 
 # Celery and Rabbitmq settings
 
-BROKER_URL = os.environ.get('CLOUDAMQP_URL')
-CELERY_RESULT_BACKEND = os.environ.get('CLOUDAMQP_URL')
+BROKER_URL = os.environ.get("CLOUDAMQP_URL", "django://")
+BROKER_POOL_LIMIT = 1
+BROKER_CONNECTION_MAX_RETRIES = None
+
+CELERY_TASK_SERIALIZER = "json"
+CELERY_ACCEPT_CONTENT = ["json", "msgpack"]
+CELERYBEAT_SCHEDULER = 'djcelery.schedulers.DatabaseScheduler'
+
+if BROKER_URL == "django://":
+    INSTALLED_APPS += ("kombu.transport.django",)

@@ -68,58 +68,58 @@
     {% block content %}
     {% for product in product_list %}
     <div class="product-card">
-      <h2>{{ product.name }}</h2>
-      <img src="{{ product.image.url }}" alt="{{ product.name }}">
-      <p>{{ product.price }}</p>
-      <a href="{% url 'shop:product_detail' product.id product.slug %}">View product</a>
+        <h2>{{ product.name }}</h2>
+        <img src="{{ product.image.url }}" alt="{{ product.name }}">
+        <p>{{ product.price }}</p>
+        <a href="{% url 'shop:product_detail' product.id product.slug %}">View product</a>
     </div>
-    {% endfor %}
+{% endfor %}
 
     {% endblock %}
+  </div>
+ 
 
-
-
-    <!-- Footer-->
-    <footer class="py-5 bg-dark">
-      <div class="container">
-        <div class="text-center text-white">Check our Socials</div>
-
-        <div class="row text-center">
-          <div class="col-md-4 box">
-            <span class="copyright quick-links">Copyright &copy; Old Town Jewels <script>
-                document.write(new Date().getFullYear())
-              </script>
-            </span>
-          </div>
-          <div class="col-md-4 box">
-            <ul class="list-inline social-buttons">
-              <li class="list-inline-item">
-                <a href="https://www.instagram.com/ot__jewels/">
-                  <i class="fab fa-instagram"></i>
-                </a>
-              </li>
-              <li class="list-inline-item">
-                <a href="https://www.facebook.com/profile.php?id=100089850577128">
-                  <i class="fab fa-facebook-f"></i>
-                </a>
-              </li>
-              <li class="list-inline-item">
-                <a href="https://twitter.com/old_townjewels">
-                  <i class="fab fa-twitter"></i>
-                </a>
-              </li>
-            </ul>
-          </div>
-          <div class="col-md-4 box">
-            <ul class="list-inline quick-links">
-              <li class="list-inline-item">
-                <a href="{% url 'shop:newsletter' %}">Sign up to our Newsletter</a>
-              </li>
-            </ul>
-          </div>
+ 
+  <!-- Footer-->
+  <footer class="py-5 bg-dark">
+    <div class="container">
+      <div class="text-center text-white">Check our Socials</div>
+    
+      <div class="row text-center">
+        <div class="col-md-4 box">
+          <span class="copyright quick-links">Copyright &copy; Old Town Jewels <script>document.write(new Date().getFullYear())</script>
+          </span>
+        </div>
+        <div class="col-md-4 box">
+          <ul class="list-inline social-buttons">
+            <li class="list-inline-item">
+              <a href="https://www.instagram.com/ot__jewels/">
+              <i class="fab fa-instagram"></i>
+            </a>
+            </li>
+            <li class="list-inline-item">
+              <a href="https://www.facebook.com/profile.php?id=100089850577128">
+              <i class="fab fa-facebook-f"></i>
+            </a>
+            </li>
+            <li class="list-inline-item">
+              <a href="https://twitter.com/old_townjewels">
+              <i class="fab fa-twitter"></i>
+            </a>
+            </li>
+          </ul>
+        </div>
+        <div class="col-md-4 box">
+          <ul class="list-inline quick-links">
+            <li class="list-inline-item">
+              <a href="{% url 'shop:newsletter' %}">Sign up to our Newsletter</a>
+            </li>
+          </ul>
         </div>
       </div>
-    </footer>
+    </div>
+    </div>
+  </footer>
 </body>
 <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
   integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
