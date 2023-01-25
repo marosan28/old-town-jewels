@@ -375,12 +375,6 @@ footer.bg-dark {
     color: white;
     }
     
-    input:focus{
-    outline: 0 0 0 0  !important;
-    box-shadow: 0 0 0 0 !important;
-    
-    }
-    
     .login-btn:hover{
     color: black;
     background-color: white;
