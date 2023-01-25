@@ -197,7 +197,6 @@ The **Category** model has a one-to-many relationship with the **Product model**
 
 ## Index – Table of Contents
 
-* [Automated Testing](#automated-testing) 
 * [Manual Testing](#manual-testing) 
 * [User Stories Testing](#user-stories-testing)
 * [Responsiveness Testing](#responsiveness-testing)
@@ -207,13 +206,22 @@ The **Category** model has a one-to-many relationship with the **Product model**
 * [Lighthouse Testing](#lighthouse-testing)
 
 
-## Automated Testing
-Automated unit testing was done within Django.
+## Manual Testing
 
-## Automated Testing
-
-Automated unit testing was done within Django.
-
+|  Test Label                                   | Action         | Expected Outcome                                          | Test Outcome  |
+|-----------------------------------------------|----------------|-----------------------------------------------------------|---------------|
+|    Register Button                            | Page load      |  Visible on homepage                                      | PASS          |
+|    Login button in navigation bar             | Page load      |  Visible on homepage                                      | PASS          |
+|    Login functionality                        | User input     |  Successful login redirects to homepage                   | PASS          |
+|    Logout functionality                       | User input     |  Successful logs out and redirects to homepage            | PASS          |
+|    User greeting in navbar                    | User input     |  Correctly displays "Hello, [username]"	                 | PASS          |
+|    Shop link                                  | User input     |  Opens shop products                                      | PASS          |
+|    Categories                                 | User input     |  Displays refined categories                              | PASS          |
+|    Product details                            | User input     |  Displays product details on the page                     | PASS          |
+|    Quantity                                   | User input     |  User can select the quantity and update susccessfully    | PASS          |
+|    Add to cart button                         | User input     |  Product successfully updates the cart                    | PASS          |
+|    Checkout                                   | User input     |  Product successfully updates the cart                    | PASS          |
+|    Apply a coupon                             | User input     |  Coupon applies successfully to the cart                  | PASS          |
 
 
 
