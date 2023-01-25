@@ -51,7 +51,7 @@
     </tr>
   </tbody>
 </table>
-<form action="{% url 'payment:process' %}" method="post">
+<form action="{% url 'payment:process' order.id %}" method="post">
   <input type="submit" value="Pay now">
   {% csrf_token %}
 </form>
