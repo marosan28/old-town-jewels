@@ -241,7 +241,35 @@ Footer with all the social media and the name and year of the page which manuall
 Users can subscribe to newsletter.
 ![App Screenshot](static/images/features/newsletter.png)
 
+After logging ing, users are able to browse the store and pick products to add them to cart. 
+![App Screenshot](static/images/features/browse.png)
+
+After logging ing, users are able to browse the store and pick products to add them to cart. 
+![App Screenshot](static/images/features/browse.png)
+
+Users can update and delete cart
+![App Screenshot](static/images/features/cart.png)
+
+Users can safely checkout
+![App Screenshot](static/images/features/checkout.png)
+
 # Technologies Used
+
+### Languages Used
+
+-   [HTML5](https://en.wikipedia.org/wiki/HTML5)
+-   [CSS3](https://en.wikipedia.org/wiki/Cascading_Style_Sheets)
+-   [JavaScript](https://en.wikipedia.org/wiki/JavaScript "Link to JavaScript Wiki")
+-   [Python](https://en.wikipedia.org/wiki/Python_(programming_language))
+
+## Frameworks - Libraries - Programs Used
+- [Django](https://www.djangoproject.com/)
+- [Django-allauth](https://django-allauth.readthedocs.io/en/latest/installation.html)
+- [ElephantSQL](https://www.elephantsql.com/)
+- [Heroku](https://dashboard.heroku.com/login)
+- [Google Fonts](https://fonts.google.com/ "Link to Google Fonts")
+- [Celery](https://docs.celeryq.dev/en/stable/)
+- [RabbitMQ](https://www.rabbitmq.com/)
 
 # Testing
 
@@ -252,7 +280,6 @@ Users can subscribe to newsletter.
 * [Responsiveness Testing](#responsiveness-testing)
 * [HTML Testing](#html-testing)
 * [CSS Testing](#css-testing)
-* [Python Testing](#python-testing)
 * [Lighthouse Testing](#lighthouse-testing)
 
 
@@ -276,11 +303,9 @@ Users can subscribe to newsletter.
 |    Checkout button                            | User input     |  Correctly displays form after clicking                   | PASS          |
 |    Pay now button                             | User input     |  Correctly displays form after clicking                   | PASS          |
 
-## User stories Testing
-
 ## Responsivness Testing
 
-Site Responsivness was fully tested using Google Tools. 
+The app has been tested in Chrome with developer tools and showed to be fully responsive.
 
 ## HTML Testing
 
@@ -308,6 +333,8 @@ Site Responsivness was fully tested using Google Tools.
             alt="Valid CSS!" />
     </a>
 </p>
+
+# Lighthouse Testing 
 
 # Bugs-found
 
