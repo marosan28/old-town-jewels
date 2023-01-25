@@ -162,6 +162,16 @@ The website was designed to be visually appealing and user-friendly, allowing fo
 - ## Wireframes
 wireframes for the project were created using [Balsamiq](https://balsamiq.com/)
 
+- ## Color Schema
+![App Screenshot](static/images/color-palete.png)
+The colors #111111, #444444, and #333333 are shades of gray, with #111111 being the darkest and #333333 being the lightest. These colors give a sense of professionalism and sophistication, and can be used as a background or text color to create a clean and simple layout.
+
+#ffc0cb is a shade of pink, which is often associated with warmth, playfulness, and femininity. It can be used as an accent color to add a pop of color to the layout without overwhelming the design.
+
+#ffffff is pure white, which can be used as a background color to create a clean and modern look. It can also be used as a text color for areas where high contrast is needed, such as on dark backgrounds.
+
+Overall, using these colors I achieved a simple and clean layout that allows the products to be the focal point.
+
 - ## Model Schema
 Our application uses two different databases: SQLite for local development and Postgres for the deployed app on Heroku. SQLite is a lightweight, file-based database that is easy to set up and use for development purposes. Postgres is a more powerful and feature-rich relational database that is well suited for production environments.
 
