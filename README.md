@@ -233,28 +233,20 @@ The **Category** model has a one-to-many relationship with the **Product model**
 ## HTML Testing
 
 
-| HTML document    | Result | Issues found                                                            | Fixes made                                                                  |
-|----------------  |--------|-------------------------------------------------------------------------|-----------------------------------------------------------------------------|
-| base.html        | Fail   |1. Stray start tag <script>.                                             |1. Checked for script closed tags and invisible characters and whitespaces   |
-| index.html       | Pass   |                                                                         |                             
-| login.html       | "Info" |1. Trailing slash on void elements has no effect                         |1. Delete trailing slash
-| base.html        | Pass   |                                                                         |
-| topics.html      | Pass   |                                                                         |
-| topic.html       | Fail   |1. Element div not allowed as child of element ul in this context.       |1. Wrap div element in li element
-| edit_entry.html  | Pass   |                                                                         |
-| delete_entry.html| Pass   |                                                                         |
-| new_topic.html   | Fail   |1. Element div not allowed as child of element button in this context.   |1. Remove a element
-| delete_topic.html| Pass   |                                                                         |
-| disclaimer.html  | Pass   |                                                                         |
-| footer.html      | Pass   |                                                                         |
-| new_entry.html   | Pass   |                                                                         |
-| newsletter.html  | Pass   |                                                                         |
-| tandc.html       | Fail   |1. No p element in scope but a p end tag seen.                           |1. Remove p tag
-| logout.html      | Pass   |                                                                         |
-| register.html    | Fail   |1. End tag p implied, but there were open elements.                      |1. Could not fix, the p tag inside django template  |
-|                  |        |2. Unclosed element span.                                                |2. Could not fix, span element inside django template                               |
-|                  |        |3. Stray end tag span.                                                   |3. Related to first issue, p tag included in django template |
-|                  |        |4. No p element in scope but a p end tag seen.                           |4. Could not fix, included in django template as well  |
+| HTML document             | Result | Issues found                                                            | Fixes made                                                                  |
+|---------------------------|--------|-------------------------------------------------------------------------|-----------------------------------------------------------------------------|
+| base.html                 | Fail   |1. Stray start tag <script>.                                             |1. Checked for script closed tags and invisible characters and whitespaces   |
+| index.html                | Pass   |                                                                         |                                                                             |
+| login.html                | Fail   |1. Unclosed element div                                                  |1. Close div element                                                         |
+| logout.html               | Pass   |                                                                         |                                                                             |
+| register.html             | Pass   |                                                                         |                                                                             |
+| detail.html               | Fail   |1. Element div not allowed as child of element ul in this context.       |1. Wrap div element in li element                                            |
+| list.html                 | Pass   |                                                                         |                                                                             |
+| newsletter.html           | Pass   |                                                                         |                                                                             |
+| cart/detail.html          | Fail   |1. Element div not allowed as child of element button in this context.   |1. Remove a element                                                          |
+| payment-successfull.html  | Pass   |                                                                         |
+| payment-unsuccessfull.html| Pass   |                                                                         |
+
 
 
 
