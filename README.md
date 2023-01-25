@@ -29,31 +29,23 @@ Whether you're looking for a special piece of jewellery for yourself or a gift f
         - [Color Schema](#color-schema)
         - [Model Schema](#model-schema)
 
-[Marketing Strategies](#marketing-strategies)
+- [Marketing Strategies](#marketing-strategies)
 
-[Features](#features)
+- [Features](#features)
 
-[Features to be Implemented](#features-to-be-implemented)
+- [Technologies Used](#technologies-used)
 
-[Technologies Used](#technologies-used)
+- [Testing](#Testing)
 
-[Testing](#testing)
+- [Bugs Found](#bugs-found)
 
-[Validator Testing](#validator-testing)
+- [Search Engine Optimisation (SEO)](#search-engine-optimisation-seo)
 
-[Responsive Testing](#responsive-testing)
+- [Deployment](#deployment)
 
-[Bugs Found](#bugs-found)
+- [Credit](#credit)
 
-[User Feedback](#user-feedback)
-
-[Search Engine Optimisation (SEO)](#search-engine-optimisation-seo)
-
-[Deployment](#deployment)
-
-[Credit](#credit)
-
-[Acknowledgments](#Acknowledgments)
+- [Acknowledgments](#Acknowledgments)
 
 
 # User experience
@@ -193,7 +185,42 @@ The **Order** model has a one-to-many relationship with the **OrderItem** model,
 - **shop app**
 The **Category** model has a one-to-many relationship with the **Product model**, as defined by the ForeignKey field in the **Product** model that references the **Category model**. This means that one category can have multiple products associated with it. The **Category** model has a get_absolute_url method that returns the URL of a page that displays all products of that category. The **Product** model has a name, slug, image, description, price, available, created, and updated fields and a get_absolute_url method that returns the URL of the product detail page. Additionally, the **Product** model has a Meta class that contains the indexes, ordering and other metainformation about the model.
 
+# Marketing Strategies
 
+# Features
+
+
+
+# Technologies Used
+
+# Testing
+
+## Index – Table of Contents
+
+* [Automated Testing](#automated-testing) 
+* [Manual Testing](#manual-testing) 
+* [User Stories Testing](#user-stories-testing)
+* [Responsiveness Testing](#responsiveness-testing)
+* [HTML Testing](#html-testing)
+* [CSS Testing](#css-testing)
+* [Python Testing](#python-testing)
+* [Lighthouse Testing](#lighthouse-testing)
+
+
+## Automated Testing
+Automated unit testing was done within Django.
+
+## Automated Testing
+
+Automated unit testing was done within Django.
+
+
+
+
+
+# Bugs-found
+
+# Search Engine Optimisation (SEO)
 
 # Deployment
 
@@ -233,6 +260,8 @@ It's generally a good idea to keep your fork up to date with the original reposi
 5. Run the command git branch to see a list of available branches in the repository.
 6. To switch to a specific branch, run the command git checkout BRANCHNAME, replacing BRANCHNAME with the name of the branch you want to switch to.
 
+
+
 # Credits
 
-## Content 
+# Acknowledgments
