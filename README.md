@@ -8,6 +8,11 @@ Old Town Jewels is designed to be user-friendly and easy to navigate. The store 
 
 Whether you're looking for a special piece of jewellery for yourself or a gift for someone else, Old Town Jewels has something for everyone. We hope you enjoy shopping with us!
 
+![App Screenshot](static/images/am-i-responsive.png)
+
+[View the live project here](https://old-town-jewels.herokuapp.com/ "Link to deployed site - Old Town Jewels")
+
+
 # Table of Contents
 
 [User Experience](#user-experience)
