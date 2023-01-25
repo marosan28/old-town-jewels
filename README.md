@@ -39,8 +39,6 @@ Whether you're looking for a special piece of jewellery for yourself or a gift f
 
 - [Bugs Found](#bugs-found)
 
-- [Search Engine Optimisation (SEO)](#search-engine-optimisation-seo)
-
 - [Deployment](#deployment)
 
 - [Credit](#credit)
@@ -220,17 +218,64 @@ The **Category** model has a one-to-many relationship with the **Product model**
 
 # Marketing Strategies
 
-Three social websites have been made as a part of this project to reach out to more audience and get more customers. 
+In order to drive more traffic to the website and attract potential customers, the following marketing strategies have been employed:
+
+1. Social Media Marketing: Three major social media platforms (Facebook, Instagram, Twitter) have been utilized to reach out to a wider audience and increase brand awareness. Regular posts, promotions, and interactive content have been shared to engage with the followers.
+
+2. Search Engine Optimization (SEO): The website has been optimized for search engines to improve its visibility and ranking. This includes the implementation of a sitemap.xml file and robots.txt file, as well as the use of relevant keywords in the website's content and meta description.
+
+3. Email Marketing: An email list has been created to send out newsletters, promotions, and other relevant updates to the subscribers.
+
+By implementing these marketing strategies, the website aims to attract more customers and increase sales.
+
+1. **Social Media Marketing** 
+
 [Facebook](https://www.facebook.com/people/Old-Town-Jewels/100089850577128// "Facebook Link")
+On Facebook, a business page for Old Town Jewels is created and used to showcase our products, 
+share promotions and discounts, and interact with our customers.
+
 [Instagram](https://www.instagram.com/ot__jewels/ "Instagram Link")
+On Instagram, we plan to create a visually appealing account that highlights our products, showcases our brand, 
+and shares customer reviews and testimonials.
+
 [Twitter](https://twitter.com/old_townjewels "Twitter Link")
+On Twitter, we plan to use Twitter to share updates about new products, promotions, and events, as well as respond to customer inquiries and feedback.
+
+2. **SEO** 
+
+**Keyword research**: To determine the most relevant and high-traffic keywords for this website
+I made a list of important topics based on the type of the website and targeted users and researched related search terms. I used a keyword research tool
+[Ahrefs](https://ahrefs.com/keywords-explorer)
+
+**Technical SEO**: Technical optimizations I made to improve the crawlability and indexability of this site
+Adding a sitemap.xml and robots.txt file and ensuring the site is mobile-friendly, using bootstrap for layouts and testing responsivness with Google Responsive Tools.
+
+A website's essential pages are listed in an XML sitemap file so that Google can easily identify and crawl them individually. Additionally, it aids in the structure-understanding of search engines. The discovery of content is sped up with a sitemap. All the URLs on website that a search engine crawler may visit are specified in a robots.txt file. The rules are assigned to bots by stating their user-agent (the search engine bot) followed by directives (the rules). I have allowed all search engines to crawl this entire site. Thereafore my block looks like this:
+
+```
+User-agent: *
+Allow: /
+```
+
+Meta tag in the HTML code, is used to provide a brief description of the website that may be displayed in search results
+```
+meta name="description" 
+```
+
+**Analytics and tracking** : In the future the plan to track and measure the success of SEO efforts, Google Analytics service will be set up. Google Analytics includes features that can help users identify trends and patterns in how visitors engage with their websites. Features enable data collection, analysis, monitoring, visualization, reporting and integration with other applications. 
+
+**Continuous improvement**: Regular reexamination of ongoing SEO efforts is of big importance. Strategies should be continually monitored and updated  based on changing search algorithms and user behavior.
+
+3. **Email Marketing**
+
+Users are able to easily subscribe to the monthly newsletter at the bottom of the site. 
 
 # Features
 Navigation bar with log in and register options to make it easy for users to log in/register as soon as they visit the site.
 ![App Screenshot](static/images/features/nav%20bar.png)
 
 Minimalistic Design of a front page with accentuations on important parts (coupons)
-![App Screenshot](static/images/features/front.png))
+![App Screenshot](static/images/features/front.png)
 
 Footer with all the social media and the name and year of the page which manually updates with the current year so is always up to date.
 ![App Screenshot](static/images/features/footer.png)
@@ -341,7 +386,7 @@ Mobile Testing with Google Lighthouse
 
 # Bugs-found
 
-# Search Engine Optimisation (SEO)
+Currently no bugs have been found on this project. 
 
 # Deployment
 
@@ -376,7 +421,7 @@ It's generally a good idea to keep your fork up to date with the original reposi
 
 1. Make sure you have Git installed on your local machine. You can check if you have it installed by running the command git --version in your terminal.
 2. Navigate to the directory where you want to create a copy of the repository.
-3. Run the command git clone https://github.com/USERNAME/REPOSITORY.git, replacing USERNAME with the username of the repository owner and REPOSITORY with the name of the repository. In this specific case (https://github.com/marosan28/online-journal.git) This will create a copy of the repository in a new directory with the same name as the repository.
+3. Run the command git clone https://github.com/USERNAME/REPOSITORY.git, replacing USERNAME with the username of the repository owner and REPOSITORY with the name of the repository. In this specific case (https://github.com/marosan28/old-town-jewels.git) This will create a copy of the repository in a new directory with the same name as the repository.
 4. Change into the new directory by running the command cd REPOSITORY, replacing REPOSITORY with the name of the repository.
 5. Run the command git branch to see a list of available branches in the repository.
 6. To switch to a specific branch, run the command git checkout BRANCHNAME, replacing BRANCHNAME with the name of the branch you want to switch to.
