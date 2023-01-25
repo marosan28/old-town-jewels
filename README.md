@@ -149,16 +149,15 @@ This project is structured with a homepage with the website's logo and a message
 **The website is made of the following apps**:
 
 1. MyShop
-2. Accounts
+2. Users
 3. Cart
 4. Coupons
-5. Login
-6. Orders
-7. Payment
-8. Shop
+5. Orders
+6. Payment
+7. Shop
 
 ## Design
-The website is created to draw users' attention and be easy to use, making it possible for an user to browse and buy things of interest quickly. In order to plan the site's layout, wireframes for desktop, tablet, and mobile views were made and only few colors were used to maintain consistency of the website.
+The website was designed to be visually appealing and user-friendly, allowing for easy browsing and quick purchasing of desired items. To ensure an optimal layout, wireframes were created for various screen sizes including desktop, tablet, and mobile, and a limited color palette was utilized to maintain a cohesive appearance throughout the site.
 
 - ## Wireframes
 wireframes for the project were created using [Balsamiq](https://balsamiq.com/)
