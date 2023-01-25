@@ -336,6 +336,12 @@ The app has been tested in Chrome with developer tools and showed to be fully re
 
 # Lighthouse Testing 
 
+Desktop Testing with Google Lightouse
+![App Screenshot](static/images/features/lighthouse-desktop.png)
+
+Mobile Testing with Google Lighthouse
+![App Screenshot](static/images/features/lighthouse-mobile.png)
+
 # Bugs-found
 
 # Search Engine Optimisation (SEO)
@@ -382,4 +388,16 @@ It's generally a good idea to keep your fork up to date with the original reposi
 
 # Credits
 
+## Content 
+
+For finding website content I was using [Google](https://www.google.com)
+
+## Media
+For creating the website logo I used [Canva](https://www.canva.com/hr_hr/)
+
 # Acknowledgments
+
+- Special thanks to Antonio Mele the creator of the book Django 4 By Example - Fourth Edition 
+- Python crash course book by Eric Matthes
+- Slack community
+- Tutor support
