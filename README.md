@@ -154,6 +154,41 @@ The website was designed to be visually appealing and user-friendly, allowing fo
 - ## Wireframes
 wireframes for the project were created using [Balsamiq](https://balsamiq.com/)
 
+Home Page 
+
+![App Screenshot](static/images/home-page.png)
+
+
+Login Page 
+
+![App Screenshot](static/images/log-in-page.png)
+
+Register Page 
+
+![App Screenshot](static/images/register-page.png)
+
+Shop Page 
+
+![App Screenshot](static/images/shop-img.png)
+
+Product Detail Page
+
+![App Screenshot](static/images/detail-rpoduct.png)
+
+Cart Detail Page
+
+![App Screenshot](static/images/checkout-image.png)
+
+Pay Now Page
+
+![App Screenshot](static/images/pay now.png)
+
+
+
+
+
+
+
 - ## Color Schema
 ![App Screenshot](static/images/color-palete.png)
 The colors #111111, #444444, and #333333 are shades of gray, with #111111 being the darkest and #333333 being the lightest. These colors give a sense of professionalism and sophistication, and can be used as a background or text color to create a clean and simple layout.
