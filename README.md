@@ -222,9 +222,24 @@ The **Category** model has a one-to-many relationship with the **Product model**
 
 # Marketing Strategies
 
+Three social websites have been made as a part of this project to reach out to more audience and get more customers. 
+Facebook 
+[Facebook](https://www.facebook.com/people/Old-Town-Jewels/100089850577128// "Facebook Link")
+[Instagram](https://www.instagram.com/ot__jewels/ "Instagram Link")
+[Twitter](https://twitter.com/old_townjewels "Twitter Link")
+
 # Features
+Navigation bar with log in and register options to make it easy for users to log in/register as soon as they visit the site.
+![App Screenshot](static/images/features/nav%20bar.png)
 
+Minimalistic Design of a front page with accentuations on important parts (coupons)
+![App Screenshot](static/images/features/front.png))
 
+Footer with all the social media and the name and year of the page which manually updates with the current year so is always up to date.
+![App Screenshot](static/images/features/footer.png)
+
+Users can subscribe to newsletter.
+![App Screenshot](static/images/features/newsletter.png)
 
 # Technologies Used
 
@@ -264,6 +279,8 @@ The **Category** model has a one-to-many relationship with the **Product model**
 ## User stories Testing
 
 ## Responsivness Testing
+
+Site Responsivness was fully tested using Google Tools. 
 
 ## HTML Testing
 
