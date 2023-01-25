@@ -193,3 +193,46 @@ The **Order** model has a one-to-many relationship with the **OrderItem** model,
 - **shop app**
 The **Category** model has a one-to-many relationship with the **Product model**, as defined by the ForeignKey field in the **Product** model that references the **Category model**. This means that one category can have multiple products associated with it. The **Category** model has a get_absolute_url method that returns the URL of a page that displays all products of that category. The **Product** model has a name, slug, image, description, price, available, created, and updated fields and a get_absolute_url method that returns the URL of the product detail page. Additionally, the **Product** model has a Meta class that contains the indexes, ordering and other metainformation about the model.
 
+
+
+# Deployment
+
+## Deploying-on-Heroku
+
+To deploy this project on Heroku, the following steps were taken:
+
+1. Create a new app on Heroku and choose a name and location for it.
+2. In the Resources tab, add a Postgres database to the app by selecting the "Heroku Postgres" option under add-ons.
+3. In the Settings tab, reveal the Config Vars and copy the url next to DATABASE_URL.
+4. In the project's GitPod workspace, create an env.py file and add the DATABASE_URL and SECRET_KEY values to it.
+5. Update the project's settings.py file to import the env file and add the SECRET_KEY and DATABASE_URL file paths.
+6. Update the Config Vars with the Cloudinary URL, and also update the settings.py file with this URL.
+7. In the settings.py file, add Cloudinary to the INSTALLED_APPS list, and add values for STATICFILE_STORAGE, STATICFILES_DIRS,   
+   STATIC_ROOT, MEDIA_URL, DEFAULT_FILE_STORAGE, and TEMPLATES_DIR.
+8. Update the DIRS in TEMPLATES with the TEMPLATES_DIR value, and update ALLOWED_HOSTS with ['app_name.heroku.com', 'localhost'].
+9. Create media, storage, and templates directories in the main project directory, and add a Procfile with the following content: "web: gunicorn project-name.wsgi".
+10. Log in to Heroku using the terminal and run the command "heroku git:remote -a your_app_name_here" to link the app to the GitPod workspace.
+11. To deploy new versions of the app, run the command "git push heroku main" in the terminal
+
+## Forking the Repository
+
+1. Make sure you have a GitHub account. If you don't have one, you can create an account by going to https://github.com and following the prompts.
+2. Go to the GitHub page for the repository you want to fork.
+3. In the top right corner of the page, click the "Fork" button. This will create a copy of the repository in your account.
+4. You can then clone the repository to your local machine by following the steps in the "Creating a clone" section above, replacing USERNAME with your own GitHub username and REPOSITORY with the name of the repository.
+5. Once you have a copy of the repository on your local machine, you can make changes to it and commit those changes back to your fork on GitHub. You can also create a pull request to submit your changes to the original repository for review.
+
+It's generally a good idea to keep your fork up to date with the original repository by regularly syncing your fork with the upstream repository. To do this, you can add the original repository as an upstream repository and then use the git pull command to sync your fork with the upstream repository.
+
+## Creating a clone
+
+1. Make sure you have Git installed on your local machine. You can check if you have it installed by running the command git --version in your terminal.
+2. Navigate to the directory where you want to create a copy of the repository.
+3. Run the command git clone https://github.com/USERNAME/REPOSITORY.git, replacing USERNAME with the username of the repository owner and REPOSITORY with the name of the repository. In this specific case (https://github.com/marosan28/online-journal.git) This will create a copy of the repository in a new directory with the same name as the repository.
+4. Change into the new directory by running the command cd REPOSITORY, replacing REPOSITORY with the name of the repository.
+5. Run the command git branch to see a list of available branches in the repository.
+6. To switch to a specific branch, run the command git checkout BRANCHNAME, replacing BRANCHNAME with the name of the branch you want to switch to.
+
+# Credits
+
+## Content 
