@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://old-town-jewels.herokuapp.com/sitemap.xml
