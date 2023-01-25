@@ -12,7 +12,6 @@ cloudinary==1.30.0
 dj-database-url==1.2.0
 dj3-cloudinary-storage==0.0.6
 Django==3.2.16
-django-celery==3.1.17
 django-crispy-forms==1.14.0
 django-tinymce4-lite==1.8.0
 exceptiongroup==1.1.0
