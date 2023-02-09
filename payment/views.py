@@ -1,18 +1,19 @@
-from decimal import Decimal
+from django.shortcuts import render, redirect, get_object_or_404
+from django.core.mail import send_mail
+import os
 import stripe
-from django.conf import settings
-from django.shortcuts import render, redirect, reverse, get_object_or_404
+from decimal import Decimal
 from orders.models import Order
-# create the Stripe instance
+from django.urls import reverse
+from django.conf import settings
 stripe.api_key = settings.STRIPE_SECRET_KEY
 stripe.api_version = settings.STRIPE_API_VERSION
-
 
 def payment_process(request, order_id):
     order = get_object_or_404(Order, id=order_id)
 
     if request.method == 'POST':
-        success_url = "https://old-town-jewels.herokuapp.com/payment/completed/"
+        success_url = "https://8000-marosan28-oldtownjewels-gkq8csu2hez.ws-eu86.gitpod.io/payment/completed/"
         cancel_url = request.build_absolute_uri(
                         reverse('payment:canceled'))
 
@@ -47,16 +48,27 @@ def payment_process(request, order_id):
             }]
         # create Stripe checkout session
         session = stripe.checkout.Session.create(**session_data)
+        email = request.POST.get('email')
+        if email:
+            email_subject = "Old Town Jewels: Order Confirmation"
+            email_body = "Your order with Order Number: {0} has been placed successfully. Total Amount: {1}. Date: {2}.\n\nOrder Details:\n\n".format(
+                order.id, order.total_amount, order.ordered_date)
+            for item in order.items.all():
+                email_body += "\tProduct Name: {0}\t Quantity: {1}\t Price: {2}\n".format(
+                    item.product.name, item.quantity, item.price)
 
-        # redirect to Stripe payment form
+            email_body += "\nThank you for your purchase!\n\nBest regards,\nThe Old Town Jewels Team"
+            from_email = os.environ.get('DEFAULT_FROM_EMAIL', settings.DEFAULT_FROM_EMAIL)
+            recipient_list = [email]
+            send_mail(email_subject, email_body, from_email, recipient_list)
+
         return redirect(session.url, code=303)
 
     else:
         return render(request, 'payment/process.html', locals())
 
-
 def payment_completed(request):
     return render(request, 'payment/completed.html')
+
 def payment_canceled(request):
     return render(request, 'payment/canceled.html')
-
