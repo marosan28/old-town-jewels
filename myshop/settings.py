@@ -171,8 +171,6 @@ CSRF_TRUSTED_ORIGINS = ['old-town-jewels.herokuapp.com']
 
 CART_SESSION_ID = 'cart'
 
-EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
-
 # Stripe settings
 STRIPE_PUBLISHABLE_KEY = 'pk_test_51MN0bDAQpwLvviS09rUz6F4sU7hualrvE6rowj4zHO12tY1Bq3oeFewVmmLHRCU915xbXEAx8NulcNbCentqiEAn00GeagOLMY'
 STRIPE_SECRET_KEY = 'sk_test_51MN0bDAQpwLvviS0lm4Udq5tvakxkurNwMHn2ZldJ8ABrNuKHpZqtAuW78KAWkNc1t9aCLRBcqiIm4gLk8m4t2eS00qdVdMxHv'
@@ -191,17 +189,14 @@ CELERYBEAT_SCHEDULER = 'djcelery.schedulers.DatabaseScheduler'
 
 # email settings
 
-EMAIL_HOST_PASSWORD = os.environ.get('EMAIL_HOST_PASSWORD')
-EMAIL_HOST_USER = os.environ.get('EMAIL_HOST_USER')
-EMAIL_PORT = os.environ.get('EMAIL_PORT')
-EMAIL_USE_TLS = os.environ.get('EMAIL_USE_TLS')
+AWS_ACCESS_KEY_ID = os.environ.get('AWS_ACCESS_KEY_ID')
+AWS_SECRET_ACCESS_KEY = os.environ.get('AWS_SECRET_ACCESS_KEY')
+AWS_SES_REGION_NAME = 'eu-west-1'
+AWS_SES_REGION_ENDPOINT = 'email.eu-west-1.amazonaws.com'
 
-EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
-EMAIL_HOST = 'smtp.gmail.com'
-EMAIL_PORT = 587
-EMAIL_USE_TLS = True
-EMAIL_HOST_USER = EMAIL_HOST_USER
-EMAIL_HOST_PASSWORD = EMAIL_HOST_PASSWORD
+EMAIL_BACKEND = 'django_ses.SESBackend'
+
+SENDGRID_API_KEY = os.environ.get('SENDGRID_API_KEY')
 
 LOGGING = {
     'version': 1,
