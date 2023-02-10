@@ -17,7 +17,7 @@ def payment_process(request, order_id):
     order = get_object_or_404(Order, id=order_id)
 
     if request.method == 'POST':
-        success_url = "https://old-town-jewels.herokuapp.com/payment/completed/"
+        success_url = "https://8000-marosan28-oldtownjewels-e76llnxuqig.ws-eu86.gitpod.io/payment/completed/"
         cancel_url = request.build_absolute_uri(
                         reverse('payment:canceled'))
 
@@ -54,6 +54,7 @@ def payment_process(request, order_id):
         session = stripe.checkout.Session.create(**session_data)
         email = request.POST.get('email')
         if email:
+            email_body = ""
             email_subject = "Old Town Jewels: Order Confirmation"
             email_body = "Your order with Order Number: {0} has been placed successfully. Total Amount: {1}. Date: {2}.\n\nOrder Details:\n\n".format(
                 order.id, order.total_amount, order.ordered_date)
