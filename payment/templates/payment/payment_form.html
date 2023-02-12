@@ -2,23 +2,38 @@
 {% load static %}
 {% block title %}Your Order{% endblock %}
 {% block content %}
+
+
 <form id="payment-form" action="{% url 'payment:completed' %}" method="post">
     {% csrf_token %}
     <div class="form-group">
         <label for="card-element">Credit or debit card</label>
         <div id="card-element"></div>
     </div>
-    <input type="text" name="first_name" value="{{ first_name }}">
-    <input type="text" name="last_name" value="{{ last_name }}">
-    <input type="email" name="email" value="{{ email }}">
-    <input type="text" name="address" value="{{ address }}">
-    <input type="text" name="postal_code" value="{{ postal_code }}">
-    <input type="text" name="city" value="{{ city }}">
-
+    <p><label for="first_name">First name:</label> <input type="text" name="first_name" id="first_name"
+            value="{{ first_name }}"></p>
+    <p><label for="last_name">Last name:</label> <input type="text" name="last_name" id="last_name"
+            value="{{ last_name }}"></p>
+    <p><label for="email">Email:</label> <input type="email" name="email" id="email" value="{{ email }}"></p>
+    <p><label for="address">Address:</label> <input type="text" name="address" id="address" value="{{ address }}"></p>
+    <p><label for="postal_code">Postal code:</label> <input type="text" name="postal_code" id="postal_code"
+            value="{{ postal_code }}"></p>
+    <p><label for="city">City:</label> <input type="text" name="city" id="city" value="{{ city }}"></p>
     <input type="hidden" name="stripeToken" value="">
-    <button id="btn-submit">Pay</button>
+
+    <div>
+        <h4>Order items:</h4>
+        <ul>
+            {% for item in order_items %}
+            <li>{{ item.product.name }} - Quantity: {{ item.quantity }} - Price: {{ item.price }}</li>
+            {% endfor %}
+        </ul>
+    </div>
+
+    <p><button id="btn-submit">Pay</button></p>
     <div id="card-errors" role="alert"></div>
 </form>
+
 
 <script>
     // Set your publishable key

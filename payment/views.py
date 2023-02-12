@@ -66,6 +66,9 @@ def payment_canceled(request):
     return render(request, 'payment/canceled.html')
 
 def payment_form(request, order_id, session_id):
+    order = get_object_or_404(Order, id=order_id)
+    order_items = order.items.all()
+
     first_name = request.session.get('first_name', '')
     last_name = request.session.get('last_name', '')
     email = request.session.get('email', '')
@@ -76,6 +79,7 @@ def payment_form(request, order_id, session_id):
     return render(request, 'payment/payment_form.html', {
         'order_id': order_id,
         'session_id': session_id,
+        'order_items': order_items,
         'first_name': first_name,
         'last_name': last_name,
         'email': email,
