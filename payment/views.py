@@ -86,6 +86,7 @@ def payment_form(request, order_id, session_id):
         'address': address,
         'postal_code': postal_code,
         'city': city,
+        'show_subheader': False,
     })
 
 

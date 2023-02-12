@@ -50,7 +50,7 @@
   {% block header %}
   {% endblock %}
   {% include 'shop/includes/messages.html' %}
-  {% if user.is_authenticated %}
+  {% if user.is_authenticated and show_subheader %}
   <div id="subheader">
     <div class="cart">
       {% with total_items=cart|length %}
