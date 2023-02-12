@@ -8,6 +8,13 @@
         <label for="card-element">Credit or debit card</label>
         <div id="card-element"></div>
     </div>
+    <input type="text" name="first_name" value="{{ first_name }}">
+    <input type="text" name="last_name" value="{{ last_name }}">
+    <input type="email" name="email" value="{{ email }}">
+    <input type="text" name="address" value="{{ address }}">
+    <input type="text" name="postal_code" value="{{ postal_code }}">
+    <input type="text" name="city" value="{{ city }}">
+
     <input type="hidden" name="stripeToken" value="">
     <button id="btn-submit">Pay</button>
     <div id="card-errors" role="alert"></div>
@@ -17,7 +24,7 @@
     // Set your publishable key
     var stripe = Stripe(
         'pk_test_51MN0bDAQpwLvviS09rUz6F4sU7hualrvE6rowj4zHO12tY1Bq3oeFewVmmLHRCU915xbXEAx8NulcNbCentqiEAn00GeagOLMY'
-        );
+    );
 
     // Create an instance of Elements
     var elements = stripe.elements();

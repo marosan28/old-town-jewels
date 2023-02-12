@@ -11,6 +11,12 @@ def order_create(request):
         form = OrderCreateForm(request.POST)
         if form.is_valid():
             order = form.save(commit=False)
+            request.session['first_name'] = form.cleaned_data['first_name']
+            request.session['last_name'] = form.cleaned_data['last_name']
+            request.session['email'] = form.cleaned_data['email']
+            request.session['address'] = form.cleaned_data['address']
+            request.session['postal_code'] = form.cleaned_data['postal_code']
+            request.session['city'] = form.cleaned_data['city']
             if cart.coupon:
                 order.coupon = cart.coupon
                 order.discount = cart.coupon.discount

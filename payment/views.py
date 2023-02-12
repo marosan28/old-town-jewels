@@ -66,6 +66,23 @@ def payment_canceled(request):
     return render(request, 'payment/canceled.html')
 
 def payment_form(request, order_id, session_id):
-    return render(request, 'payment/payment_form.html', {'order_id': order_id, 'session_id': session_id})
+    first_name = request.session.get('first_name', '')
+    last_name = request.session.get('last_name', '')
+    email = request.session.get('email', '')
+    address = request.session.get('address', '')
+    postal_code = request.session.get('postal_code', '')
+    city = request.session.get('city', '')
+
+    return render(request, 'payment/payment_form.html', {
+        'order_id': order_id,
+        'session_id': session_id,
+        'first_name': first_name,
+        'last_name': last_name,
+        'email': email,
+        'address': address,
+        'postal_code': postal_code,
+        'city': city,
+    })
+
 
     
