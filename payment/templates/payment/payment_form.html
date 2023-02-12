@@ -7,40 +7,40 @@
 
 
 <form id="payment-form" action="{% url 'payment:completed' %}" method="post">
-    {% csrf_token %}
-    <div class="form-group">
-      <label for="card-element">Credit or debit card</label>
-      <div id="card-element" class="form-control"></div>
-    </div>
-    <div class="form-group">
-      <label for="first_name">First name:</label>
-      <input type="text" name="first_name" id="first_name" value="{{ first_name }}" class="form-control">
-    </div>
-    <div class="form-group">
-      <label for="last_name">Last name:</label>
-      <input type="text" name="last_name" id="last_name" value="{{ last_name }}" class="form-control">
-    </div>
-    <div class="form-group">
-      <label for="email">Email:</label>
-      <input type="email" name="email" id="email" value="{{ email }}" class="form-control">
-    </div>
-    <div class="form-group">
-      <label for="address">Address:</label>
-      <input type="text" name="address" id="address" value="{{ address }}" class="form-control">
-    </div>
-    <div class="form-group">
-      <label for="postal_code">Postal code:</label>
-      <input type="text" name="postal_code" id="postal_code" value="{{ postal_code }}" class="form-control">
-    </div>
-    <div class="form-group">
-      <label for="city">City:</label>
-      <input type="text" name="city" id="city" value="{{ city }}" class="form-control">
-    </div>
-    <input type="hidden" name="stripeToken" value="">
-    <button id="btn-submit" class="btn btn-primary btn-block">Pay</button>
-    <div id="card-errors" role="alert" class="text-danger mt-2"></div>
-  </form>
-  
+  {% csrf_token %}
+  <div class="form-group">
+    <label for="card-element">Credit or debit card</label>
+    <div id="card-element" class="form-control"></div>
+  </div>
+  <div class="form-group">
+    <label for="first_name">First name:</label>
+    <input type="text" name="first_name" id="first_name" value="{{ first_name }}" class="form-control">
+  </div>
+  <div class="form-group">
+    <label for="last_name">Last name:</label>
+    <input type="text" name="last_name" id="last_name" value="{{ last_name }}" class="form-control">
+  </div>
+  <div class="form-group">
+    <label for="email">Email:</label>
+    <input type="email" name="email" id="email" value="{{ email }}" class="form-control">
+  </div>
+  <div class="form-group">
+    <label for="address">Address:</label>
+    <input type="text" name="address" id="address" value="{{ address }}" class="form-control">
+  </div>
+  <div class="form-group">
+    <label for="postal_code">Postal code:</label>
+    <input type="text" name="postal_code" id="postal_code" value="{{ postal_code }}" class="form-control">
+  </div>
+  <div class="form-group">
+    <label for="city">City:</label>
+    <input type="text" name="city" id="city" value="{{ city }}" class="form-control">
+  </div>
+  <input type="hidden" name="stripeToken" value="">
+  <button id="btn-submit" class="btn btn-primary btn-block">Pay</button>
+  <div id="card-errors" role="alert" class="text-danger mt-2"></div>
+</form>
+
 <h3>Order summary:</h3>
 <table>
   <thead>
@@ -48,6 +48,8 @@
       <th>Product name</th>
       <th>Quantity</th>
       <th>Price</th>
+      <th>Total</th>
+
     </tr>
   </thead>
   <tbody>
@@ -56,91 +58,92 @@
       <td>{{ item.product.name }}</td>
       <td>{{ item.quantity }}</td>
       <td>{{ item.price }}</td>
+      <td>€{{ total }}</td>
     </tr>
     {% endfor %}
   </tbody>
 </table>
-  
+
 
 
 <script>
-    // Set your publishable key
-    var stripe = Stripe(
-        'pk_test_51MN0bDAQpwLvviS09rUz6F4sU7hualrvE6rowj4zHO12tY1Bq3oeFewVmmLHRCU915xbXEAx8NulcNbCentqiEAn00GeagOLMY'
-    );
+  // Set your publishable key
+  var stripe = Stripe(
+    'pk_test_51MN0bDAQpwLvviS09rUz6F4sU7hualrvE6rowj4zHO12tY1Bq3oeFewVmmLHRCU915xbXEAx8NulcNbCentqiEAn00GeagOLMY'
+  );
 
-    // Create an instance of Elements
-    var elements = stripe.elements();
+  // Create an instance of Elements
+  var elements = stripe.elements();
 
-    // Custom styling can be passed to options when creating an Element.
-    var style = {
-        base: {
-            color: '#32325d',
-            fontFamily: '"Helvetica Neue", Helvetica, sans-serif',
-            fontSmoothing: 'antialiased',
-            fontSize: '16px',
-            '::placeholder': {
-                color: '#aab7c4'
-            }
-        },
-        invalid: {
-            color: '#fa755a',
-            iconColor: '#fa755a'
-        }
-    };
-
-    // Create an instance of the card Element
-    var card = elements.create('card', {
-        style: style
-    });
-
-    // Add an instance of the card Element into the `card-element` <div>
-    card.mount('#card-element');
-
-    // Handle real-time validation errors from the card Element.
-    card.addEventListener('change', function (event) {
-        var displayError = document.getElementById('card-errors');
-        if (event.error) {
-            displayError.textContent = event.error.message;
-        } else {
-            displayError.textContent = '';
-        }
-    });
-
-    // Handle form submission
-    var form = document.getElementById('payment-form');
-    form.addEventListener('submit', function (event) {
-        event.preventDefault();
-
-        stripe.createToken(card).then(function (result) {
-            if (result.error) {
-                // Inform the user if there was an error
-                var errorElement = document.getElementById('card-errors');
-                errorElement.textContent = result.error.message;
-            } else {
-                // Send the token to your server
-                stripeTokenHandler(result.token);
-            }
-        });
-    });
-
-    // Submit the form with the token ID.
-    // Submit the form with the token ID.
-    function stripeTokenHandler(token) {
-        // Insert the token ID into the form so it gets submitted to the server
-        var form = document.getElementById('payment-form');
-        var hiddenInput = document.createElement('input');
-        hiddenInput.setAttribute('type', 'hidden');
-        hiddenInput.setAttribute('name', 'stripeToken');
-        hiddenInput.setAttribute('value', token.id);
-        form.appendChild(hiddenInput);
-
-        // Add the action URL to the form before submitting
-        form.action = "/payment/completed/";
-
-        console.log(form);
-        form.submit();
-
+  // Custom styling can be passed to options when creating an Element.
+  var style = {
+    base: {
+      color: '#32325d',
+      fontFamily: '"Helvetica Neue", Helvetica, sans-serif',
+      fontSmoothing: 'antialiased',
+      fontSize: '16px',
+      '::placeholder': {
+        color: '#aab7c4'
+      }
+    },
+    invalid: {
+      color: '#fa755a',
+      iconColor: '#fa755a'
     }
+  };
+
+  // Create an instance of the card Element
+  var card = elements.create('card', {
+    style: style
+  });
+
+  // Add an instance of the card Element into the `card-element` <div>
+  card.mount('#card-element');
+
+  // Handle real-time validation errors from the card Element.
+  card.addEventListener('change', function (event) {
+    var displayError = document.getElementById('card-errors');
+    if (event.error) {
+      displayError.textContent = event.error.message;
+    } else {
+      displayError.textContent = '';
+    }
+  });
+
+  // Handle form submission
+  var form = document.getElementById('payment-form');
+  form.addEventListener('submit', function (event) {
+    event.preventDefault();
+
+    stripe.createToken(card).then(function (result) {
+      if (result.error) {
+        // Inform the user if there was an error
+        var errorElement = document.getElementById('card-errors');
+        errorElement.textContent = result.error.message;
+      } else {
+        // Send the token to your server
+        stripeTokenHandler(result.token);
+      }
+    });
+  });
+
+  // Submit the form with the token ID.
+  // Submit the form with the token ID.
+  function stripeTokenHandler(token) {
+    // Insert the token ID into the form so it gets submitted to the server
+    var form = document.getElementById('payment-form');
+    var hiddenInput = document.createElement('input');
+    hiddenInput.setAttribute('type', 'hidden');
+    hiddenInput.setAttribute('name', 'stripeToken');
+    hiddenInput.setAttribute('value', token.id);
+    form.appendChild(hiddenInput);
+
+    // Add the action URL to the form before submitting
+    form.action = "/payment/completed/";
+
+    console.log(form);
+    form.submit();
+
+  }
 </script>
 {% endblock content %}

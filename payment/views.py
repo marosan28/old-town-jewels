@@ -68,6 +68,7 @@ def payment_canceled(request):
 def payment_form(request, order_id, session_id):
     order = get_object_or_404(Order, id=order_id)
     order_items = order.items.all()
+    total = order.get_total_cost()
 
     first_name = request.session.get('first_name', '')
     last_name = request.session.get('last_name', '')
@@ -86,6 +87,7 @@ def payment_form(request, order_id, session_id):
         'address': address,
         'postal_code': postal_code,
         'city': city,
+        'total': total,
     })
 
 
