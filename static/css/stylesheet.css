@@ -412,6 +412,10 @@ footer.bg-dark {
  .d-flex {
     margin-top: 50px;
  }
+
+ button.btn.btn-primary.btn-block {
+        margin: 0;
+ }
 /* Media queries for small screen sizes */
 
 @media only screen and (max-width: 700px) {
