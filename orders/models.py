@@ -34,7 +34,6 @@ class Order(models.Model):
             return total_cost * (self.discount / Decimal(100))
         return Decimal(0)
 
-
     class Meta:
         ordering = ['-created']
         indexes = [
