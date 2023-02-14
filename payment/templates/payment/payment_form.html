@@ -173,10 +173,24 @@
         <label for="billing_shipping_country">Country:</label>
         <input type="text" class="form-control" id="billing_shipping_country" name="billing_shipping_country">
       </div>
+
+      {% if delivery_options %}
+      <div class="form-group">
+        <label for="delivery_options">Delivery option:</label>
+        <select name="delivery_options" id="delivery_options" class="form-control">
+          {% for option in delivery_options %}
+            <option value="{{ option.option }}">{{ option.option }} ({{ option.price }} EUR)</option>
+          {% endfor %}
+        </select>
+      </div>
+    {% endif %}
+    
+
       <input type="hidden" name="stripeToken" value="">
       <button id="btn-submit" class="btn btn-primary btn-block">Pay</button>
       <div id="card-errors" role="alert" class="text-danger mt-2"></div>
 </form>
+
 
 <h3>Order summary:</h3>
 <table>

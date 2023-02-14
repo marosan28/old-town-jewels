@@ -7,6 +7,9 @@ from orders.models import Order
 from django.urls import reverse
 from django.conf import settings
 from cart.cart import Cart
+from delivery.models import DeliveryOption
+from django_countries import countries
+from delivery.views import get_region_from_country
 
 stripe.api_key = settings.STRIPE_SECRET_KEY
 stripe.api_version = settings.STRIPE_API_VERSION
@@ -67,6 +70,7 @@ def payment_form(request, order_id, session_id):
     postal_code = request.session.get('postal_code')
     city = request.session.get('city')
     shipping_country = request.session.get('shipping_country')
+    delivery_options = DeliveryOption.objects.filter(region=get_region_from_country(shipping_country))
 
     # Get or create a PaymentIntent
     payment_intent_id = order.payment_intent_id
@@ -100,6 +104,7 @@ def payment_form(request, order_id, session_id):
         'postal_code': postal_code,
         'city': city,
         'shipping_country': shipping_country,
+        'delivery_options': delivery_options,
     })
 
 intent = stripe.PaymentIntent.create(
