@@ -6,33 +6,34 @@
 <script>
   $(document).ready(function () {
     $(document).ready(function () {
-      // Get the shipping address elements
-      var $shippingAddress = $('#shipping-address p');
+  // Get the shipping address elements
+  var $shippingAddress = $('#shipping-address p');
 
-      // Get the billing address elements
-      var $billingCountry = $('#shipping_country');
-      var $billingAddress = $('#billing_address');
-      var $billingAddress2 = $('#billing_address2');
-      var $billingPostalCode = $('#billing_postal_code');
-      var $billingcity = $('#billing_city');
+  // Get the billing address elements
+  var $billingAddress = $('#billing_address');
+  var $billingAddress2 = $('#billing_address2');
+  var $billingPostalCode = $('#billing_postal_code');
+  var $billingcity = $('#billing_city');
+  var $billingCountry = $('#billing_shipping_country');
 
-      // Set the billing address fields to the shipping address values
-      $('#copy-shipping-address').on('click', function () {
-        if ($(this).is(':checked')) {
-          var shippingShippingCountry = $shippingAddress.eq(0).text();
-          var shippingAddress1 = $shippingAddress.eq(1).text();
-          var shippingAddress2 = $shippingAddress.eq(2).text();
-          var shippingPostalCode = $shippingAddress.eq(3).text();
-          var shippingcity = $shippingAddress.eq(4).text();
+  // Set the billing address fields to the shipping address values
+  $('#copy-shipping-address').on('click', function () {
+    if ($(this).is(':checked')) {
+      var shippingAddress1 = $shippingAddress.eq(0).text();
+      var shippingAddress2 = $shippingAddress.eq(1).text();
+      var shippingPostalCode = $shippingAddress.eq(2).text();
+      var shippingcity = $shippingAddress.eq(3).text();
+      var shippingShippingCountry = $shippingAddress.eq(4).text();
 
-          $billingCountry.val(shippingShippingCountry);
-          $billingAddress.val(shippingAddress1);
-          $billingAddress2.val(shippingAddress2);
-          $billingPostalCode.val(shippingPostalCode);
-          $billingcity.val(shippingcity);
-        }
-      });
-    });
+      $billingAddress.val(shippingAddress1);
+      $billingAddress2.val(shippingAddress2);
+      $billingPostalCode.val(shippingPostalCode);
+      $billingcity.val(shippingcity);
+      $billingCountry.val(shippingShippingCountry).trigger('change');
+    }
+  });
+});
+
     // Set your publishable key
     var stripe = Stripe(
       'pk_test_51MN0bDAQpwLvviS09rUz6F4sU7hualrvE6rowj4zHO12tY1Bq3oeFewVmmLHRCU915xbXEAx8NulcNbCentqiEAn00GeagOLMY'
@@ -143,6 +144,7 @@
         <p>{{ request.session.address2 }}</p>
         <p>{{ request.session.postal_code }}</p>
         <p>{{ request.session.city }}</p>
+        <p>{{ request.session.shipping_country }}</p>
       </div>
     </div>
   </div>
@@ -164,8 +166,12 @@
         <input type="text" class="form-control" id="billing_postal_code" name="billing_postal_code">
       </div>
       <div class="form-group">
-        <label for="billing_city">city:</label>
+        <label for="billing_city">City:</label>
         <input type="text" class="form-control" id="billing_city" name="billing_city">
+      </div>
+      <div class="form-group">
+        <label for="billing_shipping_country">Country:</label>
+        <input type="text" class="form-control" id="billing_shipping_country" name="billing_shipping_country">
       </div>
       <input type="hidden" name="stripeToken" value="">
       <button id="btn-submit" class="btn btn-primary btn-block">Pay</button>

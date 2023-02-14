@@ -62,11 +62,11 @@ def payment_form(request, order_id, session_id):
     order = get_object_or_404(Order, id=order_id)
     order_items = order.items.all()
     total = order.get_total_cost()
-    shipping_country = request.session.get('shipping_country')
     address = request.session.get('address')
     address2 = request.session.get('address2')
     postal_code = request.session.get('postal_code')
     city = request.session.get('city')
+    shipping_country = request.session.get('shipping_country')
 
     # Get or create a PaymentIntent
     payment_intent_id = order.payment_intent_id
