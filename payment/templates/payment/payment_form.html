@@ -19,21 +19,27 @@
   </div>
   <h3 class="form-title">Billing Information</h3>
   <div class="form-group">
-    <label for="address">Address 1:</label>
-    <input type="text" name="address" id="address" value="{{ address }}"class="form-control">
-  </div>
-  <div class="form-group">
-    <label for="address">Address 2:</label>
-    <input type="text" name="address" id="address" value="{{ address }}" class="form-control">
-  </div>
-  <div class="form-group">
-    <label for="postal_code">Postal code:</label>
-    <input type="text" name="postal_code" id="postal_code" value="{{ postal_code }}" class="form-control">
-  </div>
-  <div class="form-group">
-    <label for="city">City:</label>
-    <input type="text" name="city" id="city" value="{{ city }}" class="form-control">
-  </div>
+    <div class="form-check">
+      <input type="checkbox" id="copy_shipping" name="copy_shipping" data-shipping-address="{{ shipping.address }} {{ shipping.address2 }}, {{ shipping.city }} {{ shipping.postal_code }}">
+        <label class="form-check-label" for="copy_shipping">Copy Shipping Information to Billing Information</label>
+    </div>
+</div>
+<div class="form-group">
+  <label for="billing_address">Address 1:</label>
+  <input type="text" class="form-control" id="billing_address" name="billing_address">
+</div>
+<div class="form-group">
+  <label for="billing_address">Address 2:</label>
+  <input type="text" class="form-control" id="billing_address2" name="billing_address2">
+</div>
+<div class="form-group">
+  <label for="billing_postal_code">Postal Code:</label>
+  <input type="text" class="form-control" id="billing_postal_code" name="billing_postal_code">
+</div>
+<div class="form-group">
+  <label for="billing_city">City:</label>
+  <input type="text" class="form-control" id="billing_city" name="billing_city">
+</div>
   <input type="hidden" name="stripeToken" value="">
   <button id="btn-submit" class="btn btn-primary btn-block">Pay</button>
   <div id="card-errors" role="alert" class="text-danger mt-2"></div>
@@ -63,8 +69,47 @@
 </table>
 
 
+{% endblock content %}
 
+{% block scripts %}
+{{ block.super }}
 <script>
+  $(document).ready(function() {
+$(document).ready(function() {
+  var $copyShipping = $('#copy_shipping');
+  var $billingAddress = $('#billing_address');
+  var $billingAddress2 = $('#billing_address2');
+  var $billingCity = $('#billing_city');
+  var $billingPostalCode = $('#billing_postal_code');
+
+  // Define the getShippingAddressFromSessionOrCookie function
+  function getShippingAddressFromSessionOrCookie(callback) {
+    var shippingAddress = null;
+
+    if (shippingAddress != null) {
+      // Call the callback function with the shipping address data
+      callback(shippingAddress);
+      console.log('Shipping address data:', shippingAddress);
+    }
+  }
+
+  $copyShipping.click(function() {
+    if ($(this).is(':checked')) {
+      // Define a callback function to handle the response
+      function handleResponse(shippingAddress) {
+        var addressParts = shippingAddress.split(', ');
+        $billingAddress.val(addressParts[0]);
+        $billingAddress2.val(addressParts[1]);
+        $billingCity.val(addressParts[2]);
+        $billingPostalCode.val(addressParts[3]);
+      }
+
+      // Call getShippingAddressFromSessionOrCookie with the callback function as an argument
+      getShippingAddressFromSessionOrCookie(handleResponse);
+    }
+  });
+});
+
   // Set your publishable key
   var stripe = Stripe('pk_test_51MN0bDAQpwLvviS09rUz6F4sU7hualrvE6rowj4zHO12tY1Bq3oeFewVmmLHRCU915xbXEAx8NulcNbCentqiEAn00GeagOLMY');
 
@@ -146,5 +191,6 @@
     }
   });
 });
+});
 </script>
-{% endblock content %}
+{% endblock %}

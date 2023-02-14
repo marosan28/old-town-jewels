@@ -62,6 +62,10 @@ def payment_form(request, order_id, session_id):
     order = get_object_or_404(Order, id=order_id)
     order_items = order.items.all()
     total = order.get_total_cost()
+    address = request.session.get('address')
+    address2 = request.session.get('address2')
+    postal_code = request.session.get('postal_code')
+    city = request.session.get('city')
 
     # Get or create a PaymentIntent
     payment_intent_id = order.payment_intent_id
@@ -90,6 +94,10 @@ def payment_form(request, order_id, session_id):
         'order_items': order_items,
         'total': total,
         'stripe_public_key': settings.STRIPE_PUBLIC_KEY,
+        'address': address,
+        'address2': address2,
+        'postal_code': postal_code,
+        'city': city,
     })
 
 intent = stripe.PaymentIntent.create(
