@@ -10,6 +10,7 @@
       var $shippingAddress = $('#shipping-address p');
 
       // Get the billing address elements
+      var $billingCountry = $('#shipping_country');
       var $billingAddress = $('#billing_address');
       var $billingAddress2 = $('#billing_address2');
       var $billingPostalCode = $('#billing_postal_code');
@@ -18,11 +19,13 @@
       // Set the billing address fields to the shipping address values
       $('#copy-shipping-address').on('click', function () {
         if ($(this).is(':checked')) {
-          var shippingAddress1 = $shippingAddress.eq(0).text();
-          var shippingAddress2 = $shippingAddress.eq(1).text();
-          var shippingPostalCode = $shippingAddress.eq(2).text();
-          var shippingcity = $shippingAddress.eq(3).text();
+          var shippingShippingCountry = $shippingAddress.eq(0).text();
+          var shippingAddress1 = $shippingAddress.eq(1).text();
+          var shippingAddress2 = $shippingAddress.eq(2).text();
+          var shippingPostalCode = $shippingAddress.eq(3).text();
+          var shippingcity = $shippingAddress.eq(4).text();
 
+          $billingCountry.val(shippingShippingCountry);
           $billingAddress.val(shippingAddress1);
           $billingAddress2.val(shippingAddress2);
           $billingPostalCode.val(shippingPostalCode);

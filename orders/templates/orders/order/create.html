@@ -61,7 +61,7 @@ Checkout
   </div>
   <h3 class="form-title">Shipping Information</h3>
   <div class="form-group">
-    <label for="{{ form.shipping_country.id_for_label }}">Shipping Country:</label>
+    <label for="{{ shipping.shipping_country.id_for_label }}">Shipping Country:</label>
     {{ form.shipping_country }}
     {% if form.shipping_country.errors %}
     <div class="alert alert-danger" role="alert">

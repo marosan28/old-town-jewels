@@ -11,7 +11,7 @@ class Order(models.Model):
     first_name = models.CharField(max_length=50)
     last_name = models.CharField(max_length=50)
     email = models.EmailField()
-    shipping_country = CountryField(blank_label='(select country)')
+    shipping_country = CountryField(blank_label='(select country)', default='US')
     address = models.CharField(max_length=250)
     address2 = models.CharField(max_length=250, null=True, blank=True)
     postal_code = models.CharField(max_length=20)
