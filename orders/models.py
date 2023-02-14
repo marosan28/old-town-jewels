@@ -5,11 +5,13 @@ from decimal import Decimal
 from django.core.validators import MinValueValidator, \
                                    MaxValueValidator
 from coupons.models import Coupon
+from django_countries.fields import CountryField
 
 class Order(models.Model):
     first_name = models.CharField(max_length=50)
     last_name = models.CharField(max_length=50)
     email = models.EmailField()
+    shipping_country = CountryField(blank_label='(select country)')
     address = models.CharField(max_length=250)
     address2 = models.CharField(max_length=250, null=True, blank=True)
     postal_code = models.CharField(max_length=20)

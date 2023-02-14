@@ -55,6 +55,7 @@ INSTALLED_APPS = [
     'users.apps.UsersConfig',
     'tinymce',
     'crispy_forms',
+    'django_countries',
 ]
 
 MIDDLEWARE = [

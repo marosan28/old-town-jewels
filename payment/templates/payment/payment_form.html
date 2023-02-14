@@ -13,7 +13,7 @@
       var $billingAddress = $('#billing_address');
       var $billingAddress2 = $('#billing_address2');
       var $billingPostalCode = $('#billing_postal_code');
-      var $billingCity = $('#billing_city');
+      var $billingcity = $('#billing_city');
 
       // Set the billing address fields to the shipping address values
       $('#copy-shipping-address').on('click', function () {
@@ -21,12 +21,12 @@
           var shippingAddress1 = $shippingAddress.eq(0).text();
           var shippingAddress2 = $shippingAddress.eq(1).text();
           var shippingPostalCode = $shippingAddress.eq(2).text();
-          var shippingCity = $shippingAddress.eq(3).text();
+          var shippingcity = $shippingAddress.eq(3).text();
 
           $billingAddress.val(shippingAddress1);
           $billingAddress2.val(shippingAddress2);
           $billingPostalCode.val(shippingPostalCode);
-          $billingCity.val(shippingCity);
+          $billingcity.val(shippingcity);
         }
       });
     });
@@ -161,7 +161,7 @@
         <input type="text" class="form-control" id="billing_postal_code" name="billing_postal_code">
       </div>
       <div class="form-group">
-        <label for="billing_city">City:</label>
+        <label for="billing_city">city:</label>
         <input type="text" class="form-control" id="billing_city" name="billing_city">
       </div>
       <input type="hidden" name="stripeToken" value="">
