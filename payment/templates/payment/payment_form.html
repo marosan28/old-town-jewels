@@ -19,30 +19,40 @@
   </div>
   <h3 class="form-title">Billing Information</h3>
   <div class="form-group">
-    <div class="form-check">
-      <input type="checkbox" id="copy_shipping" name="copy_shipping" data-shipping-address="{{ shipping.address }} {{ shipping.address2 }}, {{ shipping.city }} {{ shipping.postal_code }}">
-        <label class="form-check-label" for="copy_shipping">Copy Shipping Information to Billing Information</label>
-    </div>
-</div>
-<div class="form-group">
-  <label for="billing_address">Address 1:</label>
-  <input type="text" class="form-control" id="billing_address" name="billing_address">
-</div>
-<div class="form-group">
-  <label for="billing_address">Address 2:</label>
-  <input type="text" class="form-control" id="billing_address2" name="billing_address2">
-</div>
-<div class="form-group">
-  <label for="billing_postal_code">Postal Code:</label>
-  <input type="text" class="form-control" id="billing_postal_code" name="billing_postal_code">
-</div>
-<div class="form-group">
-  <label for="billing_city">City:</label>
-  <input type="text" class="form-control" id="billing_city" name="billing_city">
-</div>
-  <input type="hidden" name="stripeToken" value="">
-  <button id="btn-submit" class="btn btn-primary btn-block">Pay</button>
-  <div id="card-errors" role="alert" class="text-danger mt-2"></div>
+    <div id="shipping-details">
+      <p><strong>Shipping Address:</strong></p>
+      <div id="shipping-address">
+        <p>{{ request.session.address }}</p>
+        <p>{{ request.session.address2 }}</p>
+        <p>{{ request.session.postal_code }}</p>
+        <p>{{ request.session.city }}</p>
+      </div>
+      <p><strong>Billing Address:</strong></p>
+      <div class="form-check">
+        <input type="checkbox" id="copy-shipping-address" name="copy-shipping-address">
+        <label for="copy-shipping-address">Same as shipping address</label>
+      </div>
+
+
+      <div class="form-group">
+        <label for="billing_address">Address 1:</label>
+        <input type="text" class="form-control" id="billing_address" name="billing_address">
+      </div>
+      <div class="form-group">
+        <label for="billing_address">Address 2:</label>
+        <input type="text" class="form-control" id="billing_address2" name="billing_address2">
+      </div>
+      <div class="form-group">
+        <label for="billing_postal_code">Postal Code:</label>
+        <input type="text" class="form-control" id="billing_postal_code" name="billing_postal_code">
+      </div>
+      <div class="form-group">
+        <label for="billing_city">City:</label>
+        <input type="text" class="form-control" id="billing_city" name="billing_city">
+      </div>
+      <input type="hidden" name="stripeToken" value="">
+      <button id="btn-submit" class="btn btn-primary btn-block">Pay</button>
+      <div id="card-errors" role="alert" class="text-danger mt-2"></div>
 </form>
 
 <h3>Order summary:</h3>
@@ -74,123 +84,115 @@
 {% block scripts %}
 {{ block.super }}
 <script>
-  $(document).ready(function() {
-$(document).ready(function() {
-  var $copyShipping = $('#copy_shipping');
+  $(document).ready(function () {
+    $(document).ready(function() {
+  // Get the shipping address elements
+  var $shippingAddress = $('#shipping-address p');
+  
+  // Get the billing address elements
   var $billingAddress = $('#billing_address');
   var $billingAddress2 = $('#billing_address2');
-  var $billingCity = $('#billing_city');
   var $billingPostalCode = $('#billing_postal_code');
-
-  // Define the getShippingAddressFromSessionOrCookie function
-  function getShippingAddressFromSessionOrCookie(callback) {
-    var shippingAddress = null;
-
-    if (shippingAddress != null) {
-      // Call the callback function with the shipping address data
-      callback(shippingAddress);
-      console.log('Shipping address data:', shippingAddress);
-    }
-  }
-
-  $copyShipping.click(function() {
+  var $billingCity = $('#billing_city');
+  
+  // Set the billing address fields to the shipping address values
+  $('#copy-shipping-address').on('click', function() {
     if ($(this).is(':checked')) {
-      // Define a callback function to handle the response
-      function handleResponse(shippingAddress) {
-        var addressParts = shippingAddress.split(', ');
-        $billingAddress.val(addressParts[0]);
-        $billingAddress2.val(addressParts[1]);
-        $billingCity.val(addressParts[2]);
-        $billingPostalCode.val(addressParts[3]);
-      }
-
-      // Call getShippingAddressFromSessionOrCookie with the callback function as an argument
-      getShippingAddressFromSessionOrCookie(handleResponse);
+      var shippingAddress1 = $shippingAddress.eq(0).text();
+      var shippingAddress2 = $shippingAddress.eq(1).text();
+      var shippingPostalCode = $shippingAddress.eq(2).text();
+      var shippingCity = $shippingAddress.eq(3).text();
+      
+      $billingAddress.val(shippingAddress1);
+      $billingAddress2.val(shippingAddress2);
+      $billingPostalCode.val(shippingPostalCode);
+      $billingCity.val(shippingCity);
     }
   });
 });
+    // Set your publishable key
+    var stripe = Stripe(
+      'pk_test_51MN0bDAQpwLvviS09rUz6F4sU7hualrvE6rowj4zHO12tY1Bq3oeFewVmmLHRCU915xbXEAx8NulcNbCentqiEAn00GeagOLMY'
+      );
 
-  // Set your publishable key
-  var stripe = Stripe('pk_test_51MN0bDAQpwLvviS09rUz6F4sU7hualrvE6rowj4zHO12tY1Bq3oeFewVmmLHRCU915xbXEAx8NulcNbCentqiEAn00GeagOLMY');
+    // Create an instance of Elements
+    var elements = stripe.elements();
 
-  // Create an instance of Elements
-  var elements = stripe.elements();
-
-  // Custom styling can be passed to options when creating an Element.
-  var style = {
-    base: {
-      color: '#32325d',
-      fontFamily: '"Helvetica Neue", Helvetica, sans-serif',
-      fontSmoothing: 'antialiased',
-      fontSize: '16px',
-      '::placeholder': {
-        color: '#aab7c4'
+    // Custom styling can be passed to options when creating an Element.
+    var style = {
+      base: {
+        color: '#32325d',
+        fontFamily: '"Helvetica Neue", Helvetica, sans-serif',
+        fontSmoothing: 'antialiased',
+        fontSize: '16px',
+        '::placeholder': {
+          color: '#aab7c4'
+        }
+      },
+      invalid: {
+        color: '#fa755a',
+        iconColor: '#fa755a'
       }
-    },
-    invalid: {
-      color: '#fa755a',
-      iconColor: '#fa755a'
-    }
-  };
+    };
 
-  // Create an instance of the card Element
-  var card = elements.create('card', {
-    style: style
-  });
+    // Create an instance of the card Element
+    var card = elements.create('card', {
+      style: style
+    });
 
-  // Add an instance of the card Element into the `card-element` <div>
-  card.mount('#card-element');
+    // Add an instance of the card Element into the `card-element` <div>
+    card.mount('#card-element');
 
-  // Handle real-time validation errors from the card Element.
-  card.addEventListener('change', function (event) {
-    var displayError = document.getElementById('card-errors');
-    if (event.error) {
-      displayError.textContent = event.error.message;
-    } else {
-      displayError.textContent = '';
-    }
-  });
+    // Handle real-time validation errors from the card Element.
+    card.addEventListener('change', function (event) {
+      var displayError = document.getElementById('card-errors');
+      if (event.error) {
+        displayError.textContent = event.error.message;
+      } else {
+        displayError.textContent = '';
+      }
+    });
 
-  // Handle form submission
-  var form = document.getElementById('payment-form');
-  form.addEventListener('submit', function(event) {
-  event.preventDefault();
+    // Handle form submission
+    var form = document.getElementById('payment-form');
+    form.addEventListener('submit', function (event) {
+      event.preventDefault();
 
-  // Disable the submit button to prevent multiple clicks
-  document.getElementById('btn-submit').disabled = true;
+      // Disable the submit button to prevent multiple clicks
+      document.getElementById('btn-submit').disabled = true;
 
-  stripe.createPaymentMethod({
-    type: 'card',
-    card: card,
-  }).then(function(result) {
-    if (result.error) {
-      var errorElement = document.getElementById('card-errors');
-      errorElement.textContent = result.error.message;
-      document.getElementById('btn-submit').disabled = false;
-    } else {
-      // Add the payment method to the form
-      var paymentMethodInput = document.createElement('input');
-      paymentMethodInput.setAttribute('type', 'hidden');
-      paymentMethodInput.setAttribute('name', 'payment_method');
-      paymentMethodInput.setAttribute('value', result.paymentMethod.id);
-      form.appendChild(paymentMethodInput);
-
-      // Submit the form
-      var clientSecret = '{{ client_secret }}';
-      stripe.confirmCardPayment(clientSecret, {
-        payment_method: result.paymentMethod.id,
-      }).then(function(result) {
+      stripe.createPaymentMethod({
+        type: 'card',
+        card: card,
+      }).then(function (result) {
         if (result.error) {
           var errorElement = document.getElementById('card-errors');
           errorElement.textContent = result.error.message;
           document.getElementById('btn-submit').disabled = false;
         } else {
-          form.submit();
+          // Add the payment method to the form
+          var paymentMethodInput = document.createElement('input');
+          paymentMethodInput.setAttribute('type', 'hidden');
+          paymentMethodInput.setAttribute('name', 'payment_method');
+          paymentMethodInput.setAttribute('value', result.paymentMethod.id);
+          form.appendChild(paymentMethodInput);
+
+          // Submit the form
+          var clientSecret = '{{ client_secret }}';
+          stripe.confirmCardPayment(clientSecret, {
+            payment_method: result.paymentMethod.id,
+          }).then(function (result) {
+            if (result.error) {
+              var errorElement = document.getElementById('card-errors');
+              errorElement.textContent = result.error.message;
+              document.getElementById('btn-submit').disabled = false;
+            } else {
+              form.submit();
+            }
+          });
         }
       });
-    }
+    });
   });
-});
-});
 </script>
 {% endblock %}
