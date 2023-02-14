@@ -15,6 +15,7 @@ def order_create(request):
             request.session['last_name'] = form.cleaned_data['last_name']
             request.session['email'] = form.cleaned_data['email']
             request.session['address'] = form.cleaned_data['address']
+            request.session['address2'] = form.cleaned_data['address2']
             request.session['postal_code'] = form.cleaned_data['postal_code']
             request.session['city'] = form.cleaned_data['city']
             if cart.coupon:
