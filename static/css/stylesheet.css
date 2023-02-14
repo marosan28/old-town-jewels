@@ -325,6 +325,10 @@ button.btn  {
 .bg-dark {
     background-color: black!important;
 }
+
+.form-title {
+    margin-bottom: 20px;
+}
 /*------------Footer----------------*/
 footer.bg-dark {
     position: relative;
@@ -408,6 +412,7 @@ footer.bg-dark {
  }
  .alert {
     background-color: rgba(255, 192, 203, 0.668);
+    margin-top: 5px;
  }
  .d-flex {
     margin-top: 50px;

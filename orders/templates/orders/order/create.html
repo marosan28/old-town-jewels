@@ -23,34 +23,76 @@ Checkout
   <p>Total: €{{ cart.get_total_price_after_discount|floatformat:2 }}</p>
 </div>
 <form method="post" class="order-form">
-  <h3>Personal Info</h3>
+  <h3 class="form-title">Personal Information</h3>
   <div class="form-group">
-      <label for="first_name">First name:</label>
+      <label for="{{ form.first_name.id_for_label }}">First Name:</label>
       <input type="text" name="first_name" id="first_name" class="form-control">
-    </div>
+      {% if form.first_name.errors %}
+      <div class="alert alert-danger" role="alert">
+          {% for error in form.first_name.errors %}
+          {{ error }}
+          {% endfor %}
+      </div>
+      {% endif %}
+  </div>
   <div class="form-group">
-      <label for="last_name">Last name:</label>
+      <label for="{{ form.last_name.id_for_label }}">Last Name:</label>
       <input type="text" name="last_name" id="last_name" class="form-control">
-    </div>
+      {% if form.last_name.errors %}
+      <div class="alert alert-danger" role="alert">
+          {% for error in form.last_name.errors %}
+          {{ error }}
+          {% endfor %}
+      </div>
+      {% endif %}
+  </div>
   <div class="form-group">
-      <label for="email">Email:</label>
+      <label for="{{ form.email.id_for_label }}">Email:</label>
       <input type="email" name="email" id="email" class="form-control">
-    </div>
-  <h3>Shipping Info</h3>
+      {% if form.email.errors %}
+      <div class="alert alert-danger" role="alert">
+          {% for error in form.email.errors %}
+          {{ error }}
+          {% endfor %}
+      </div>
+      {% endif %}
+  </div>
+  <h3 class="form-title">Shipping Information</h3>
   <div class="form-group">
-      <label for="address">Address:</label>
+      <label for="{{ form.address.id_for_label }}">Address:</label>
       <input type="text" name="address" id="address" class="form-control">
-    </div>
+      {% if form.address.errors %}
+      <div class="alert alert-danger" role="alert">
+          {% for error in form.address.errors %}
+          {{ error }}
+          {% endfor %}
+      </div>
+      {% endif %}
+  </div>
   <div class="form-group">
-      <label for="postal_code">Postal Code:</label>
+      <label for="{{ form.postal_code.id_for_label }}">Postal Code:</label>
       <input type="text" name="postal_code" id="postal_code" class="form-control">
-    </div>
+      {% if form.postal_code.errors %}
+      <div class="alert alert-danger" role="alert">
+          {% for error in form.postal_code.errors %}
+          {{ error }}
+          {% endfor %}
+      </div>
+      {% endif %}
+  </div>
   <div class="form-group">
-      <label for="city">City:</label>
+      <label for="{{ form.city.id_for_label }}">City:</label>
       <input type="text" name="city" id="city" class="form-control">
-    </div>
-   <button id="btn-submit" class="btn btn-primary btn-block">Place Order</button>
-    {% csrf_token %}
+      {% if form.city.errors %}
+      <div class="alert alert-danger" role="alert">
+          {% for error in form.city.errors %}
+          {{ error }}
+          {% endfor %}
+      </div>
+      {% endif %}
+  </div>
+  <p><input type="submit" value="Place order"></p>
+  {% csrf_token %}
 </form>
 
 {% endblock %}
