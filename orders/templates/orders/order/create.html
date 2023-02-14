@@ -2,7 +2,9 @@
 {% block title %}
 Checkout
 {% endblock %}
+{% block subheader %}{% endblock %}
 {% block content %}
+<div id="content">
 <h1>Checkout</h1>
 <div class="order-info">
   <h3>Your order</h3>
@@ -105,5 +107,5 @@ Checkout
   <p><input type="submit" value="Place order"></p>
   {% csrf_token %}
 </form>
-
+</div>
 {% endblock %}

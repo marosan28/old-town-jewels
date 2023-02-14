@@ -81,8 +81,9 @@
   {% endif %}
   {% endblock %}
 
+  {% block content %}
   <div id="content">
-    {% block content %}
+    
     {% for product in product_list %}
     <div class="product-card">
       <h2>{{ product.name }}</h2>
@@ -92,11 +93,11 @@
     </div>
     {% endfor %}
 
-    {% endblock %}
+ 
   </div>
 
-
-
+  {% endblock %}
+{% block footer %}
   <!-- Footer-->
   <footer class="py-5 bg-dark">
     <div class="container">
@@ -139,6 +140,7 @@
     </div>
     </div>
   </footer>
+  {% endblock %}
 </body>
 
 

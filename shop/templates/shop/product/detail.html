@@ -4,6 +4,7 @@
 {{ product.name }}
 {% endblock %}
 {% block content %}
+<div id="content">
 <div class="product-detail">
   <img src="{% if product.image %}{{ product.image.url }}{% else %}
     {% static 'img/no_image.png' %}{% endif %}" alt="product-image">
@@ -21,5 +22,6 @@
     {% csrf_token %}
     <input type="submit" value="Add to cart">
   </form>
+</div>
 </div>
 {% endblock %}

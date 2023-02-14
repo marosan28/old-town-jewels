@@ -1,7 +1,9 @@
 {% extends "shop/base.html" %}
 {% load static %}
 {% block title %}Pay your order{% endblock %}
+{% block subheader %}{% endblock %}
 {% block content %}
+<div id="content">
 <h1>Order summary</h1>
 <h3>Make Sure You Got Everything!</h3>
 <table class="cart">
@@ -56,4 +58,5 @@
   <input type="submit" value="Pay now">
   {% csrf_token %}
 </form>
+</div>
 {% endblock %}

@@ -4,6 +4,7 @@
   {% if category %}{{ category.name }}{% else %}Products{% endif %}
 {% endblock %}
 {% block content %}
+<div id="content">
   <div id="sidebar">
     <h3>Categories</h3>
     <ul>
@@ -32,4 +33,5 @@
       </div>
     {% endfor %}
   </div>
+</div>
 {% endblock %}
