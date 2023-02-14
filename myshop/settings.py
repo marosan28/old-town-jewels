@@ -172,7 +172,7 @@ CSRF_TRUSTED_ORIGINS = ['old-town-jewels.herokuapp.com']
 CART_SESSION_ID = 'cart'
 
 # Stripe settings
-STRIPE_PUBLISHABLE_KEY = os.environ.get('STRIPE_PUBLISHABLE_KEY')
+STRIPE_PUBLIC_KEY = os.environ.get('STRIPE_PUBLIC_KEY')
 STRIPE_SECRET_KEY = os.environ.get('STRIPE_SECRET_KEY')
 STRIPE_API_VERSION = os.environ.get('STRIPE_API_VERSION')
 STRIPE_WEBHOOK_SECRET = os.environ.get('STRIPE_WEBHOOK_SECRET')

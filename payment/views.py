@@ -48,7 +48,7 @@ def payment_process(request, order_id):
             }]
         session = stripe.checkout.Session.create(**session_data)
         session_id = session.id
-        return redirect('payment:form', order_id=order_id, session_id=session_id)
+        return redirect('payment:payment_form', order_id=order_id, session_id=session_id)
     else:
         return render(request, 'payment/process.html', {'order': order})
 
@@ -58,7 +58,7 @@ def payment_completed(request):
 def payment_canceled(request):
     return render(request, 'payment/canceled.html')
 
-def payment_form(request, order_id):
+def payment_form(request, order_id, session_id):
     order = get_object_or_404(Order, id=order_id)
     order_items = order.items.all()
     total = order.get_total_cost()
@@ -70,9 +70,9 @@ def payment_form(request, order_id):
             amount=int(total * 100),
             currency='eur',
             payment_method_types=['card'],
-            customer_email=request.user.email,
             metadata={
-                'order_id': order.id
+                'order_id': order.id,
+                'email': request.user.email
             }
         )
         payment_intent_id = payment_intent.id
@@ -80,6 +80,7 @@ def payment_form(request, order_id):
         order.save()
     else:
         payment_intent = stripe.PaymentIntent.retrieve(payment_intent_id)
+        customer_email = payment_intent.metadata.get('email')
 
     # Render the payment form with the client_secret and other necessary details
     return render(request, 'payment/payment_form.html', {
@@ -89,7 +90,6 @@ def payment_form(request, order_id):
         'order_items': order_items,
         'total': total,
         'stripe_public_key': settings.STRIPE_PUBLIC_KEY,
-        'publishable_key': settings.STRIPE_PUBLISHABLE_KEY,
     })
 
 intent = stripe.PaymentIntent.create(

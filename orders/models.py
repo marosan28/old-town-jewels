@@ -17,6 +17,7 @@ class Order(models.Model):
     updated = models.DateTimeField(auto_now=True)
     paid = models.BooleanField(default=False)
     stripe_id = models.CharField(max_length=250, blank=True)
+    payment_intent_id = models.CharField(max_length=100, blank=True, null=True)
     coupon = models.ForeignKey(Coupon,
                                related_name='orders',
                                null=True,
