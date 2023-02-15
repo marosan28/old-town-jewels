@@ -179,11 +179,12 @@
         <label for="delivery_options">Delivery option:</label>
         <select name="delivery_options" id="delivery_options" class="form-control">
           {% for option in delivery_options %}
-            <option value="{{ option.option }}">{{ option.option }} ({{ option.price }} EUR)</option>
+            <option value="{{ option.id }}">{{ option.name }} ({{ option.price }} EUR)</option>
           {% endfor %}
         </select>
       </div>
     {% endif %}
+    
     
 
       <input type="hidden" name="stripeToken" value="">

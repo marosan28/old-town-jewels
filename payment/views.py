@@ -9,7 +9,6 @@ from django.conf import settings
 from cart.cart import Cart
 from delivery.models import DeliveryOption
 from django_countries import countries
-from delivery.views import get_region_from_country
 
 stripe.api_key = settings.STRIPE_SECRET_KEY
 stripe.api_version = settings.STRIPE_API_VERSION
@@ -70,7 +69,6 @@ def payment_form(request, order_id, session_id):
     postal_code = request.session.get('postal_code')
     city = request.session.get('city')
     shipping_country = request.session.get('shipping_country')
-    delivery_options = DeliveryOption.objects.filter(region=get_region_from_country(shipping_country))
 
     # Get or create a PaymentIntent
     payment_intent_id = order.payment_intent_id
@@ -90,7 +88,7 @@ def payment_form(request, order_id, session_id):
     else:
         payment_intent = stripe.PaymentIntent.retrieve(payment_intent_id)
         customer_email = payment_intent.metadata.get('email')
-
+    delivery_options = DeliveryOption.objects.all()
     # Render the payment form with the client_secret and other necessary details
     return render(request, 'payment/payment_form.html', {
         'order_id': order_id,
