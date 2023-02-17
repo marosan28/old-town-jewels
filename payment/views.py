@@ -16,7 +16,7 @@ stripe.api_version = settings.STRIPE_API_VERSION
 def payment_process(request, order_id):
     order = get_object_or_404(Order, id=order_id)
     payment_method = request.POST.get('payment_method')
-    print('Payment method:', payment_method)
+    
     if request.method == 'POST':
         session_data = {
             'payment_method_types': ['card'],
@@ -63,12 +63,14 @@ def payment_canceled(request):
 def payment_form(request, order_id, session_id):
     order = get_object_or_404(Order, id=order_id)
     order_items = order.items.all()
-    total = order.get_total_cost()
+    delivery_charge = float(request.POST.get('delivery_charge', 0))
+    total = order.get_total_cost() + Decimal(str(delivery_charge))
     address = request.session.get('address')
     address2 = request.session.get('address2')
     postal_code = request.session.get('postal_code')
     city = request.session.get('city')
     shipping_country = request.session.get('shipping_country')
+    
 
     # Get or create a PaymentIntent
     payment_intent_id = order.payment_intent_id
@@ -103,6 +105,7 @@ def payment_form(request, order_id, session_id):
         'city': city,
         'shipping_country': shipping_country,
         'delivery_options': delivery_options,
+        'coupon_code': order.coupon.code if order.coupon else None,
     })
 
 intent = stripe.PaymentIntent.create(

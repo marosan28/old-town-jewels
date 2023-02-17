@@ -47,7 +47,7 @@
         var newOrderTotal = orderTotal + deliveryCharge;
         $('#order-total').text(newOrderTotal.toFixed(2));
       });
-
+      
     });
 
     // Set your publishable key
@@ -133,6 +133,7 @@
         }
       });
     });
+    
   });
 </script>
 {% endblock %}
@@ -192,8 +193,8 @@
     {% if delivery_options %}
     <div class="form-group">
       <label for="delivery_options">Delivery option:</label>
-      <select name="delivery_options" id="delivery_options" class="form-control">
-        <option value="0" selected disabled>Please select delivery option</option>
+      <select name="delivery_options" id="delivery_options" class="form-control" required>
+        <option value="" selected disabled>Please select delivery option</option>
         {% for option in delivery_options %}
         <option value="{{ option.id }}" data-price="{{ option.price }}">{{ option.name }} ({{ option.price }} EUR)
         </option>
@@ -201,10 +202,6 @@
       </select>
     </div>
     {% endif %}
-
-
-
-
 
     <input type="hidden" name="stripeToken" value="">
     <button id="btn-submit" class="btn btn-primary btn-block">Pay</button>
@@ -229,9 +226,14 @@
         <td>{{ item.product.name }}</td>
         <td>{{ item.quantity }}</td>
         <td>{{ item.price }}</td>
-        <td> {{ total }}</td>
+        <td> {{ item.get_cost }}</td>
       </tr>
       {% endfor %}
+<tr>
+        <td colspan="3" class="text-right">Applied Coupon:</td>
+        <td> <strong><span class="text-danger"> {{ coupon_code }} ({{ order.discount }}% off) </span></strong></td>
+</tr>
+
       <tr>
         <td colspan="3" class="text-right">Delivery charge:</td>
         <td>€<span id="delivery-charge">0.00</span></td>
