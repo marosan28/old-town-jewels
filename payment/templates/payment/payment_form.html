@@ -6,33 +6,49 @@
 <script>
   $(document).ready(function () {
     $(document).ready(function () {
-  // Get the shipping address elements
-  var $shippingAddress = $('#shipping-address p');
+      // Get the shipping address elements
+      var $shippingAddress = $('#shipping-address p');
 
-  // Get the billing address elements
-  var $billingAddress = $('#billing_address');
-  var $billingAddress2 = $('#billing_address2');
-  var $billingPostalCode = $('#billing_postal_code');
-  var $billingcity = $('#billing_city');
-  var $billingCountry = $('#billing_shipping_country');
+      // Get the billing address elements
+      var $billingAddress = $('#billing_address');
+      var $billingAddress2 = $('#billing_address2');
+      var $billingPostalCode = $('#billing_postal_code');
+      var $billingcity = $('#billing_city');
+      var $billingCountry = $('#billing_shipping_country');
 
-  // Set the billing address fields to the shipping address values
-  $('#copy-shipping-address').on('click', function () {
-    if ($(this).is(':checked')) {
-      var shippingAddress1 = $shippingAddress.eq(0).text();
-      var shippingAddress2 = $shippingAddress.eq(1).text();
-      var shippingPostalCode = $shippingAddress.eq(2).text();
-      var shippingcity = $shippingAddress.eq(3).text();
-      var shippingShippingCountry = $shippingAddress.eq(4).text();
+      // Set the billing address fields to the shipping address values
+      $('#copy-shipping-address').on('click', function () {
+        if ($(this).is(':checked')) {
+          var shippingAddress1 = $shippingAddress.eq(0).text();
+          var shippingAddress2 = $shippingAddress.eq(1).text();
+          var shippingPostalCode = $shippingAddress.eq(2).text();
+          var shippingcity = $shippingAddress.eq(3).text();
+          var shippingShippingCountry = $shippingAddress.eq(4).text();
 
-      $billingAddress.val(shippingAddress1);
-      $billingAddress2.val(shippingAddress2);
-      $billingPostalCode.val(shippingPostalCode);
-      $billingcity.val(shippingcity);
-      $billingCountry.val(shippingShippingCountry).trigger('change');
-    }
-  });
-});
+          $billingAddress.val(shippingAddress1);
+          $billingAddress2.val(shippingAddress2);
+          $billingPostalCode.val(shippingPostalCode);
+          $billingcity.val(shippingcity);
+          $billingCountry.val(shippingShippingCountry).trigger('change');
+        }
+      });
+      $('#delivery_options').on('change', function () {
+        // Get the selected delivery option
+        var deliveryOption = $(this).find('option:selected');
+
+        // Extract the delivery charge from the selected option
+        var deliveryCharge = parseFloat(deliveryOption.data('price'));
+
+        // Update the delivery charge in the table
+        $('#delivery-charge').text(deliveryCharge.toFixed(2));
+
+        // Update the order total with the delivery charge
+        var orderTotal = parseFloat($('#order-total').text());
+        var newOrderTotal = orderTotal + deliveryCharge;
+        $('#order-total').text(newOrderTotal.toFixed(2));
+      });
+
+    });
 
     // Set your publishable key
     var stripe = Stripe(
@@ -124,97 +140,106 @@
 {% block content %}
 <div id="content">
 
-<form id="payment-form" action="{% url 'payment:completed' %}" method="post">
-  {% csrf_token %}
-  <h3 class="form-title">Credit Card Information</h3>
-  <div class="form-group">
-    <label for="first_name">Name on the card:</label>
-    <input type="text" name="first_name" id="first_name" value="{{ first_name }}" class="form-control">
-  </div>
-  <div class="form-group">
-    <label for="card-element">Credit or debit card</label>
-    <div id="card-element" class="form-control"></div>
-  </div>
-  <h3 class="form-title">Billing Information</h3>
-  <div class="form-group">
-    <div id="shipping-details">
-      <p><strong>Shipping Address:</strong></p>
-      <div id="shipping-address">
-        <p>{{ request.session.address }}</p>
-        <p>{{ request.session.address2 }}</p>
-        <p>{{ request.session.postal_code }}</p>
-        <p>{{ request.session.city }}</p>
-        <p>{{ request.session.shipping_country }}</p>
+  <form id="payment-form" action="{% url 'payment:completed' %}" method="post">
+    {% csrf_token %}
+    <h3 class="form-title">Credit Card Information</h3>
+    <div class="form-group">
+      <label for="first_name">Name on the card:</label>
+      <input type="text" name="first_name" id="first_name" value="{{ first_name }}" class="form-control">
+    </div>
+    <div class="form-group">
+      <label for="card-element">Credit or debit card</label>
+      <div id="card-element" class="form-control"></div>
+    </div>
+    <h3 class="form-title">Billing Information</h3>
+    <div class="form-group">
+      <div id="shipping-details">
+        <p><strong>Shipping Address:</strong></p>
+        <div id="shipping-address">
+          <p>{{ request.session.address }}</p>
+          <p>{{ request.session.address2 }}</p>
+          <p>{{ request.session.postal_code }}</p>
+          <p>{{ request.session.city }}</p>
+          <p>{{ request.session.shipping_country }}</p>
+        </div>
       </div>
     </div>
-  </div>
-      <p><strong>Billing Address:</strong></p>
-      <div class="form-check">
-        <input type="checkbox" id="copy-shipping-address" name="copy-shipping-address">
-        <label for="copy-shipping-address">Same as shipping address</label>
-      </div>
-      <div class="form-group">
-        <label for="billing_address">Address 1:</label>
-        <input type="text" class="form-control" id="billing_address" name="billing_address">
-      </div>
-      <div class="form-group">
-        <label for="billing_address">Address 2:</label>
-        <input type="text" class="form-control" id="billing_address2" name="billing_address2">
-      </div>
-      <div class="form-group">
-        <label for="billing_postal_code">Postal Code:</label>
-        <input type="text" class="form-control" id="billing_postal_code" name="billing_postal_code">
-      </div>
-      <div class="form-group">
-        <label for="billing_city">City:</label>
-        <input type="text" class="form-control" id="billing_city" name="billing_city">
-      </div>
-      <div class="form-group">
-        <label for="billing_shipping_country">Country:</label>
-        <input type="text" class="form-control" id="billing_shipping_country" name="billing_shipping_country">
-      </div>
+    <p><strong>Billing Address:</strong></p>
+    <div class="form-check">
+      <input type="checkbox" id="copy-shipping-address" name="copy-shipping-address">
+      <label for="copy-shipping-address">Same as shipping address</label>
+    </div>
+    <div class="form-group">
+      <label for="billing_address">Address 1:</label>
+      <input type="text" class="form-control" id="billing_address" name="billing_address">
+    </div>
+    <div class="form-group">
+      <label for="billing_address">Address 2:</label>
+      <input type="text" class="form-control" id="billing_address2" name="billing_address2">
+    </div>
+    <div class="form-group">
+      <label for="billing_postal_code">Postal Code:</label>
+      <input type="text" class="form-control" id="billing_postal_code" name="billing_postal_code">
+    </div>
+    <div class="form-group">
+      <label for="billing_city">City:</label>
+      <input type="text" class="form-control" id="billing_city" name="billing_city">
+    </div>
+    <div class="form-group">
+      <label for="billing_shipping_country">Country:</label>
+      <input type="text" class="form-control" id="billing_shipping_country" name="billing_shipping_country">
+    </div>
 
-      {% if delivery_options %}
-      <div class="form-group">
+    {% if delivery_options %}
+    <div class="form-group">
         <label for="delivery_options">Delivery option:</label>
         <select name="delivery_options" id="delivery_options" class="form-control">
-          {% for option in delivery_options %}
-            <option value="{{ option.id }}">{{ option.name }} ({{ option.price }} EUR)</option>
-          {% endfor %}
+            {% for option in delivery_options %}
+            <option value="{{ option.id }}" data-price="{{ option.price }}">{{ option.name }} ({{ option.price }} EUR)</option>
+            {% endfor %}
         </select>
-      </div>
-    {% endif %}
-    
-    
-
-      <input type="hidden" name="stripeToken" value="">
-      <button id="btn-submit" class="btn btn-primary btn-block">Pay</button>
-      <div id="card-errors" role="alert" class="text-danger mt-2"></div>
-</form>
+    </div>
+{% endif %}
 
 
-<h3>Order summary:</h3>
-<table>
-  <thead>
-    <tr>
-      <th>Product name</th>
-      <th>Quantity</th>
-      <th>Price</th>
-      <th>Total</th>
 
-    </tr>
-  </thead>
-  <tbody>
-    {% for item in order_items %}
-    <tr>
-      <td>{{ item.product.name }}</td>
-      <td>{{ item.quantity }}</td>
-      <td>{{ item.price }}</td>
-      <td>€{{ total }}</td>
-    </tr>
-    {% endfor %}
+
+    <input type="hidden" name="stripeToken" value="">
+    <button id="btn-submit" class="btn btn-primary btn-block">Pay</button>
+    <div id="card-errors" role="alert" class="text-danger mt-2"></div>
+  </form>
+
+
+  <h3>Order summary:</h3>
+  <table>
+    <thead>
+      <tr>
+        <th>Product name</th>
+        <th>Quantity</th>
+        <th>Price</th>
+        <th>Total</th>
+
+      </tr>
+    </thead>
+    <tbody>
+      {% for item in order_items %}
+      <tr>
+        <td>{{ item.product.name }}</td>
+        <td>{{ item.quantity }}</td>
+        <td>{{ item.price }}</td>
+        <td> {{ total }}</td>
+      </tr>
+      {% endfor %}
+      <tr>
+        <td colspan="3" class="text-right">Delivery charge:</td>
+        <td>€<span id="delivery-charge">0.00</span></td>
+      </tr>
+      <tr>
+        <td colspan="3" class="text-right"><strong>Total:</strong></td>
+        <td><strong>€<span id="order-total">{{ total }}</span></strong></td>
+      </tr>
   </tbody>
-</table>
+  
+  </table>
 </div>
 {% endblock %}
-
