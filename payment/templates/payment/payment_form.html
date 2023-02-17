@@ -189,17 +189,19 @@
       <label for="billing_shipping_country">Country:</label>
       <input type="text" class="form-control" id="billing_shipping_country" name="billing_shipping_country">
     </div>
-
     {% if delivery_options %}
     <div class="form-group">
-        <label for="delivery_options">Delivery option:</label>
-        <select name="delivery_options" id="delivery_options" class="form-control">
-            {% for option in delivery_options %}
-            <option value="{{ option.id }}" data-price="{{ option.price }}">{{ option.name }} ({{ option.price }} EUR)</option>
-            {% endfor %}
-        </select>
+      <label for="delivery_options">Delivery option:</label>
+      <select name="delivery_options" id="delivery_options" class="form-control">
+        <option value="0" selected disabled>Please select delivery option</option>
+        {% for option in delivery_options %}
+        <option value="{{ option.id }}" data-price="{{ option.price }}">{{ option.name }} ({{ option.price }} EUR)
+        </option>
+        {% endfor %}
+      </select>
     </div>
-{% endif %}
+    {% endif %}
+
 
 
 
@@ -238,8 +240,8 @@
         <td colspan="3" class="text-right"><strong>Total:</strong></td>
         <td><strong>€<span id="order-total">{{ total }}</span></strong></td>
       </tr>
-  </tbody>
-  
+    </tbody>
+
   </table>
 </div>
 {% endblock %}
