@@ -10,4 +10,5 @@ urlpatterns = [
     path('<int:id>/<slug:slug>/', views.product_detail,
          name='product_detail'),
     path("newsletter", views.newsletter, name="newsletter"),
+    path('category/<int:category_id>/carousel/', views.category_carousel, name='category_carousel'),
 ]
