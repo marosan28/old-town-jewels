@@ -360,6 +360,10 @@ footer.bg-dark {
 .second-img {
     padding: 0 100px;
 }
+
+.newsletter {
+    margin: 10px;
+}
 /* Log in page */ 
 
 .container-login{

@@ -101,16 +101,17 @@
   <!-- Footer-->
   <footer class="py-5 bg-dark">
     <div class="container">
-      <div class="text-center text-white">Check our Socials</div>
-
       <div class="row text-center">
+
         <div class="col-md-4 box">
           <span class="copyright quick-links">Copyright &copy; Old Town Jewels <script>
               document.write(new Date().getFullYear())
             </script>
           </span>
         </div>
+
         <div class="col-md-4 box">
+          <span class="text-center text-white">Check our Socials</span>
           <ul class="list-inline social-buttons">
             <li class="list-inline-item">
               <a href="https://www.instagram.com/ot__jewels/">
@@ -129,10 +130,29 @@
             </li>
           </ul>
         </div>
+
         <div class="col-md-4 box">
+          <span class="text-center text-white">Subscribe for our newsletter</span>
+        
           <ul class="list-inline quick-links">
             <li class="list-inline-item">
-              <a href="{% url 'shop:newsletter' %}">Sign up to our Newsletter</a>
+              <form action="{% url 'users:subscribe' %}" method="post">
+                {% csrf_token %}
+                    <div class="col-auto">
+                        <input id="name" name="name" class="form-control newsletter" placeholder="Your Name">
+                    </div>
+        
+                    <div class="col-auto">
+                        <input id="email" name="email" type="email" class="form-control newsletter" placeholder="Email address">
+                    </div>
+        
+                    <div class="col-auto">
+                        <button type="submit" class="btn btncolor">
+                            Submit
+                        </button>
+                  
+                </div>
+            </form>
             </li>
           </ul>
         </div>
