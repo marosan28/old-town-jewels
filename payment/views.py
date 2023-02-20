@@ -62,8 +62,7 @@ def payment_completed(request):
     print(f"order_id: {order_id}")
     order = Order.objects.get(id=order_id)
     send_order_confirmation_email(order.id)
-    print("Payment completed!")
-    return HttpResponse("Payment completed")
+    return render(request, 'payment/completed.html')
 
 def payment_canceled(request):
     return render(request, 'payment/canceled.html')
