@@ -60,8 +60,13 @@ def payment_process(request, order_id):
 def payment_completed(request):
     order_id = request.session.get('order_id')
     order = Order.objects.get(id=order_id)
-    send_order_confirmation_email(order.id)
-    return render(request, 'payment/completed.html', {'customer_email': order.email, 'order_number': order.id})
+    delivery_charge = float(request.POST.get('delivery_charge', 0))
+    total_cost = order.get_total_cost() + Decimal(str(delivery_charge))
+    order_items = order.items.all()
+    coupon_code = order.coupon.code if order.coupon else None
+    send_order_confirmation_email(order_id, delivery_charge, total_cost, order_items, coupon_code)
+    return render(request, 'payment/completed.html', {'order': order, 'delivery_charge': delivery_charge, 'total_cost': total_cost, 'order_items': order_items, 'coupon_code': coupon_code})
+
 
 
 def payment_canceled(request):
@@ -123,13 +128,21 @@ intent = stripe.PaymentIntent.create(
 
 client_secret = intent.client_secret
 
-def send_order_confirmation_email(order_id):
+def send_order_confirmation_email(order_id, delivery_charge, total_cost, order_items, coupon_code):
     order = Order.objects.get(id=order_id)
     subject = 'Order Confirmation'
-    message = f'Thank you for your order. Your order number is {order.id}.'
+    message = f'Thank you for your order. Your order number is {order.id}. \n\n'
+    message += 'Order summary: \n'
+    for item in order_items:
+        message += f'{item.product.name} x {item.quantity} - {item.price * item.quantity} \n'
+    message += f'Delivery charge: {delivery_charge} \n'
+    message += f'Total cost: {total_cost} \n'
+    if coupon_code:
+        message += f'Coupon code: {coupon_code} \n'
     from_email = settings.DEFAULT_FROM_EMAIL
     recipient_list = [order.email]
     send_mail(subject, message, from_email, recipient_list, fail_silently=False)
+
 
 
     

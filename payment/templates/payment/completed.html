@@ -1,17 +1,25 @@
 {% extends "shop/base.html" %}
-{% block title %}Payment successful{% endblock %}
+{% load custom_filters %}
+{% block title %}Payment completed{% endblock %}
 {% block subheader %} {% endblock %}
 {% block content %}
-<div id="content">
   <h1>Your payment was successful</h1>
   <p>Your payment has been processed successfully.</p>
 
   <p>
-    Your online receipt has been sent to : {{ customer_email }}
+    Email with details has been sent to: {{ order.email }}
   </p>
 
-  <p>
-    Order number: {{ order_number }}
-  </p>
-</div>
+  <h2>Order summary:</h2>
+  <ul>
+  {% for item in order_items %}
+    <li>{{ item|total_price }}</li>
+  {% endfor %}
+  </ul>
+
+  <p>Delivery charge: {{ delivery_charge }}</p>
+  <p>Total cost: {{ total_cost }}</p>
+  {% if coupon_code %}
+    <p>Coupon code: {{ coupon_code }}</p>
+  {% endif %}
 {% endblock %}
