@@ -3,4 +3,10 @@
 {% block content %}
   <h1>Your payment was successful</h1>
   <p>Your payment has been processed successfully.</p>
+
+  <p>
+    <a href="{% url 'payment:send_email' order_id=order.id %}">
+      send email
+    </a>
+  </p>
 {% endblock %}

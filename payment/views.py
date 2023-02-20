@@ -9,6 +9,8 @@ from django.conf import settings
 from cart.cart import Cart
 from delivery.models import DeliveryOption
 from django_countries import countries
+from .forms import EmailPostForm
+from django.http import HttpResponse
 
 stripe.api_key = settings.STRIPE_SECRET_KEY
 stripe.api_version = settings.STRIPE_API_VERSION
@@ -50,17 +52,24 @@ def payment_process(request, order_id):
             }]
         session = stripe.checkout.Session.create(**session_data)
         session_id = session.id
+        request.session['order_id'] = order_id
         return redirect('payment:payment_form', order_id=order_id, session_id=session_id)
     else:
         return render(request, 'payment/process.html', {'order': order})
 
 def payment_completed(request):
-    return render(request, 'payment/completed.html')
+    order_id = request.session.get('order_id')
+    print(f"order_id: {order_id}")
+    order = Order.objects.get(id=order_id)
+    send_order_confirmation_email(order.id)
+    print("Payment completed!")
+    return HttpResponse("Payment completed")
 
 def payment_canceled(request):
     return render(request, 'payment/canceled.html')
 
 def payment_form(request, order_id, session_id):
+    order_id = request.session.get('order_id')
     order = get_object_or_404(Order, id=order_id)
     order_items = order.items.all()
     delivery_charge = float(request.POST.get('delivery_charge', 0))
@@ -114,5 +123,14 @@ intent = stripe.PaymentIntent.create(
 )
 
 client_secret = intent.client_secret
+
+def send_order_confirmation_email(order_id):
+    order = Order.objects.get(id=order_id)
+    subject = 'Order Confirmation'
+    message = f'Thank you for your order. Your order number is {order.id}.'
+    from_email = settings.DEFAULT_FROM_EMAIL
+    recipient_list = [order.email]
+    send_mail(subject, message, from_email, recipient_list, fail_silently=False)
+
 
     

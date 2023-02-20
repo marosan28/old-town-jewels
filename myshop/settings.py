@@ -191,15 +191,14 @@ CELERYBEAT_SCHEDULER = 'djcelery.schedulers.DatabaseScheduler'
 
 # email settings
 
-AWS_ACCESS_KEY_ID = os.environ.get('AWS_ACCESS_KEY_ID')
-AWS_SECRET_ACCESS_KEY = os.environ.get('AWS_SECRET_ACCESS_KEY')
-AWS_SES_REGION_NAME = 'eu-west-1'
-AWS_SES_REGION_ENDPOINT = 'email.eu-west-1.amazonaws.com'
-
-EMAIL_BACKEND = 'sendgrid_backend.SendgridBackend'
-
-SENDGRID_API_KEY = os.environ.get('SENDGRID_API_KEY')
-DEFAULT_FROM_EMAIL = os.environ.get('DEFAULT_FROM_EMAIL')
+# Email server configuration
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_HOST_USER = 'piedsamoureux@gmail.com'
+EMAIL_HOST_PASSWORD = ''
+EMAIL_PORT = 587
+EMAIL_USE_TLS = True
+DEFAULT_FROM_EMAIL = 'piedsamoureux@gmail.com'
 
 LOGGING = {
     'version': 1,
