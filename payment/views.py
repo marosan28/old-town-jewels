@@ -40,6 +40,20 @@ def payment_process(request, order_id):
                 },
                 'quantity': item.quantity,
             })
+        	
+        # Delivery charge	
+        delivery_charge = float(request.POST.get('delivery_charge', 0))	
+        if delivery_charge > 0:	
+            session_data['line_items'].append({	
+                'price_data': {	
+                    'currency': 'eur',	
+                    'unit_amount': int(delivery_charge * 100),	
+                    'product_data': {	
+                        'name': 'Delivery Charge',	
+                    },	
+                },	
+                'quantity': 1,	
+            })
 
         if order.coupon:
             stripe_coupon = stripe.Coupon.create(
