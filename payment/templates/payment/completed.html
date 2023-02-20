@@ -2,12 +2,16 @@
 {% block title %}Payment successful{% endblock %}
 {% block subheader %} {% endblock %}
 {% block content %}
+<div id="content">
   <h1>Your payment was successful</h1>
   <p>Your payment has been processed successfully.</p>
 
   <p>
-    <a href="">
-      send email
-    </a>
+    Your online receipt has been sent to : {{ customer_email }}
   </p>
+
+  <p>
+    Order number: {{ order_number }}
+  </p>
+</div>
 {% endblock %}

@@ -59,10 +59,10 @@ def payment_process(request, order_id):
 
 def payment_completed(request):
     order_id = request.session.get('order_id')
-    print(f"order_id: {order_id}")
     order = Order.objects.get(id=order_id)
     send_order_confirmation_email(order.id)
-    return render(request, 'payment/completed.html')
+    return render(request, 'payment/completed.html', {'customer_email': order.email, 'order_number': order.id})
+
 
 def payment_canceled(request):
     return render(request, 'payment/canceled.html')
