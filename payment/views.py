@@ -40,19 +40,19 @@ def payment_process(request, order_id):
                 },
                 'quantity': item.quantity,
             })
-        	
-        # Delivery charge	
-        delivery_charge = float(request.POST.get('delivery_charge', 0))	
-        if delivery_charge > 0:	
-            session_data['line_items'].append({	
-                'price_data': {	
-                    'currency': 'eur',	
-                    'unit_amount': int(delivery_charge * 100),	
-                    'product_data': {	
-                        'name': 'Delivery Charge',	
-                    },	
-                },	
-                'quantity': 1,	
+
+        # Add a line item for the delivery charge
+        delivery_charge = request.session.get('delivery_charge', 0)
+        if delivery_charge > 0:
+            session_data['line_items'].append({
+                'price_data': {
+                    'currency': 'eur',
+                    'unit_amount': int(delivery_charge * 100),
+                    'product_data': {
+                        'name': 'Delivery Charge',
+                    },
+                },
+                'quantity': 1,
             })
 
         if order.coupon:
@@ -64,12 +64,14 @@ def payment_process(request, order_id):
             session_data['discounts'] = [{
                 'coupon': stripe_coupon.id
             }]
+
         session = stripe.checkout.Session.create(**session_data)
         session_id = session.id
         request.session['order_id'] = order_id
         return redirect('payment:payment_form', order_id=order_id, session_id=session_id)
     else:
         return render(request, 'payment/process.html', {'order': order})
+
 
 def payment_completed(request):
     order_id = request.session.get('order_id')
@@ -90,7 +92,8 @@ def payment_form(request, order_id, session_id):
     order_id = request.session.get('order_id')
     order = get_object_or_404(Order, id=order_id)
     order_items = order.items.all()
-    delivery_charge = float(request.POST.get('delivery_charge', 0))
+    delivery_charge = request.session.get('delivery_charge', 0)
+    request.session['delivery_charge'] = delivery_charge
     total = order.get_total_cost() + Decimal(str(delivery_charge))
     address = request.session.get('address')
     address2 = request.session.get('address2')
@@ -132,6 +135,7 @@ def payment_form(request, order_id, session_id):
         'city': city,
         'shipping_country': shipping_country,
         'delivery_options': delivery_options,
+        'delivery_charge' : delivery_charge,
         'coupon_code': order.coupon.code if order.coupon else None,
     })
 
