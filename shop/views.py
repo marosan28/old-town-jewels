@@ -33,9 +33,12 @@ def product_list(request, category_slug=None):
 def product_detail(request, id, slug):
     product = get_object_or_404(Product, id=id, slug=slug, available=True)
     cart_product_form = CartAddProductForm()
+    reviews = product.reviews.filter(active=True)
+    review_form = ReviewForm()
     return render(request, 'shop/product/detail.html', {'product': product,
-                                                        'cart_product_form': cart_product_form})
-
+                                                        'cart_product_form': cart_product_form,
+                                                        'reviews': reviews,
+                                                        'review_form': review_form})
 def newsletter(request):
     if request.method == 'POST':
         form = NewsletterForm(request.POST)
