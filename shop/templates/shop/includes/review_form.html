@@ -1,6 +1,6 @@
 <h2>Add a new review</h2>
-<form action="{% url 'shop:review_product' product.id %}" method="post">
+<form action="{% url 'shop:review_product' product.id product.slug %}" method="post">
   {% csrf_token %}
-  {{ form.as_p }}
+  {{ review_form.as_p }}
   <input type="submit" value="Submit">
 </form>

@@ -1,27 +1,41 @@
 {% extends "shop/base.html" %}
 {% load static %}
+
 {% block title %}
 {{ product.name }}
 {% endblock %}
+
 {% block content %}
-<div id="content">
-<div class="product-detail">
-  <img src="{% if product.image %}{{ product.image.url }}{% else %}
-    {% static 'img/no_image.png' %}{% endif %}" alt="product-image">
-  <span class="product-description">
-    {{ product.description }}</span>
-  <h1>{{ product.name }}</h1>
-  <h2>
-    <a href="{{ product.category.get_absolute_url }}">
-      {{ product.category }}
-    </a>
-  </h2>
-  <p class="price">€{{ product.price }}</p>
-  <form action="{% url 'cart:cart_add' product.id %}" method="post">
-    {{ cart_product_form }}
-    {% csrf_token %}
-    <input type="submit" value="Add to cart">
-  </form>
-</div>
-</div>
+  <div id="content">
+    <div class="product-detail">
+      <img src="{% if product.image %}{{ product.image.url }}{% else %}{% static 'img/no_image.png' %}{% endif %}" alt="product-image">
+      <span class="product-description">{{ product.description }}</span>
+      <h1>{{ product.name }}</h1>
+      <h2><a href="{{ product.category.get_absolute_url }}">{{ product.category }}</a></h2>
+      <p class="price">€{{ product.price }}</p>
+
+      <form action="{% url 'cart:cart_add' product.id %}" method="post">
+        {{ cart_product_form }}
+        {% csrf_token %}
+        <input type="submit" value="Add to cart">
+      </form>
+
+      {% with reviews.count as total_reviews %}
+        <h3>{{ total_reviews }} review{{ total_reviews|pluralize }}</h3>
+      {% endwith %}
+      {% for review in reviews %}
+        <div class="review">
+          <p class="info">
+            Review {{ forloop.counter }} by {{ review.name }} {{ review.created }}
+          </p>
+          {{ review.body|linebreaks }}
+        </div>
+      {% empty %}
+        <p>There are no reviews.</p>
+      {% endfor %}
+
+      {% include "shop/includes/review_form.html" %}
+
+    </div>
+  </div>
 {% endblock %}
