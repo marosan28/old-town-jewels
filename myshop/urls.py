@@ -25,5 +25,6 @@ urlpatterns = [
     path('coupons/', include('coupons.urls', namespace='coupons')),
     path('tinymce/', include('tinymce.urls')),
     path('', include('shop.urls', namespace='shop')),
+    path('ratings/', include('star_ratings.urls', namespace='ratings')),
 
 ]

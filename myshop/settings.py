@@ -57,6 +57,7 @@ INSTALLED_APPS = [
     'tinymce',
     'crispy_forms',
     'django_countries',
+    'star_ratings',
 ]
 
 MIDDLEWARE = [
@@ -87,6 +88,7 @@ TEMPLATES = [
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
                 'cart.context_processors.cart',
+                'django.template.context_processors.request',
             ],
         },
     },
