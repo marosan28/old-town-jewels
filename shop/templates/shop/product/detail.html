@@ -5,6 +5,15 @@
 {{ product.name }}
 {% endblock %}
 
+{% block scripts %}
+  <script src="{% static 'js/jquery-3.6.0.min.js' %}"></script>
+  <script src="{% static 'js/review_stars.js' %}"></script>
+  <script src="https://kit.fontawesome.com/aba9c8794f.js" crossorigin="anonymous"></script>
+  <script src="https://kit.fontawesome.com/aba9c8794f.js" crossorigin="anonymous"></script>
+
+  
+{% endblock %}
+
 {% block content %}
   <div id="content">
     <div class="product-detail">

@@ -10,4 +10,4 @@ class NewsletterForm(forms.Form):
 class ReviewForm(forms.ModelForm):
     class Meta:
         model = Review
-        fields = ['name', 'email', 'body', 'rating']
+        fields = ['name', 'email', 'body']

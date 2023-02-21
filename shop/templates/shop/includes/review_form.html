@@ -1,6 +1,27 @@
-<h2>Add a new review</h2>
-<form action="{% url 'shop:review_product' product.id product.slug %}" method="post">
-  {% csrf_token %}
-  {{ review_form.as_p }}
-  <input type="submit" value="Submit">
-</form>
+{% load static %}
+
+{% block title %}Add Review{% endblock %}
+
+{% block scripts %}
+  <script src="{% static 'js/jquery-3.6.0.min.js' %}"></script>
+  <script src="{% static 'js/review_stars.js' %}"></script>
+  <script src="https://kit.fontawesome.com/aba9c8794f.js" crossorigin="anonymous"></script>
+
+{% endblock %}
+
+{% block content %}
+  <h2>Add a new review</h2>
+  <form action="{% url 'shop:review_product' product.id product.slug %}" method="post">
+    {% csrf_token %}
+    {{ review_form.as_p }}
+    <div class="rating-select btn-group" role="group" aria-label="Rating">
+      <button type="button" class="btn btn-default btn-sm"><i class="fas fa-star"></i></button>
+      <button type="button" class="btn btn-default btn-sm"><i class="fas fa-star"></i></button>
+      <button type="button" class="btn btn-default btn-sm"><i class="fas fa-star"></i></button>
+      <button type="button" class="btn btn-default btn-sm"><i class="fas fa-star"></i></button>
+      <button type="button" class="btn btn-default btn-sm"><i class="fas fa-star"></i></button>
+    </div>
+    <input type="submit" value="Submit">
+  </form>
+{% endblock %}
+
