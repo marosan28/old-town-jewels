@@ -1,50 +1,66 @@
 {% extends "shop/base.html" %}
 {% load static %}
+{% load humanize %}
 
 {% block title %}
 {{ product.name }}
 {% endblock %}
 
 {% block scripts %}
-  <script src="{% static 'js/jquery-3.6.0.min.js' %}"></script>
-  <script src="{% static 'js/review_stars.js' %}"></script>
-  <script src="https://kit.fontawesome.com/aba9c8794f.js" crossorigin="anonymous"></script>
-  <script src="https://kit.fontawesome.com/aba9c8794f.js" crossorigin="anonymous"></script>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="{% static 'js/review_stars.js' %}"></script>
+<script src="https://kit.fontawesome.com/aba9c8794f.js" crossorigin="anonymous"></script>
 
-  
 {% endblock %}
 
 {% block content %}
-  <div id="content">
-    <div class="product-detail">
-      <img src="{% if product.image %}{{ product.image.url }}{% else %}{% static 'img/no_image.png' %}{% endif %}" alt="product-image">
-      <span class="product-description">{{ product.description }}</span>
-      <h1>{{ product.name }}</h1>
-      <h2><a href="{{ product.category.get_absolute_url }}">{{ product.category }}</a></h2>
-      <p class="price">€{{ product.price }}</p>
+<div id="content">
+  <div class="product-detail">
+    <img src="{% if product.image %}{{ product.image.url }}{% else %}{% static 'img/no_image.png' %}{% endif %}"
+      alt="product-image">
+    <span class="product-description">{{ product.description }}</span>
+    <h1>{{ product.name }}</h1>
+    <h2><a href="{{ product.category.get_absolute_url }}">{{ product.category }}</a></h2>
+    <p class="price">€{{ product.price }}</p>
 
-      <form action="{% url 'cart:cart_add' product.id %}" method="post">
-        {{ cart_product_form }}
-        {% csrf_token %}
-        <input type="submit" value="Add to cart">
-      </form>
+    <form action="{% url 'cart:cart_add' product.id %}" method="post">
+      {{ cart_product_form }}
+      {% csrf_token %}
+      <input type="submit" value="Add to cart">
+    </form>
 
-      {% with reviews.count as total_reviews %}
-        <h3>{{ total_reviews }} review{{ total_reviews|pluralize }}</h3>
-      {% endwith %}
-      {% for review in reviews %}
-        <div class="review">
-          <p class="info">
-            Review {{ forloop.counter }} by {{ review.name }} {{ review.created }}
-          </p>
-          {{ review.body|linebreaks }}
-        </div>
-      {% empty %}
-        <p>There are no reviews.</p>
-      {% endfor %}
+    {% with reviews.count as total_reviews %}
+    <h3>{{ total_reviews }} review{{ total_reviews|pluralize }}</h3>
+    {% endwith %}
 
-      {% include "shop/includes/review_form.html" %}
+    {% with rating_stars_list|length as stars_count %}
+    {% for i in "x"|rjust:stars_count %}
+    <span
+      class="glyphicon glyphicon-star{% if i|add:"-1"|slice:":1" <= review.rating|add:"-1"|slice:":1" %} star-selected{% endif %}"></span>
+    {% endfor %}
+    <span class="text-muted">({{ total_reviews }} reviews)</span>
+    {% endwith %}
 
+    {% for review in reviews %}
+    <div class="review">
+      <p class="info">
+        Review {{ forloop.counter }} by {{ review.name }} {{ review.created }}
+      </p>
+      {% for rating in rating_stars_list %}
+  <span class="glyphicon glyphicon-star{% if forloop.counter0 <= rating|add:"-1" %} star-selected{% endif %}"></span>
+{% endfor %}
+
+      {{ review.body|linebreaks }}
     </div>
+    {% empty %}
+    <p>There are no reviews.</p>
+    {% endfor %}
+
+    {% include "shop/includes/review_form.html" %}
+
+
+
+
   </div>
+</div>
 {% endblock %}

@@ -6,6 +6,7 @@ from django.core.mail import EmailMessage
 from django.contrib import messages
 from users.models import SubscribedUsers
 from django.views.decorators.http import require_POST
+from django.http import JsonResponse
 
 
 def home(request):
@@ -39,10 +40,17 @@ def product_detail(request, id, slug):
     cart_product_form = CartAddProductForm()
     reviews = product.reviews.filter(active=True)
     review_form = ReviewForm()
+    rating_stars_list = []
+    for review in reviews:
+        rating_stars = render(request, 'shop/includes/rating_stars.html', {'rating': review.rating})
+        rating_stars_list.append(rating_stars)
     return render(request, 'shop/product/detail.html', {'product': product,
                                                         'cart_product_form': cart_product_form,
                                                         'reviews': reviews,
-                                                        'review_form': review_form})
+                                                        'review_form': review_form,
+                                                        'rating_stars_list': rating_stars_list})
+
+
 
 
 def newsletter(request):
@@ -102,7 +110,13 @@ def review_product(request, id, slug):
             return redirect('shop:product_detail', id=id, slug=slug)
     else:
         form = ReviewForm()
-    return render(request, 'shop/review_form.html',
-                           {'product': product,
-                            'form': form,
-                            'review': review})
+
+    context = {'product': product, 'form': form, 'review': review}
+
+    # Add rating_stars to the context if the review exists
+    if review:
+        rating_stars = render(request, 'shop/includes/rating_stars.html', {'rating': review.rating})
+        context['rating_stars'] = rating_stars
+
+    return render(request, 'shop/review_form.html', context)
+

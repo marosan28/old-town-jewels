@@ -57,6 +57,7 @@ INSTALLED_APPS = [
     'tinymce',
     'crispy_forms',
     'django_countries',
+    'django.contrib.humanize'
 ]
 
 MIDDLEWARE = [
