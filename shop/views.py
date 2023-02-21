@@ -1,10 +1,11 @@
 from django.shortcuts import render, get_object_or_404, redirect
 from cart.forms import CartAddProductForm
-from .models import Category, Product
+from .models import Category, Product, Review
 from .forms import NewsletterForm
 from django.core.mail import EmailMessage
 from django.contrib import messages
 from users.models import SubscribedUsers
+from .forms import ReviewForm
 
 def home(request):
     category_slug = None
@@ -69,3 +70,26 @@ def category_carousel(request, category_id):
         'products': products
     }
     return render(request, 'category_carousel.html', context)
+
+
+def review_product(request, product_id):
+    product = get_object_or_404(Product, id=product_id)
+    review = None
+    # A review was submitted
+    if request.method == 'POST':
+        form = ReviewForm(request.POST)
+        if form.is_valid():
+            # Create a Review object without saving it to the database
+            review = form.save(commit=False)
+            # Assign the product to the review
+            review.product = product
+            # Save the review to the database
+            review.save()
+            # Redirect to the product detail page
+            return redirect('product_detail', id=product.id)
+    else:
+        form = ReviewForm()
+    return render(request, 'shop/review.html',
+                           {'product': product,
+                            'form': form,
+                            'review': review})
