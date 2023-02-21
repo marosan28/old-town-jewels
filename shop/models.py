@@ -2,6 +2,7 @@ from django.db import models
 from django.urls import reverse
 from cloudinary.models import CloudinaryField
 
+
 # Category
 class Category(models.Model):
     name = models.CharField(max_length=200)
