@@ -12,6 +12,13 @@ from django.core.validators import validate_email
 from django.core.exceptions import ValidationError
 from django.urls import reverse_lazy
 from django.contrib.auth.views import PasswordChangeDoneView, PasswordChangeView
+from django.contrib.auth import logout
+
+class MyPasswordChangeDoneView(PasswordChangeDoneView):
+    def get(self, request, *args, **kwargs):
+        logout(request)
+        return super().get(request, *args, **kwargs)
+
 
 
 class MyPasswordChangeView(PasswordChangeView):
