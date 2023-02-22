@@ -11,15 +11,21 @@ from django.contrib import messages
 from django.core.validators import validate_email
 from django.core.exceptions import ValidationError
 from django.urls import reverse_lazy
-from django.contrib.auth.views import PasswordChangeDoneView, PasswordChangeView
+from django.contrib.auth.views import PasswordChangeDoneView, PasswordChangeView, PasswordResetView
 from django.contrib.auth import logout
+from django.contrib.auth.views import PasswordResetDoneView
+
+class MyPasswordResetDoneView(PasswordResetDoneView):
+    template_name = 'registration/password_reset_done.html'
+
+class MyPasswordResetView(PasswordResetView):
+    success_url = reverse_lazy('users:password_reset_done')
+
 
 class MyPasswordChangeDoneView(PasswordChangeDoneView):
     def get(self, request, *args, **kwargs):
         logout(request)
         return super().get(request, *args, **kwargs)
-
-
 
 class MyPasswordChangeView(PasswordChangeView):
     success_url = reverse_lazy('users:password_change_done')
