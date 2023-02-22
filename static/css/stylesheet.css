@@ -440,8 +440,9 @@ footer.bg-dark {
   
   .card-title {
     font-size: 1.25rem;
-  }
-  
+    border-bottom: 1px solid #e4dddd;
+}
+
   .card-subtitle {
     font-size: 1rem;
     color: #6c757d;
@@ -453,7 +454,7 @@ footer.bg-dark {
     margin-bottom: 0.5rem;
   }
   
-  .review-stars .fa-star {
+  .review-stars .fa-star  {
     color: #ffc107;
   }
   
@@ -467,7 +468,10 @@ footer.bg-dark {
     margin-bottom: 1rem;
   }
   
-
+button.btn.stars {
+    color: #ff9800;
+    background-color: white;
+}
 
 /* Media queries for small screen sizes */
 

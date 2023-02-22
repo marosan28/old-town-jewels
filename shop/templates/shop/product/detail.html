@@ -1,6 +1,7 @@
 {% extends "shop/base.html" %}
 {% load static %}
 {% load humanize %}
+{% load review_tags %}
 
 {% block title %}
 {{ product.name }}
@@ -26,24 +27,28 @@
       {% csrf_token %}
       <input type="submit" value="Add to cart">
     </form>
-    {% with reviews.count as total_reviews %}
-    <h3>{{ total_reviews }} review{{ total_reviews|pluralize }}</h3>
-  {% endwith %}
 
-  {% with rating_stars_list|length as stars_count %}
-    <div class="review-stars" id="review-{{ review.id }}-stars">
-      {% for i in "x"|rjust:stars_count %}
-        <span class="fa fa-star{% if i|add:'-1'|slice:':1' <= review.rating|add:'-1'|slice:':1' %} star-selected{% endif %}"></span>
-      {% endfor %}
-    </div>
-    <span class="text-muted">({{ total_reviews }} reviews)</span>
+    {% with reviews.count as total_reviews %}
+  <h3><strong>{{ total_reviews }} review{{ total_reviews|pluralize }}</strong></h3>
+{% endwith %}
+
+{% if reviews %}
+  {% with reviews|average_review as avg_review %}
+  <div class="review-stars" id="review-{{ review.id }}-stars">
+    <p>Average review: {{ avg_review }}  <span class="fa fa-star star-selected"></span></p>
+  </div>
   {% endwith %}
+{% endif %}
+
+
   {% include "shop/includes/review_form.html" %}
+
+
   {% for review in reviews %}
     <div class="card my-3">
       <div class="card-body">
         <h5 class="card-title">{{ review.name }}</h5>
-        <h6 class="card-subtitle mb-2 text-muted">{{ review.created }} - {{ review.rating }}</h6>
+        <h6 class="card-subtitle mb-2 text-muted">{{ review.created }} </h6>
         <div class="review-stars" id="review-{{ review.id }}-stars">
           {% for i in "x"|rjust:review.rating %}
             <span class="fa fa-star star-selected"></span>
