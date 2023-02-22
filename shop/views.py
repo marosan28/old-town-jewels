@@ -42,16 +42,13 @@ def product_detail(request, id, slug):
     review_form = ReviewForm()
     rating_stars_list = []
     for review in reviews:
-        rating_stars = render(request, 'shop/includes/rating_stars.html', {'rating': review.rating})
+        rating_stars = review_form.fields['rating'].widget.render('rating', review.rating)
         rating_stars_list.append(rating_stars)
     return render(request, 'shop/product/detail.html', {'product': product,
                                                         'cart_product_form': cart_product_form,
                                                         'reviews': reviews,
                                                         'review_form': review_form,
                                                         'rating_stars_list': rating_stars_list})
-
-
-
 
 def newsletter(request):
     if request.method == 'POST':
@@ -104,6 +101,8 @@ def review_product(request, id, slug):
             review = form.save(commit=False)
             # Assign the product to the review
             review.product = product
+            # Convert the rating value to an integer
+            review.rating = int(request.POST['rating'])
             # Save the review to the database
             review.save()
             # Redirect to the product detail page

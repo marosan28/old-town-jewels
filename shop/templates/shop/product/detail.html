@@ -7,10 +7,8 @@
 {% endblock %}
 
 {% block scripts %}
-<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-<script src="{% static 'js/review_stars.js' %}"></script>
-<script src="https://kit.fontawesome.com/aba9c8794f.js" crossorigin="anonymous"></script>
-
+{{ block.super }}
+<script src="/static/js/review_stars.js"></script>
 {% endblock %}
 
 {% block content %}
@@ -34,33 +32,31 @@
     {% endwith %}
 
     {% with rating_stars_list|length as stars_count %}
+    <div class="review-stars" id="review-{{ review.id }}-stars">
     {% for i in "x"|rjust:stars_count %}
-    <span
-      class="glyphicon glyphicon-star{% if i|add:"-1"|slice:":1" <= review.rating|add:"-1"|slice:":1" %} star-selected{% endif %}"></span>
+    <span class="fa fa-star{% if i|add:'-1'|slice:':1' <= review.rating|add:'-1'|slice:':1' %} star-selected{% endif %}"></span>
     {% endfor %}
+  </div>
     <span class="text-muted">({{ total_reviews }} reviews)</span>
-    {% endwith %}
+{% endwith %}
 
-    {% for review in reviews %}
-    <div class="review">
-      <p class="info">
-        Review {{ forloop.counter }} by {{ review.name }} {{ review.created }}
-      </p>
-      {% for rating in rating_stars_list %}
-  <span class="glyphicon glyphicon-star{% if forloop.counter0 <= rating|add:"-1" %} star-selected{% endif %}"></span>
+{% for review in reviews %}
+<div class="review">
+  <p class="info">
+    Review {{ forloop.counter }} by {{ review.name }} {{ review.created }} {{ review.rating }}
+  </p>
+  <div class="review-stars" id="review-{{ review.id }}-stars">
+    {% for i in "x"|rjust:review.rating %}
+      <span class="fa fa-star star-selected"></span>
+    {% endfor %}
+  </div>
+  {{ review.body|linebreaks }}
+</div>
+{% empty %}
+<p>There are no reviews.</p>
 {% endfor %}
 
-      {{ review.body|linebreaks }}
-    </div>
-    {% empty %}
-    <p>There are no reviews.</p>
-    {% endfor %}
-
     {% include "shop/includes/review_form.html" %}
-
-
-
-
   </div>
 </div>
 {% endblock %}
