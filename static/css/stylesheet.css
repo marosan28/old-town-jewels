@@ -425,6 +425,50 @@ footer.bg-dark {
  button.btn.btn-primary.btn-block {
         margin: 0;
  }
+/* Card Reviews Display */
+.card {
+    background-color: #fff!important;
+    border: 1px solid #e9ecef!important;
+    border-radius: 0.25rem!important;
+    width: 100%!important;
+    height: auto!important;
+    display: flex!important;
+    flex-direction: column!important;
+    box-shadow: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.075)!important;
+    margin-bottom: 1rem!important;
+  }
+  
+  .card-title {
+    font-size: 1.25rem;
+  }
+  
+  .card-subtitle {
+    font-size: 1rem;
+    color: #6c757d;
+    margin-bottom: 0.5rem;
+  }
+  
+  .review-stars {
+    display: inline-block;
+    margin-bottom: 0.5rem;
+  }
+  
+  .review-stars .fa-star {
+    color: #ffc107;
+  }
+  
+  .review-stars .fa-star.star-selected {
+    color: #ff9800;
+  }
+  
+  .card-text {
+    font-size: 1rem;
+    line-height: 1.5;
+    margin-bottom: 1rem;
+  }
+  
+
+
 /* Media queries for small screen sizes */
 
 @media only screen and (max-width: 700px) {

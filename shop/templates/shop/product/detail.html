@@ -26,37 +26,41 @@
       {% csrf_token %}
       <input type="submit" value="Add to cart">
     </form>
-
     {% with reviews.count as total_reviews %}
     <h3>{{ total_reviews }} review{{ total_reviews|pluralize }}</h3>
-    {% endwith %}
+  {% endwith %}
 
-    {% with rating_stars_list|length as stars_count %}
+  {% with rating_stars_list|length as stars_count %}
     <div class="review-stars" id="review-{{ review.id }}-stars">
-    {% for i in "x"|rjust:stars_count %}
-    <span class="fa fa-star{% if i|add:'-1'|slice:':1' <= review.rating|add:'-1'|slice:':1' %} star-selected{% endif %}"></span>
-    {% endfor %}
-  </div>
+      {% for i in "x"|rjust:stars_count %}
+        <span class="fa fa-star{% if i|add:'-1'|slice:':1' <= review.rating|add:'-1'|slice:':1' %} star-selected{% endif %}"></span>
+      {% endfor %}
+    </div>
     <span class="text-muted">({{ total_reviews }} reviews)</span>
-{% endwith %}
+  {% endwith %}
+  {% include "shop/includes/review_form.html" %}
+  {% for review in reviews %}
+    <div class="card my-3">
+      <div class="card-body">
+        <h5 class="card-title">{{ review.name }}</h5>
+        <h6 class="card-subtitle mb-2 text-muted">{{ review.created }} - {{ review.rating }}</h6>
+        <div class="review-stars" id="review-{{ review.id }}-stars">
+          {% for i in "x"|rjust:review.rating %}
+            <span class="fa fa-star star-selected"></span>
+          {% endfor %}
+        </div>
+        <p class="card-text">{{ review.body }}</p>
+      </div>
+    </div>
+  {% empty %}
+    <p>There are no reviews.</p>
+  {% endfor %}
+  
 
-{% for review in reviews %}
-<div class="review">
-  <p class="info">
-    Review {{ forloop.counter }} by {{ review.name }} {{ review.created }} {{ review.rating }}
-  </p>
-  <div class="review-stars" id="review-{{ review.id }}-stars">
-    {% for i in "x"|rjust:review.rating %}
-      <span class="fa fa-star star-selected"></span>
-    {% endfor %}
-  </div>
-  {{ review.body|linebreaks }}
-</div>
-{% empty %}
-<p>There are no reviews.</p>
-{% endfor %}
+  
 
-    {% include "shop/includes/review_form.html" %}
+
+   
   </div>
 </div>
 {% endblock %}
