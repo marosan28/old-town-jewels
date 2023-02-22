@@ -14,6 +14,7 @@ from django.urls import reverse_lazy
 from django.contrib.auth.views import PasswordChangeDoneView, PasswordChangeView, PasswordResetView
 from django.contrib.auth import logout
 from django.contrib.auth.views import (PasswordResetDoneView, PasswordResetConfirmView, PasswordResetCompleteView)
+from .forms import Login, UserRegistrationForm
 
 # Password Reset 
 class MyPasswordResetConfirmView(PasswordResetConfirmView):
@@ -46,23 +47,24 @@ def logout_view(request):
 
 
 def register(request):
-    """Register a new user."""
-    if request.method != 'POST':
-        # Display blank registration form.   
-        form = UserCreationForm()
+    if request.method == 'POST':
+        user_form = UserRegistrationForm(request.POST)
+        if user_form.is_valid():
+            # Create a new user object but avoid saving it yet
+            new_user = user_form.save(commit=False)
+            # Set the chosen password
+            new_user.set_password(
+                user_form.cleaned_data['password'])
+            # Save the User object
+            new_user.save()
+            return render(request,
+                          'users/register_done.html',
+                          {'new_user': new_user})
     else:
-        # Process the completed form.
-        form = UserCreationForm(data=request.POST)
-        
-        if form.is_valid():
-            new_user = form.save()
-            # Log the user in and then redirect him to homepage.
-            login(request, new_user)
-            return redirect('shop:home')
-
-    # Display a blank or invalid form.
-    context = {'form': form}
-    return render(request, 'registration/register.html', context)
+        user_form = UserRegistrationForm()
+    return render(request,
+                  'users/register.html',
+                  {'user_form': user_form})
 
 def subscribe(request):
     if request.method == 'POST':
