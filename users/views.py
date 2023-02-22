@@ -30,8 +30,6 @@ class MyPasswordResetView(PasswordResetView):
     success_url = reverse_lazy('users:password_reset_done')
 
 
-
-
 class MyPasswordChangeDoneView(PasswordChangeDoneView):
     def get(self, request, *args, **kwargs):
         logout(request)
@@ -58,12 +56,12 @@ def register(request):
             # Save the User object
             new_user.save()
             return render(request,
-                          'users/register_done.html',
+                          'registration/register_done.html',
                           {'new_user': new_user})
     else:
         user_form = UserRegistrationForm()
     return render(request,
-                  'users/register.html',
+                  'registration/register.html',
                   {'user_form': user_form})
 
 def subscribe(request):
