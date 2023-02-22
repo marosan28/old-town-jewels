@@ -25,10 +25,14 @@ class Profile(models.Model):
     def __str__(self):
         return f'Profile of {self.user.username}'
     
-    def image_url(self):
+    def image_tag(self):
         if self.image:
-            return cloudinary.utils.cloudinary_url(self.image.name)[0]
-        return ""
+            return CloudinaryImage(self.image).image(transformation=[
+                {'width': 400, 'height': 400, 'crop': 'thumb'},
+                {'radius': 'max'},
+            ])
+        return ''
 
+    image_tag.short_description = 'Profile Picture'
 
 
