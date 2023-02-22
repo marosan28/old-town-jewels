@@ -6,7 +6,7 @@ from django.http import HttpResponseRedirect
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import logout
 from django.contrib.auth import get_user_model
-from .models import SubscribedUsers
+from .models import SubscribedUsers, Profile
 from django.contrib import messages
 from django.core.validators import validate_email
 from django.core.exceptions import ValidationError
@@ -14,7 +14,7 @@ from django.urls import reverse_lazy
 from django.contrib.auth.views import PasswordChangeDoneView, PasswordChangeView, PasswordResetView
 from django.contrib.auth import logout
 from django.contrib.auth.views import (PasswordResetDoneView, PasswordResetConfirmView, PasswordResetCompleteView)
-from .forms import Login, UserRegistrationForm
+from .forms import Login, UserRegistrationForm, UserEditForm, ProfileEditForm
 
 # Password Reset 
 class MyPasswordResetConfirmView(PasswordResetConfirmView):
@@ -29,7 +29,7 @@ class MyPasswordResetDoneView(PasswordResetDoneView):
 class MyPasswordResetView(PasswordResetView):
     success_url = reverse_lazy('users:password_reset_done')
 
-
+# Password Change
 class MyPasswordChangeDoneView(PasswordChangeDoneView):
     def get(self, request, *args, **kwargs):
         logout(request)
@@ -55,6 +55,8 @@ def register(request):
                 user_form.cleaned_data['password'])
             # Save the User object
             new_user.save()
+             # Create the user profile
+            Profile.objects.create(user=new_user)
             return render(request,
                           'registration/register_done.html',
                           {'new_user': new_user})
@@ -63,6 +65,27 @@ def register(request):
     return render(request,
                   'registration/register.html',
                   {'user_form': user_form})
+
+@login_required
+def edit(request):
+    if request.method == 'POST':
+        user_form = UserEditForm(instance=request.user,
+                                 data=request.POST)
+        profile_form = ProfileEditForm(
+                                    instance=request.user.profile,
+                                    data=request.POST,
+                                    files=request.FILES)
+        if user_form.is_valid() and profile_form.is_valid():
+            user_form.save()
+            profile_form.save()
+    else:
+        user_form = UserEditForm(instance=request.user)
+        profile_form = ProfileEditForm(
+                                    instance=request.user.profile)
+    return render(request,
+                  'registration/edit.html',
+                  {'user_form': user_form,
+                   'profile_form': profile_form})
 
 def subscribe(request):
     if request.method == 'POST':

@@ -1,0 +1,50 @@
+{% extends "shop/base.html" %}
+
+{% load static %}
+
+{% block title %}Edit your account{% endblock %}
+
+{% block content %}
+  <h1>Edit your account</h1>
+  <p>You can edit your account using the following form:</p>
+  <div class="row">
+    <div class="col-md-8">
+      <form method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        <fieldset>
+          <legend>User Information</legend>
+          {{ user_form.non_field_errors }}
+          <div class="form-group">
+            {{ user_form.first_name.label_tag }}
+            {{ user_form.first_name }}
+          </div>
+          <div class="form-group">
+            {{ user_form.last_name.label_tag }}
+            {{ user_form.last_name }}
+          </div>
+          <div class="form-group">
+            {{ user_form.email.label_tag }}
+            {{ user_form.email }}
+          </div>
+        </fieldset>
+        <fieldset>
+          <legend>Profile Information</legend>
+          {{ profile_form.non_field_errors }}
+          <div class="form-group">
+            {{ profile_form.date_of_birth.label_tag }}
+            {{ profile_form.date_of_birth }}
+          </div>
+          <div class="form-group">
+            {{ profile_form.image.label_tag }}
+            {{ profile_form.image }}
+          </div>
+        </fieldset>
+        <button type="submit" class="btn btn-primary">Save changes</button>
+      </form>
+    </div>
+    <div class="col-md-4">
+        <img src="{% if profile.image %}{{ profile.image_url }}{% else %}{% static 'img/no_image.png' %}{% endif %}"
+alt="profile-image" class="img-fluid rounded">
+    </div>
+  </div>
+{% endblock %}

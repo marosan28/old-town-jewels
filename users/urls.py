@@ -14,6 +14,7 @@ urlpatterns = [
     path('register/', views.register, name='register'),
     path('logout/', views.logout_view, name='logout'),
     path('subscribe/', views.subscribe, name='subscribe'),
+    path('edit/', views.edit, name='edit'),
 
 
     # password change URLs

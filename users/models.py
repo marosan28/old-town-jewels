@@ -2,6 +2,8 @@ from django.db import models
 from django.utils import timezone
 from django.conf import settings
 import cloudinary
+from cloudinary.models import CloudinaryField
+from django.contrib.auth import get_user_model
 
 
 class SubscribedUsers(models.Model):
@@ -13,17 +15,20 @@ class SubscribedUsers(models.Model):
         return self.email
 
 
+User = get_user_model()
 
 class Profile(models.Model):
-    user = models.OneToOneField(settings.AUTH_USER_MODEL,
-                                on_delete=models.CASCADE)
+    user = models.OneToOneField(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
     date_of_birth = models.DateField(blank=True, null=True)
-    photo = models.CharField(max_length=255, blank=True)
+    image = CloudinaryField('image')
 
     def __str__(self):
         return f'Profile of {self.user.username}'
-
+    
     def image_url(self):
-        if self.photo:
-            return cloudinary.utils.cloudinary_url(self.photo_public_id)[0]
+        if self.image:
+            return cloudinary.utils.cloudinary_url(self.image.name)[0]
         return ""
+
+
+
