@@ -10,6 +10,11 @@ from .models import SubscribedUsers
 from django.contrib import messages
 from django.core.validators import validate_email
 from django.core.exceptions import ValidationError
+from django.urls import reverse_lazy
+from django.contrib.auth.views import PasswordChangeDoneView
+
+class PasswordChangeDoneView(PasswordChangeDoneView):
+    success_url = reverse_lazy('users:password_change_done')
 
 def logout_view(request):
     """Log the user out."""
