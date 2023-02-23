@@ -288,36 +288,10 @@ select#id_quantity {
     float: left;
 }
 
-.order-info {
-    float: right;
-    width: 300px;
-    background: #efefef;
-    padding: 10px 20px;
-    color: #333;
-    border-bottom: 4px solid #111;
-}
 button.btn  {
     background-color: pink;
     color: black;
     margin: 20px;
-}
-.order-info h3 {
-    color: #111;
-}
-
-.order-info ul li {
-    margin: 0;
-    padding: 0;
-    font-size: 14px;
-}
-
-.order-info p {
-    font-weight: bold;
-    float: right;
-}
-
-.order-info span {
-    float: right;
 }
 
 .neg {
@@ -398,9 +372,6 @@ footer.bg-dark {
  .alert {
     background-color: rgba(255, 192, 203, 0.668);
     margin-top: 5px;
- }
- .d-flex {
-    margin-top: 50px;
  }
 
  button.btn.btn-primary.btn-block {
