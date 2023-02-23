@@ -221,8 +221,8 @@ span.product-description {
 .product-list {
     display: flex;
     flex-wrap: wrap;
-    justify-content: flex-start;
-    align-items: baseline;
+    justify-content: center;
+    align-items: center;
 }
 
 .product-list .item {
