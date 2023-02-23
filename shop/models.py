@@ -1,6 +1,10 @@
 from django.db import models
 from django.urls import reverse
 from cloudinary.models import CloudinaryField
+from django.contrib.auth.models import User
+from users.models import Profile
+from django.conf import settings
+
 
 
 # Category
@@ -54,10 +58,10 @@ class Product(models.Model):
                        args=[self.id, self.slug])
 
 
+
 class Review(models.Model):
     product = models.ForeignKey(Product, on_delete=models.CASCADE, related_name='reviews')
-    name = models.CharField(max_length=80)
-    email = models.EmailField()
+    profile = models.ForeignKey(Profile, on_delete=models.CASCADE, related_name='reviews', default=1)
     body = models.TextField()
     rating = models.IntegerField()
     created = models.DateTimeField(auto_now_add=True)
@@ -70,8 +74,10 @@ class Review(models.Model):
             models.Index(fields=['created']),
         ]
 
-    def __str__(self):
-        return f'Review by {self.name} on {self.product}'
+    #def __str__(self):
+    #   return f'Review by {self.profile.user.username} on {self.product}'
+
+
 
 
 

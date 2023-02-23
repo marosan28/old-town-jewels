@@ -180,6 +180,8 @@ cloudinary.config(
     api_secret=os.environ.get('CLOUDINARY_API_SECRET')
 )
 
+# User profile
+DEFAULT_PROFILE_ID = 1
 
 
 # Default primary key field type

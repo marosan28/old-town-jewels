@@ -7,6 +7,8 @@ from django.contrib import messages
 from users.models import SubscribedUsers
 from django.views.decorators.http import require_POST
 from django.http import JsonResponse
+from django.contrib.auth.decorators import login_required
+from users.models import Profile
 
 
 def home(request):
@@ -39,7 +41,7 @@ def product_detail(request, id, slug):
     product = get_object_or_404(Product, id=id, slug=slug, available=True)
     cart_product_form = CartAddProductForm()
     reviews = product.reviews.filter(active=True)
-    review_form = ReviewForm()
+    review_form = ReviewForm(request.POST or None, user=request.user)
     rating_stars_list = []
     for review in reviews:
         rating_stars = review_form.fields['rating'].widget.render('rating', review.rating)
@@ -88,19 +90,20 @@ def category_carousel(request, category_id):
     }
     return render(request, 'category_carousel.html', context)
 
-
+@login_required
 @require_POST
 def review_product(request, id, slug):
     product = get_object_or_404(Product, id=id, slug=slug, available=True)
     review = None
     # A review was submitted
-    form = ReviewForm(request.POST)
     if request.method == 'POST':
+        form = ReviewForm(request.POST, user=request.user)
         if form.is_valid():
             # Create a Review object without saving it to the database
             review = form.save(commit=False)
-            # Assign the product to the review
+            # Assign the product and user profile to the review
             review.product = product
+            review.profile = Profile.objects.get(user=request.user)
             # Convert the rating value to an integer
             review.rating = int(request.POST['rating'])
             # Save the review to the database
@@ -108,7 +111,7 @@ def review_product(request, id, slug):
             # Redirect to the product detail page
             return redirect('shop:product_detail', id=id, slug=slug)
     else:
-        form = ReviewForm()
+        form = ReviewForm(user=request.user)
 
     context = {'product': product, 'form': form, 'review': review}
 
@@ -118,4 +121,5 @@ def review_product(request, id, slug):
         context['rating_stars'] = rating_stars
 
     return render(request, 'shop/review_form.html', context)
+
 
