@@ -74,9 +74,6 @@ class Review(models.Model):
             models.Index(fields=['created']),
         ]
 
-    #def __str__(self):
-    #   return f'Review by {self.profile.user.username} on {self.product}'
-
 
 
 

@@ -5,10 +5,21 @@
 
 {% block content %}
   <h2>Add a new review</h2>
-  <form action="{% url 'shop:review_product' product.id product.slug %}" method="post">
-    {% csrf_token %}
-    {{ review_form.as_p }}
-    {% include "shop/includes/rating_stars.html" %}
-    <input type="submit" value="Submit">
-  </form>
+  <div class="card my-4">
+    <div class="card-body">
+      <form action="{% url 'shop:review_product' product.id product.slug %}" method="post">
+        {% csrf_token %}
+        <div class="form-group">
+          <label for="{{ review_form.body.id_for_label }}">Tell us what you think</label>
+          {{ review_form.body }}
+        </div>
+        <div class="form-group">
+          <label for="{{ review_form.rating.id_for_label }}">Rating</label>
+          {% include "shop/includes/rating_stars.html" %}
+          {{ review_form.rating }}
+        </div>
+        <button type="submit" class="btn btn-primary">Submit</button>
+      </form>
+    </div>
+  </div>
 {% endblock %}

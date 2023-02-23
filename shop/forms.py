@@ -16,7 +16,7 @@ class ReviewForm(forms.ModelForm):
         model = Review
         fields = ['profile', 'body', 'rating']
         widgets = {
-            'body': forms.Textarea(attrs={'class': 'form-control'}),
+            'body': forms.Textarea(attrs={'class': 'form-control', 'rows': 5, 'style': 'resize:none;'}),
             'rating': forms.HiddenInput(),
         }
         labels = {

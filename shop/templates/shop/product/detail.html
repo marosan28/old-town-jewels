@@ -14,20 +14,26 @@
 
 {% block content %}
 <div id="content">
-  <div class="product-detail">
-    <img src="{% if product.image %}{{ product.image.url }}{% else %}{% static 'img/no_image.png' %}{% endif %}"
-      alt="product-image">
-    <span class="product-description">{{ product.description }}</span>
-    <h1>{{ product.name }}</h1>
-    <h2><a href="{{ product.category.get_absolute_url }}">{{ product.category }}</a></h2>
-    <p class="price">€{{ product.price }}</p>
-
-    <form action="{% url 'cart:cart_add' product.id %}" method="post">
-      {{ cart_product_form }}
-      {% csrf_token %}
-      <input type="submit" value="Add to cart">
-    </form>
-
+  <div class="row">
+    <div class="col-lg-6 mb-4">
+      <img src="{% if product.image %}{{ product.image.url }}{% else %}{% static 'img/no_image.png' %}{% endif %}"
+        alt="product-image" class="img-fluid">
+    </div>
+    <div class="col-lg-6">
+      <h1>{{ product.name }}</h1>
+      <h2 class="text-muted">{{ product.category }}</h2>
+      <p class="lead font-weight-bold text-primary">€{{ product.price }}</p>
+      <hr>
+      <p class="text-muted">{{ product.description }}</p>
+      <hr>
+      <form action="{% url 'cart:cart_add' product.id %}" method="post">
+        {{ cart_product_form }}
+        {% csrf_token %}
+        <button type="submit" class="btn btn-lg btn-primary"><i class="fas fa-shopping-cart"></i> Add to cart</button>
+      </form>
+    </div>
+  </div>
+  
     {% with reviews.count as total_reviews %}
   <h3><strong>{{ total_reviews }} review{{ total_reviews|pluralize }}</strong></h3>
 {% endwith %}
@@ -47,7 +53,7 @@
   {% for review in reviews %}
     <div class="card my-3">
       <div class="card-body">
-        <h5 class="card-title">{{ review.name }}</h5>
+        <h5 class="card-title">{{ review.profile.user.username }}</h5>
         <h6 class="card-subtitle mb-2 text-muted">{{ review.created }} </h6>
         <div class="review-stars" id="review-{{ review.id }}-stars">
           {% for i in "x"|rjust:review.rating %}

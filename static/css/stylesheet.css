@@ -274,6 +274,29 @@ span.product-description {
 .product-detail h2 {
     margin-top: 10px;
 }
+/* Select dropdown  */
+select#id_quantity {
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    padding: 8px 20px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    font-size: 16px;
+    color: #333;
+    background-color: #fff;
+  }
+  
+  select#id_quantity option {
+    color: #333;
+    background-color: #fff;
+  }
+  
+  select#id_quantity option:checked {
+    background-color: #007bff;
+    color: #fff;
+  }
+  
 
 .order-form {
     float: left;
