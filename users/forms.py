@@ -1,7 +1,10 @@
 from django import forms
 from django.contrib.auth.models import User
 from .models import Profile
-
+from cloudinary.forms import CloudinaryJsFileField, CloudinaryUnsignedJsFileField
+from cloudinary.compat import to_bytes
+import cloudinary, hashlib
+from django.conf import settings
 
 
 class Login(forms.Form):
@@ -25,8 +28,13 @@ class UserRegistrationForm(forms.ModelForm):
 class UserEditForm(forms.ModelForm):
     class Meta:
         model = User
-        fields = ['first_name', 'last_name', 'email']
+        fields = ['username', 'first_name', 'last_name', 'email']
+
 class ProfileEditForm(forms.ModelForm):
     class Meta:
         model = Profile
         fields = ['date_of_birth', 'image']
+
+    image = CloudinaryJsFileField(attrs={'label': ''})
+
+        

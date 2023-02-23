@@ -7,8 +7,4 @@ class SubscribedUsersAdmin(admin.ModelAdmin):
 
 admin.site.register(SubscribedUsers, SubscribedUsersAdmin)
 
-@admin.register(Profile)
-class ProfileAdmin(admin.ModelAdmin):
-    list_display = ['user', 'date_of_birth', 'image']
-    raw_id_fields = ['user']
-
+admin.site.register(Profile)

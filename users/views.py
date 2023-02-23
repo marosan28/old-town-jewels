@@ -15,6 +15,10 @@ from django.contrib.auth.views import PasswordChangeDoneView, PasswordChangeView
 from django.contrib.auth import logout
 from django.contrib.auth.views import (PasswordResetDoneView, PasswordResetConfirmView, PasswordResetCompleteView)
 from .forms import Login, UserRegistrationForm, UserEditForm, ProfileEditForm
+import cloudinary
+from cloudinary.forms import cl_init_js_callbacks
+from cloudinary import api
+
 
 # Password Reset 
 class MyPasswordResetConfirmView(PasswordResetConfirmView):
@@ -69,23 +73,30 @@ def register(request):
 @login_required
 def edit(request):
     if request.method == 'POST':
-        user_form = UserEditForm(instance=request.user,
-                                 data=request.POST)
-        profile_form = ProfileEditForm(
-                                    instance=request.user.profile,
-                                    data=request.POST,
-                                    files=request.FILES)
+        user_form = UserEditForm(instance=request.user, data=request.POST)
+        profile_form = ProfileEditForm(instance=request.user.profile, data=request.POST, files=request.FILES)
         if user_form.is_valid() and profile_form.is_valid():
             user_form.save()
-            profile_form.save()
+            profile = profile_form.save(commit=False)
+            profile.user = request.user
+
+            # Check if the image file is uploaded
+            if 'image' in request.FILES:
+                # Upload the image file to Cloudinary
+                response = cloudinary.uploader.upload(request.FILES['image'], folder="profiles/")
+
+                # Set the image url in the profile model
+                profile.image = response['secure_url']
+
+            profile.save()
+            messages.success(request, 'Your profile has been updated successfully.')
+            return redirect('users:edit')
     else:
         user_form = UserEditForm(instance=request.user)
-        profile_form = ProfileEditForm(
-                                    instance=request.user.profile)
-    return render(request,
-                  'registration/edit.html',
-                  {'user_form': user_form,
-                   'profile_form': profile_form})
+        profile_form = ProfileEditForm(instance=request.user.profile)
+    return render(request, 'registration/edit.html', {'user_form': user_form, 'profile_form': profile_form})
+
+
 
 def subscribe(request):
     if request.method == 'POST':
@@ -117,3 +128,7 @@ def subscribe(request):
         subscribe_model_instance.save()
         messages.success(request, "Thank you for subscribing! " + f'{email}, You have successfully subscribed to our newsletter!')
         return redirect(request.META.get("HTTP_REFERER", "/"))
+
+
+# Edit profile 
+
