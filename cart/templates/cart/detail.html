@@ -1,90 +1,112 @@
 {% extends "shop/base.html" %}
 {% load static %}
+
 {% block title %}
 Your shopping cart
 {% endblock %}
+
 {% block content %}
-<div id="content">
-<h1>Your shopping cart</h1>
-<div class="table-responsive">
-<table class="cart">
-  <thead>
-    <tr>
-      <th>Image</th>
-      <th>Product</th>
-      <th>Quantity</th>
-      <th>Remove</th>
-      <th>Unit price</th>
-      <th>Price</th>
-    </tr>
-  </thead>
-  <tbody>
-    {% for item in cart %}
-    {% with product=item.product %}
-    <tr>
-      <td>
-        <a href="{{ product.get_absolute_url }}">
-          <img src="{% if product.image %}{{ product.image.url }}
-                {% else %}{% static 'img/no_image.png' %}{% endif %}" alt="product-img">
+<div class="container my-5">
+  <div class="row">
+    <div class="col-md-12">
+      <h1 class="text-center mb-5">Your shopping cart</h1>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-12">
+      <div class="table-responsive">
+        <table class="table table-hover cart">
+          <thead>
+            <tr>
+              <th scope="col">Product</th>
+              <th scope="col">Price</th>
+              <th scope="col">Quantity</th>
+              <th scope="col">Total</th>
+              <th scope="col">Remove</th>
+            </tr>
+          </thead>
+          <tbody>
+            {% for item in cart %}
+            {% with product=item.product %}
+            <tr>
+              <td class="align-middle">
+                <div class="media">
+                  <img src="{% if product.image %}{{ product.image.url }}
+                          {% else %}{% static 'img/no_image.png' %}{% endif %}" class="mr-3" alt="product-image">
+                  <div class="media-body">
+                    <h5 class="mt-0 mb-1">{{ product.name }}</h5>
+                    <p class="mb-0">{{ product.description|truncatewords:20 }}</p>
+                  </div>
+                </div>
+              </td>
+              <td class="align-middle">€{{ product.price }}</td>
+              <td class="align-middle">
+                <form action="{% url 'cart:cart_add' product.id %}" method="post" class="form-inline">
+                  {{ item.update_quantity_form.quantity }}
+                  <button type="submit" class="btn btn-sm btn-outline-secondary">Update</button>
+                  {% csrf_token %}
+                </form>
+              </td>
+              <td class="align-middle">€{{ item.total_price }}</td>
+              <td class="align-middle">
+                <form action="{% url 'cart:cart_remove' product.id %}" method="post">
+                  <button type="submit" class="btn btn-sm btn-danger"><i class="fa fa-trash"></i></button>
+                  {% csrf_token %}
+                </form>
+              </td>
+            </tr>
+            {% endwith %}
+            {% endfor %}
+          </tbody>
+          <tfoot>
+            {% if cart.coupon %}
+            <tr>
+              <td colspan="3">Coupon:</td>
+              <td colspan="2">{{ cart.coupon.code }} - {{ cart.coupon.discount }}%</td>
+            </tr>
+            {% endif %}
+            <tr>
+              <td colspan="3" class="text-right">Subtotal:</td>
+              <td colspan="2">€{{ cart.get_total_price|floatformat:2 }}</td>
+            </tr>
+            <tr>
+              <td colspan="3" class="text-right">Total:</td>
+              <td colspan="2">€{{ cart.get_total_price_after_discount|floatformat:2 }}</td>
+            </tr>
+          </tfoot>
+        </table>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-12 mt-3">
+
+      
+      <form action="{% url 'coupons:apply' %}" method="post">
+        <div class="form-group row">
+          <div class="col-9">
+            {{ coupon_apply_form }}
+            {{ coupon_apply_form.errors }}
+          </div>
+          <div class="col-3">
+            <button class="btn btn-primary" type="submit">Apply</button>
+          </div>
+        </div>
+        {% csrf_token %}
+      </form>
+    </div>
+  </div>
+  <div class="row mt-5">
+    <div class="col-md-12">
+      <p class="text-right">
+        <a href="{% url 'shop:home' %}" class="btn btn-secondary">
+          <i class="fa fa-angle-left"></i> Continue shopping
         </a>
-      </td>
-      <td>{{ product.name }}</td>
-      <td>
-        <form action="{% url "cart:cart_add" product.id %}" method="post">
-          {{ item.update_quantity_form.quantity }}
-          {{ item.update_quantity_form.override }}
-          <input type="submit" value="Update">
-          {% csrf_token %}
-        </form>
-      </td>
-      <td>
-        <form action="{% url "cart:cart_remove" product.id %}" method="post">
-          <input type="submit" value="Remove">
-          {% csrf_token %}
-        </form>
-      </td>
-      <td class="num">€{{ item.price }}</td>
-      <td class="num">€{{ item.total_price }}</td>
-    </tr>
-    {% endwith %}
-    {% endfor %}
-    {% if cart.coupon %}
-    <tr class="subtotal">
-      <td>Subtotal</td>
-      <td colspan="4"></td>
-      <td class="num">€{{ cart.get_total_price|floatformat:2 }}</td>
-    </tr>
-    <tr>
-      <td>
-        "{{ cart.coupon.code }}" coupon
-        ({{ cart.coupon.discount }}% off)
-      </td>
-      <td colspan="4"></td>
-      <td class="num neg">
-        - ${{ cart.get_discount|floatformat:2 }}
-      </td>
-    </tr>
-    {% endif %}
-    <tr class="total">
-      <td>Total</td>
-      <td colspan="4"></td>
-      <td class="num">€{{ cart.get_total_price_after_discount|floatformat:2 }}</td>
-    </tr>
-  </tbody>
-</table>
-</div>
-<p>Apply a coupon:</p>
-<form action="{% url 'coupons:apply' %}" method="post">
-  {{ coupon_apply_form }}
-  <input type="submit" value="Apply">
-  {% csrf_token %}
-</form>
-<p class="text-right">
-  <a href="{% url 'shop:home' %}" class="button
-    light">Continue shopping</a>
-  <a href="{% url 'orders:order_create' %}" class="button">
-    Checkout
-  </a>
-</p>
+        <a href="{% url 'orders:order_create' %}" class="btn btn-primary">
+          Checkout <i class="fa fa-angle-right"></i>
+        </a>
+      </p>
+    </div>
+  </div>
 </div>
 {% endblock %}

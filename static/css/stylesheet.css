@@ -117,20 +117,6 @@ table td {
     margin: 0;
 }
 
-tbody tr:nth-child(odd) {
-    background: #efefef;
-}
-
-tbody tr.subtotal {
-    background: #ccc;
-}
-
-thead th,
-tbody tr.total {
-    background: #111;
-    color: white;
-}
-
 table.cart {
     margin-bottom: 40px;
 }
