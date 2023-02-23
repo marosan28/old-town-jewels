@@ -373,29 +373,6 @@ footer.bg-dark {
 .newsletter {
     margin: 10px;
 }
-/* Log in page */ 
-
-.container-login{
-    height: 100%;
-    align-content: center;
-    }
-    
-    .card{
-    height: 370px;
-    margin-top: auto;
-    margin-bottom: auto;
-    width: 400px;
-    background-color: grey!important;
-    }
-
-    .card-header h3{
-    color: white;
-    }
-    
-    .login-btn:hover{
-    color: black;
-    background-color: white;
-    }
 
 
 .form {
