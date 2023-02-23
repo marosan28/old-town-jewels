@@ -283,16 +283,12 @@ select#id_quantity {
     color: #fff;
   }
   
-
-.order-form {
-    float: left;
-}
-
 button.btn  {
     background-color: pink;
     color: black;
     margin: 20px;
 }
+
 
 .neg {
     color: #dc1616;
