@@ -453,7 +453,22 @@ button.btn.stars {
     color: #ff9800;
     background-color: white;
 }
-
+/* Cart styling */
+.cart-side {
+    position: relative;
+    display: inline-block;
+    width: 250px;
+    margin-left: 20px;
+    margin-right: 20px;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+  }
+  .cart-wrapper {
+    margin-left: 0%;
+  }
+  
+  
 /* Media queries for small screen sizes */
 
 @media only screen and (max-width: 700px) {

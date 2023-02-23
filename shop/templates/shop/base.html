@@ -68,44 +68,58 @@
   
 
   
-  {% block header %}
-  {% endblock %}
   {% include 'shop/includes/messages.html' %}
   {% block subheader %}
-  {% if user.is_authenticated %}
-  <div id="subheader">
-    <div class="cart">
-      {% with total_items=cart|length %}
-      {% if total_items > 0 %}
-      Your cart:
-      <a href="{% url 'cart:cart_detail' %}">
-        {{ total_items }} item{{ total_items|pluralize }},
-        €{{ cart.get_total_price }}
-      </a>
-      {% elif not order %}
-      Your cart is empty.
-      {% endif %}
-      {% endwith %}
-    </div>
-  </div>
-  {% endif %}
+    {% if user.is_authenticated %}
+      <div class="cart-wrapper">
+        <div class="cart-side">
+          {% with total_items=cart|length %}
+            {% if total_items > 0 %}
+              <div class="cart-icon">
+                <i class="fas fa-shopping-cart"></i>
+              </div>
+              <div class="cart-info">
+                <span class="cart-total"><a href="{% url 'cart:cart_detail' %}">{{ total_items }} item{{ total_items|pluralize }}, €{{ cart.get_total_price }}</a></span>
+                <div class="cart-items">
+                  <ul>
+                    {% for item in cart %}
+                      <li>{{ item.quantity }}x {{ item.product.name }}</li>
+                    {% endfor %}
+                  </ul>
+                </div>
+              </div>
+            {% elif not order %}
+              <div class="cart-icon">
+                <i class="fas fa-shopping-cart"></i>
+              </div>
+              <div class="cart-info">
+                <span class="cart-total">Your cart is empty.</span>
+              </div>
+            {% endif %}
+          {% endwith %}
+        </div>
+      </div>
+    {% endif %}
   {% endblock %}
-
+  
+  
   {% block content %}
-  <div id="content">
-    
-    {% for product in product_list %}
-    <div class="product-card">
-      <h2>{{ product.name }}</h2>
-      <img src="{{ product.image.url }}" alt="{{ product.name }}">
-      <p>{{ product.price }}</p>
-      <a href="{% url 'shop:product_detail' product.id product.slug %}">View product</a>
+  <div class="container my-5">
+    <div class="row">
+      {% for product in product_list %}
+      <div class="col-md-4 mb-4">
+        <div class="card">
+          <img class="card-img-top" src="{{ product.image.url }}" alt="{{ product.name }}">
+          <div class="card-body">
+            <h5 class="card-title">{{ product.name }}</h5>
+            <p class="card-text">{{ product.price }}</p>
+            <a href="{% url 'shop:product_detail' product.id product.slug %}" class="btn btn-primary">View product</a>
+          </div>
+        </div>
+      </div>
+      {% endfor %}
     </div>
-    {% endfor %}
-
- 
   </div>
-
   {% endblock %}
 {% block footer %}
   <!-- Footer-->
