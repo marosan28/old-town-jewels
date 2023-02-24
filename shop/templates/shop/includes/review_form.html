@@ -11,7 +11,7 @@
         {% csrf_token %}
         <div class="form-group">
           <label for="{{ review_form.body.id_for_label }}">Tell us what you think</label>
-          {{ review_form.body }}
+          <textarea class="form-control" rows="5" style="resize:none;" name="{{ review_form.body.name }}" id="{{ review_form.body.id_for_label }}" required>{{ review_form.body.value }}</textarea>
         </div>
         <div class="form-group">
           <label for="{{ review_form.rating.id_for_label }}">Rating</label>
@@ -23,3 +23,4 @@
     </div>
   </div>
 {% endblock %}
+
