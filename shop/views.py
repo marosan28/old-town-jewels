@@ -95,31 +95,29 @@ def category_carousel(request, category_id):
 def review_product(request, id, slug):
     product = get_object_or_404(Product, id=id, slug=slug, available=True)
     review = None
-    # A review was submitted
     if request.method == 'POST':
         form = ReviewForm(request.POST, user=request.user)
         if form.is_valid():
-            # Create a Review object without saving it to the database
             review = form.save(commit=False)
-            # Assign the product and user profile to the review
             review.product = product
             review.profile = Profile.objects.get(user=request.user)
-            # Convert the rating value to an integer
             review.rating = int(request.POST['rating'])
-            # Save the review to the database
             review.save()
-            # Redirect to the product detail page
             return redirect('shop:product_detail', id=id, slug=slug)
+        else:
+            print(form.cleaned_data)
     else:
         form = ReviewForm(user=request.user)
+        print(form.errors)
 
     context = {'product': product, 'form': form, 'review': review}
 
-    # Add rating_stars to the context if the review exists
     if review:
         rating_stars = render(request, 'shop/includes/rating_stars.html', {'rating': review.rating})
         context['rating_stars'] = rating_stars
 
-    return render(request, 'shop/review_form.html', context)
+    return redirect('shop:product_detail', id=id, slug=slug)
+
+
 
 
