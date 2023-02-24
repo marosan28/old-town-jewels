@@ -10,40 +10,23 @@ class NewsletterForm(forms.Form):
     message = forms.CharField(widget=TinyMCE(), label="Email content")
 
 class ReviewForm(forms.ModelForm):
-    profile = forms.ModelChoiceField(queryset=None, widget=forms.HiddenInput())
-
     class Meta:
         model = Review
-        fields = ['profile', 'body', 'rating']
-        widgets = {
-            'body': forms.Textarea(attrs={'class': 'form-control', 'rows': 5, 'style': 'resize:none;'}),
-            'rating': forms.HiddenInput(),
-        }
-        labels = {
-            'body': 'Review',
-            'rating': 'Rating',
-        }
-        help_texts = {
-            'body': 'Write your review',
-            'rating': 'Select a rating',
-        }
-        error_messages = {
-            'body': {
-                'required': 'Please write your review',
-            },
-            'rating': {
-                'required': 'Please select a rating',
-            }
-        }
+        fields = ['body', 'rating']
 
-    def __init__(self, *args, **kwargs):
-        user = kwargs.pop('user')
-        queryset = Profile.objects.filter(user=user)
+    def __init__(self, user, *args, **kwargs):
         super().__init__(*args, **kwargs)
-        self.fields['profile'].queryset = queryset
+        self.user = user
 
     def clean_rating(self):
         rating = self.cleaned_data['rating']
         if not rating:
             raise forms.ValidationError("Please select a rating")
         return rating
+
+    def save(self, commit=True):
+        review = super().save(commit=False)
+        review.user = self.user
+        if commit:
+            review.save()
+        return review

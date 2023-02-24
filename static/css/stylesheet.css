@@ -62,9 +62,16 @@ a.button.light {
 }
 
 /* navbar */
+.navbar-dark .navbar-nav .nav-link {
+    color: black !important;
+}
+.navbar-brand {
+    margin: 0 auto;
+}
 nav.navbar {
-    background-color: #111 !important;
+    background-color: pink !important;
     margin-bottom: 50px;
+    padding: 20px;
 }
 .navbar-light .navbar-brand, i.fa-gem {
     color: white !important;
@@ -433,6 +440,7 @@ button.btn.stars {
   }
   .cart-wrapper {
     margin-left: 0%;
+    margin-bottom: 20px;
   }
   
   

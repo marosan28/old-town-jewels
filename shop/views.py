@@ -1,4 +1,4 @@
-from django.shortcuts import render, get_object_or_404, redirect
+from django.shortcuts import render, get_object_or_404, redirect, reverse
 from cart.forms import CartAddProductForm
 from .models import Category, Product, Review
 from .forms import NewsletterForm, ReviewForm
@@ -36,21 +36,38 @@ def product_list(request, category_slug=None):
                    'categories': categories,
                    'products': products})
 
-
+@login_required
 def product_detail(request, id, slug):
     product = get_object_or_404(Product, id=id, slug=slug, available=True)
     cart_product_form = CartAddProductForm()
     reviews = product.reviews.filter(active=True)
-    review_form = ReviewForm(request.POST or None, user=request.user)
+
+    if request.method == 'POST':
+        review_form = ReviewForm(user=request.user, data=request.POST)
+        if review_form.is_valid():
+            review = review_form.save(commit=False)
+            review.product = product
+            review.user = request.user
+            review.save()
+            messages.success(request, 'Your review was submitted successfully!')
+            return redirect('shop:product_detail', id=id, slug=slug)
+    else:
+        if request.user.is_authenticated:
+            review_form = ReviewForm(user=request.user)
+        else:
+            review_form = ReviewForm()
+
     rating_stars_list = []
     for review in reviews:
         rating_stars = review_form.fields['rating'].widget.render('rating', review.rating)
         rating_stars_list.append(rating_stars)
+
     return render(request, 'shop/product/detail.html', {'product': product,
                                                         'cart_product_form': cart_product_form,
                                                         'reviews': reviews,
                                                         'review_form': review_form,
                                                         'rating_stars_list': rating_stars_list})
+
 
 def newsletter(request):
     if request.method == 'POST':
@@ -90,43 +107,22 @@ def category_carousel(request, category_id):
     }
     return render(request, 'category_carousel.html', context)
 
-from django.urls import reverse
 
 @login_required
 @require_POST
 def review_product(request, id, slug):
     product = get_object_or_404(Product, id=id, slug=slug, available=True)
-    review = None
-
     if request.method == 'POST':
-        form = ReviewForm(request.POST, user=request.user)
-
+        form = ReviewForm(user=request.user, data=request.POST)
         if form.is_valid():
-            review = form.save(commit=False)
-            review.product = product
-            review.profile = Profile.objects.get(user=request.user)
-            review.rating = int(request.POST['rating'])
-            review.save()
-            reviews = product.reviews.filter(active=True)
-
-            # Set a success message to display to the user
+            form.save()
             messages.success(request, 'Your review was submitted successfully!')
-
-            # Redirect back to the product detail page
             return redirect('shop:product_detail', id=id, slug=slug)
-
     else:
-        form = ReviewForm(request.POST or None, user=request.user)
-
-    reviews = product.reviews.filter(active=True)
-    rating_stars_list = []
-    for review in reviews:
-        rating_stars = form.fields['rating'].widget.render('rating', review.rating)
-        rating_stars_list.append(rating_stars)
-
-    context = {'product': product, 'form': form, 'review': review, 'reviews': reviews, 'rating_stars_list': rating_stars_list}
-
+        form = ReviewForm(user=request.user)
+    context = {'product': product, 'form': form }
     return render(request, 'shop/product/detail.html', context)
+
 
 
 

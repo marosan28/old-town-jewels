@@ -61,7 +61,7 @@ class Product(models.Model):
 
 class Review(models.Model):
     product = models.ForeignKey(Product, on_delete=models.CASCADE, related_name='reviews')
-    profile = models.ForeignKey(Profile, on_delete=models.CASCADE, related_name='reviews', default=1)
+    user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, default=1)
     body = models.TextField()
     rating = models.IntegerField()
     created = models.DateTimeField(auto_now_add=True)
@@ -73,6 +73,9 @@ class Review(models.Model):
         indexes = [
             models.Index(fields=['created']),
         ]
+
+
+
 
 
 

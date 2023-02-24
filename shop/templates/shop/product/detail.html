@@ -47,13 +47,29 @@
 {% endif %}
 
 
-  {% include "shop/includes/review_form.html" %}
-
+<h2>Add a new review</h2>
+  <div class="card my-4">
+    <div class="card-body">
+      <form action="{% url 'shop:product_detail' id=product.id slug=product.slug %}#reviews" method="post">
+        {% csrf_token %}
+        <div class="form-group">
+          <label for="{{ review_form.body.id_for_label }}">Write your review as {{ user.username }}</label>
+          <textarea class="form-control" rows="5" style="resize:none;" name="{{ review_form.body.name }}" id="{{ review_form.body.id_for_label }}" required placeholder="Write your review as {{ user.username }}">{{ review_form.body.value }}</textarea>
+        </div>
+        <div class="form-group">
+          <label for="{{ review_form.rating.id_for_label }}">Rate this product</label>
+          {% include "shop/includes/rating_stars.html" %}
+          {{ review_form.rating }}
+        </div>
+        <button type="submit" class="btn btn-primary">Submit</button>
+      </form>
+    </div>
+  </div>
 
   {% for review in reviews %}
     <div class="card my-3">
       <div class="card-body">
-        <h5 class="card-title">{{ review.profile.user.username }}</h5>
+        <h5 class="card-title">{{ review.user.username }}</h5>
         <h6 class="card-subtitle mb-2 text-muted">{{ review.created }} </h6>
         <div class="review-stars" id="review-{{ review.id }}-stars">
           {% for i in "x"|rjust:review.rating %}
@@ -66,12 +82,7 @@
   {% empty %}
     <p>There are no reviews.</p>
   {% endfor %}
-  
 
-  
-
-
-   
   </div>
 </div>
 {% endblock %}
