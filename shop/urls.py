@@ -13,5 +13,6 @@ urlpatterns = [
     path("newsletter", views.newsletter, name="newsletter"),
      path('<int:id>/<slug:slug>/review/',
          views.review_product, name='review_product'),
+     path('<int:id>/<slug:slug>/review/<int:review_id>/edit/', views.edit_review, name='edit_review'),
     path('category/<int:category_id>/carousel/', views.category_carousel, name='category_carousel'),
 ]

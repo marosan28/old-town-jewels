@@ -67,21 +67,25 @@
   </div>
 
   {% for review in reviews %}
-    <div class="card my-3">
-      <div class="card-body">
-        <h5 class="card-title">{{ review.user.username }}</h5>
-        <h6 class="card-subtitle mb-2 text-muted">{{ review.created }} </h6>
-        <div class="review-stars" id="review-{{ review.id }}-stars">
-          {% for i in "x"|rjust:review.rating %}
-            <span class="fa fa-star star-selected"></span>
-          {% endfor %}
-        </div>
-        <p class="card-text">{{ review.body }}</p>
+  <div class="card my-3">
+    <div class="card-body">
+      <h5 class="card-title">{{ review.user.username }}</h5>
+      <h6 class="card-subtitle mb-2 text-muted">{{ review.created }} </h6>
+      <div class="review-stars" id="review-{{ review.id }}-stars">
+        {% for i in "x"|rjust:review.rating %}
+          <span class="fa fa-star star-selected"></span>
+        {% endfor %}
       </div>
+      <p class="card-text">{{ review.body }}</p>
+      {% if request.user == review.user %}
+        <a href="{% url 'shop:edit_review' id=product.id slug=product.slug review_id=review.id %}" class="btn btn-link">Edit</a>
+      {% endif %}
     </div>
-  {% empty %}
-    <p>There are no reviews.</p>
-  {% endfor %}
+  </div>
+{% empty %}
+  <p>There are no reviews.</p>
+{% endfor %}
+
 
   </div>
 </div>
