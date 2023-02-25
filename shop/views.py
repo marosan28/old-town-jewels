@@ -150,6 +150,15 @@ def edit_review(request, product_id, product_slug, review_id):
     context = {'form': form, 'product': product, 'review': review}
     return render(request, 'shop/edit_review.html', context)
 
+@login_required
+def delete_review(request, product_id, product_slug, review_id):
+    product = get_object_or_404(Product, id=product_id)
+    review = get_object_or_404(Review, id=review_id, user=request.user)
+    review.delete()
+    messages.success(request, 'Your review was deleted successfully!')
+    return redirect('shop:product_detail', id=product_id, slug=product_slug)
+
+
 
 
 
