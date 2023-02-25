@@ -1,12 +1,36 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-</head>
-<body>
-    <p>ok</p>
-</body>
-</html>
+{% extends "shop/base.html" %}
+{% load static %}
+{% load humanize %}
+{% load review_tags %}
+
+
+{% block scripts %}
+{{ block.super }}
+<script src="/static/js/review_stars.js"></script>
+{% endblock %}
+
+{% block content %}
+<div id="content">
+  <h2>Edit Review</h2>
+  <div class="card my-4">
+    <div class="card-body">
+      <form method="post" action="{% url 'shop:edit_review' product.id product.slug review.id %}">
+        {% csrf_token %}
+        <div class="form-group">
+          <label for="{{ form.body.id_for_label }}">Write your review</label>
+          <textarea class="form-control" rows="5" style="resize:none;" name="{{ form.body.name }}"
+            id="{{ form.body.id_for_label }}" required
+            placeholder="Write your review">{{ form.body.value }}</textarea>
+        </div>
+        <div class="form-group">
+          <label for="{{ form.rating.id_for_label }}">Rate this product</label>
+          {% include "shop/includes/rating_stars.html" %}
+          {{ form.rating }}
+        </div>
+        <button type="submit" class="btn btn-primary">Save changes</button>
+        <a href="{% url 'shop:product_detail' id=product.id slug=product.slug %}#reviews" class="btn btn-secondary">Cancel</a>
+      </form>
+    </div>
+  </div>
+  </div>
+{% endblock %}

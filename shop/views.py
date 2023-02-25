@@ -43,7 +43,7 @@ def product_detail(request, id, slug):
     reviews = product.reviews.filter(active=True)
 
     if request.method == 'POST':
-        review_form = ReviewForm(user=request.user, data=request.POST)
+        review_form = ReviewForm(request.POST)
         if review_form.is_valid():
             review = review_form.save(commit=False)
             review.product = product
@@ -53,7 +53,7 @@ def product_detail(request, id, slug):
             return redirect('shop:product_detail', id=id, slug=slug)
     else:
         if request.user.is_authenticated:
-            review_form = ReviewForm(user=request.user)
+            review_form = ReviewForm()
         else:
             review_form = ReviewForm()
 
@@ -113,13 +113,16 @@ def category_carousel(request, category_id):
 def review_product(request, id, slug):
     product = get_object_or_404(Product, id=id, slug=slug, available=True)
     if request.method == 'POST':
-        form = ReviewForm(user=request.user, data=request.POST)
+        form = ReviewForm(request.POST)
         if form.is_valid():
-            form.save()
+            review = form.save(commit=False)
+            review.user = request.user
+            review.product = product
+            review.save()
             messages.success(request, 'Your review was submitted successfully!')
             return redirect('shop:product_detail', id=id, slug=slug)
     else:
-        form = ReviewForm(user=request.user)
+        form = ReviewForm()
     context = {'product': product, 'form': form }
     return render(request, 'shop/product/detail.html', context)
 
@@ -135,10 +138,12 @@ def edit_review(request, product_id, product_slug, review_id):
             messages.success(request, 'Your review was updated successfully!')
             return redirect('shop:product_detail', id=product_id, slug=product_slug)
     else:
-        form = ReviewForm(instance=review)
+        form = ReviewForm(instance=review, initial={'body': request.POST.get('body', '')})
 
     context = {'form': form, 'product': product, 'review': review}
     return render(request, 'shop/edit_review.html', context)
+
+
 
 
 

@@ -33,61 +33,70 @@
       </form>
     </div>
   </div>
-  
-    {% with reviews.count as total_reviews %}
-  <h3><strong>{{ total_reviews }} review{{ total_reviews|pluralize }}</strong></h3>
-{% endwith %}
 
-{% if reviews %}
+  {% with reviews.count as total_reviews %}
+  <h3><strong>{{ total_reviews }} review{{ total_reviews|pluralize }}</strong></h3>
+  {% endwith %}
+
+  {% if reviews %}
   {% with reviews|average_review as avg_review %}
   <div class="review-stars" id="review-{{ review.id }}-stars">
-    <p>Average review: {{ avg_review }}  <span class="fa fa-star star-selected"></span></p>
+    <p>Average review: {{ avg_review }} <span class="fa fa-star star-selected"></span></p>
   </div>
   {% endwith %}
-{% endif %}
+  {% endif %}
 
 
-<h2>Add a new review</h2>
-  <div class="card my-4">
-    <div class="card-body">
-      <form action="{% url 'shop:product_detail' id=product.id slug=product.slug %}#reviews" method="post">
-        {% csrf_token %}
-        <div class="form-group">
-          <label for="{{ review_form.body.id_for_label }}">Write your review as {{ user.username }}</label>
-          <textarea class="form-control" rows="5" style="resize:none;" name="{{ review_form.body.name }}" id="{{ review_form.body.id_for_label }}" required placeholder="Write your review as {{ user.username }}">{{ review_form.body.value }}</textarea>
-        </div>
-        <div class="form-group">
-          <label for="{{ review_form.rating.id_for_label }}">Rate this product</label>
-          {% include "shop/includes/rating_stars.html" %}
-          {{ review_form.rating }}
-        </div>
-        <button type="submit" class="btn btn-primary">Submit</button>
-      </form>
-    </div>
+  <h2>Add a new review</h2>
+<div class="card my-4">
+  <div class="card-body">
+    <form action="{% url 'shop:product_detail' id=product.id slug=product.slug %}#reviews" method="post">
+      {% csrf_token %}
+      <div class="form-group">
+        <label for="{{ review_form.body.id_for_label }}">Write your review</label>
+        <textarea class="form-control" rows="5" style="resize:none;" name="{{ review_form.body.name }}"
+          id="{{ review_form.body.id_for_label }}" required
+          placeholder="Write your review">{{ review_form.body.value }}</textarea>
+      </div>
+      <div class="form-group">
+        <label for="{{ review_form.rating.id_for_label }}">Rate this product</label>
+        {% include "shop/includes/rating_stars.html" %}
+        {{ review_form.rating }}
+      </div>
+      <button type="submit" class="btn btn-primary">Submit</button>
+    </form>
   </div>
+</div>
 
-  {% for review in reviews %}
+{% for review in reviews %}
   <div class="card my-3">
     <div class="card-body">
       <h5 class="card-title">{{ review.user.username }}</h5>
       <h6 class="card-subtitle mb-2 text-muted">{{ review.created }} </h6>
       <div class="review-stars" id="review-{{ review.id }}-stars">
         {% for i in "x"|rjust:review.rating %}
-          <span class="fa fa-star star-selected"></span>
+        <span class="fa fa-star star-selected"></span>
         {% endfor %}
       </div>
       <p class="card-text">{{ review.body }}</p>
-      {% if request.user == review.user %}
-      <a href="{% url 'shop:edit_review' product_id=product.id product_slug=product.slug review_id=review.id %}">Edit review</a>
-
+      {% if user.is_authenticated %}
+      {% if review.user == user %}
+      <form method="post" action="{% url 'shop:edit_review' product.id product.slug review.id %}">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit" class="btn btn-primary">Edit Review</button>
+        <input type="hidden" name="body" value="{{ review.body }}">
+      </form>
+      {% endif %}
       {% endif %}
     </div>
   </div>
 {% empty %}
-  <p>There are no reviews.</p>
+<p>There are no reviews.</p>
 {% endfor %}
 
 
-  </div>
+
+</div>
 </div>
 {% endblock %}

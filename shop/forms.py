@@ -14,19 +14,12 @@ class ReviewForm(forms.ModelForm):
         model = Review
         fields = ['body', 'rating']
 
-    def __init__(self, user, *args, **kwargs):
+    def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
-        self.user = user
+        self.fields['rating'].required = True
 
     def clean_rating(self):
         rating = self.cleaned_data['rating']
         if not rating:
             raise forms.ValidationError("Please select a rating")
         return rating
-
-    def save(self, commit=True):
-        review = super().save(commit=False)
-        review.user = self.user
-        if commit:
-            review.save()
-        return review
