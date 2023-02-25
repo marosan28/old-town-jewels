@@ -107,7 +107,9 @@ def payment_completed(request):
     order.save()
 
     send_order_confirmation_email(order_id, delivery_charge, total_cost,
-                                  order_items, coupon_code, payment_method, transaction_id, order.email)
+                                  order_items, coupon_code, payment_method,
+                                  transaction_id, order.email)
+
     return render(request, 'payment/completed.html', {'order': order, 'delivery_charge': delivery_charge, 'total_cost': total_cost, 'order_items': order_items, 'coupon_code': coupon_code, 'payment_method': payment_method, 'transaction_id': transaction_id, 'payment_method_type': payment_method_type, 'payment_method_last4': payment_method_last4})
 
 
@@ -174,7 +176,7 @@ intent = stripe.PaymentIntent.create(
 client_secret = intent.client_secret
 
 
-def send_order_confirmation_email(order_id, delivery_charge, total_cost, order_items, coupon_code, payment_method, transaction_id, email):
+def send_order_confirmation_email(order_id, delivery_charge, total_cost, order_items, coupon_code, payment_method_id, transaction_id, email):
     order = Order.objects.get(id=order_id)
     subject = 'Order Confirmation'
     message = f'Thank you for your order. Your order number is {order.id}. \n\n'
@@ -185,7 +187,8 @@ def send_order_confirmation_email(order_id, delivery_charge, total_cost, order_i
     message += f'Total cost: {total_cost} \n'
     if coupon_code:
         message += f'Coupon code: {coupon_code} \n'
-    message += f'Payment method: {payment_method} \n'
+    payment_method = stripe.PaymentMethod.retrieve(payment_method_id)
+    message += f'Payment method: {payment_method.card.brand} \n'
     message += f'Transaction ID: {transaction_id} \n'
     from_email = settings.DEFAULT_FROM_EMAIL
     recipient_list = [email]
