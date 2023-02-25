@@ -14,9 +14,9 @@
   <link href="{% static 'css/stylesheet.css' %}" rel="stylesheet">
   {% block scripts %}
   <script src="https://code.jquery.com/jquery-3.6.0.min.js"
-  integrity="sha384-vtXRMe3mGCbOeY7l30aIg8H9p3GdeSe4IFlP6G8JMa7o7lXvnz3GFKzPxzJdPfGK" crossorigin="anonymous">
-</script>
-<script src="{% static 'js/js.cookie.js' %}"></script>
+    integrity="sha384-vtXRMe3mGCbOeY7l30aIg8H9p3GdeSe4IFlP6G8JMa7o7lXvnz3GFKzPxzJdPfGK" crossorigin="anonymous">
+  </script>
+  <script src="{% static 'js/js.cookie.js' %}"></script>
   <script src="https://kit.fontawesome.com/aba9c8794f.js" crossorigin="anonymous"></script>
   <script src="https://js.stripe.com/v3/"></script>
   <script src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js"
@@ -42,7 +42,8 @@
       <ul class="navbar-nav ml-auto">
         {% if user.is_authenticated %}
         <li class="nav-item">
-          <a class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          <a class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true"
+            aria-expanded="false">
             <i class="fa fa-user"></i> Welcome, {{ user.username }}
           </a>
           <div class="dropdown-menu" aria-labelledby="navbarDropdown">
@@ -65,45 +66,46 @@
       </ul>
     </div>
   </nav>
-  
-  
 
-  
+
+
+
   {% include 'shop/includes/messages.html' %}
   {% block subheader %}
-    {% if user.is_authenticated %}
-      <div class="cart-wrapper">
-        <div class="cart-side">
-          {% with total_items=cart|length %}
-            {% if total_items > 0 %}
-              <div class="cart-icon">
-                <i class="fas fa-shopping-cart"></i>
-              </div>
-              <div class="cart-info">
-                <span class="cart-total"><a href="{% url 'cart:cart_detail' %}">{{ total_items }} item{{ total_items|pluralize }}, €{{ cart.get_total_price }}</a></span>
-                <div class="cart-items">
-                  <ul>
-                    {% for item in cart %}
-                      <li>{{ item.quantity }}x {{ item.product.name }}</li>
-                    {% endfor %}
-                  </ul>
-                </div>
-              </div>
-            {% elif not order %}
-              <div class="cart-icon">
-                <i class="fas fa-shopping-cart"></i>
-              </div>
-              <div class="cart-info">
-                <span class="cart-total">Your cart is empty.</span>
-              </div>
-            {% endif %}
-          {% endwith %}
+  {% if user.is_authenticated %}
+  <div class="cart-wrapper">
+    <div class="cart-side">
+      {% with total_items=cart|length %}
+      {% if total_items > 0 %}
+      <div class="cart-icon">
+        <i class="fas fa-shopping-cart"></i>
+      </div>
+      <div class="cart-info">
+        <span class="cart-total"><a href="{% url 'cart:cart_detail' %}">{{ total_items }}
+            item{{ total_items|pluralize }}, €{{ cart.get_total_price }}</a></span>
+        <div class="cart-items">
+          <ul>
+            {% for item in cart %}
+            <li>{{ item.quantity }}x {{ item.product.name }}</li>
+            {% endfor %}
+          </ul>
         </div>
       </div>
-    {% endif %}
+      {% elif not order %}
+      <div class="cart-icon">
+        <i class="fas fa-shopping-cart"></i>
+      </div>
+      <div class="cart-info">
+        <span class="cart-total">Your cart is empty.</span>
+      </div>
+      {% endif %}
+      {% endwith %}
+    </div>
+  </div>
+  {% endif %}
   {% endblock %}
-  
-  
+
+
   {% block content %}
   <div class="container my-5">
     <div class="row">
@@ -122,21 +124,46 @@
     </div>
   </div>
   {% endblock %}
-{% block footer %}
-  <!-- Footer-->
+  {% block footer %}
   <footer class="py-5 bg-dark">
     <div class="container">
-      <div class="row text-center">
-
-        <div class="col-md-4 box">
-          <span class="copyright quick-links">Copyright &copy; Old Town Jewels <script>
-              document.write(new Date().getFullYear())
-            </script>
-          </span>
+      <div class="row">
+        <div class="col-md-4">
+          <div class="footer-brand">
+            <img src="{% static 'images/logo-otj.png' %}" width="50" height="50" alt="Old Town Jewels Logo">
+            <h3 class="text-white mt-3">Old Town Jewels</h3>
+            <p class="text-muted">We offer a unique collection of vintage and antique jewelry.</p>
+          </div>
         </div>
-
-        <div class="col-md-4 box">
-          <span class="text-center text-white">Check our Socials</span>
+        <div class="col-md-4">
+          <div class="footer-links">
+            <h4 class="text-white">Quick Links</h4>
+            <ul class="list-unstyled text-muted">
+              <li><a href="{% url 'shop:index' %}">Home</a></li>
+              <li><a href="{% url 'shop:home' %}">Products</a></li>
+              <li><a href="">About Us</a></li>
+              <li><a href="">Contact Us</a></li>
+            </ul>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="footer-newsletter">
+            <h4 class="text-white">Subscribe to Our Newsletter</h4>
+            <form action="{% url 'users:subscribe' %}" method="post" class="form-inline">
+              {% csrf_token %}
+              <div class="form-group mr-2">
+                <input type="text" name="name" class="form-control newsletter-input" placeholder="Your Name">
+              </div>
+              <div class="form-group mr-2">
+                <input type="email" name="email" class="form-control newsletter-input" placeholder="Email Address">
+              </div>
+              <button type="submit" class="btn btn-primary newsletter-button">Subscribe</button>
+            </form>
+          </div>
+        </div>
+      </div>
+      <div class="row mt-5">
+        <div class="col text-center">
           <ul class="list-inline social-buttons">
             <li class="list-inline-item">
               <a href="https://www.instagram.com/ot__jewels/">
@@ -154,38 +181,14 @@
               </a>
             </li>
           </ul>
-        </div>
-
-        <div class="col-md-4 box">
-          <span class="text-center text-white">Subscribe for our newsletter</span>
-        
-          <ul class="list-inline quick-links">
-            <li class="list-inline-item">
-              <form action="{% url 'users:subscribe' %}" method="post">
-                {% csrf_token %}
-                    <div class="col-auto">
-                        <input id="name" name="name" class="form-control newsletter" placeholder="Your Name">
-                    </div>
-        
-                    <div class="col-auto">
-                        <input id="email" name="email" type="email" class="form-control newsletter" placeholder="Email address">
-                    </div>
-        
-                    <div class="col-auto">
-                        <button type="submit" class="btn btncolor">
-                            Submit
-                        </button>
-                  
-                </div>
-            </form>
-            </li>
-          </ul>
+          <p class="text-muted mb-0">&copy; Old Town Jewels <script>document.write(new Date().getFullYear())</script>. All rights reserved.</p>
         </div>
       </div>
     </div>
-    </div>
   </footer>
-  {% endblock %}
+{% endblock %}
+
+
 </body>
 
 

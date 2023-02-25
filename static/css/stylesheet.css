@@ -308,20 +308,11 @@ button.btn  {
 .bg-image-full {
     background-size: cover;
 }
-.bg-dark {
-    background-color: black!important;
-}
 
 .form-title {
     margin-bottom: 20px;
 }
 /*------------Footer----------------*/
-footer.bg-dark {
-    position: relative;
-    bottom: 0;
-    width: 100%;
-    margin-top: 200px
-  }
 
 
   a:hover {
@@ -345,10 +336,6 @@ footer.bg-dark {
 
 .second-img {
     padding: 0 100px;
-}
-
-.newsletter {
-    margin: 10px;
 }
 
  .helptext {
