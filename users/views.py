@@ -91,8 +91,6 @@ def edit(request):
     return render(request, 'registration/edit.html', {'user_form': user_form, 'profile_form': profile_form})
 
 
-
-
 def subscribe(request):
     if request.method == 'POST':
         name = request.POST.get('name', None)
