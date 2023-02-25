@@ -33,21 +33,42 @@
         }
       });
       $('#delivery_options').on('change', function () {
-        // Get the selected delivery option
-        var deliveryOption = $(this).find('option:selected');
+    // Get the selected delivery option
+    var deliveryOption = $(this).find('option:selected');
 
-        // Extract the delivery charge from the selected option
-        var deliveryCharge = parseFloat(deliveryOption.data('price'));
+    // Extract the delivery charge from the selected option
+    var deliveryCharge = parseFloat(deliveryOption.data('price'));
 
-        // Update the delivery charge in the table
-        $('#delivery-charge').text(deliveryCharge.toFixed(2));
+    // Update the delivery charge in the table
+    $('#delivery-charge').text(deliveryCharge.toFixed(2));
 
-        // Update the order total with the delivery charge
-        var orderTotal = parseFloat($('#order-total').text());
-        var newOrderTotal = orderTotal + deliveryCharge;
-        $('#order-total').text(newOrderTotal.toFixed(2));
-      });
-      
+    // Update the order total with the delivery charge
+    var orderTotal = parseFloat($('#order-total').text());
+    var newOrderTotal = orderTotal + deliveryCharge;
+    $('#order-total').text(newOrderTotal.toFixed(2));
+
+    // Get the CSRF token
+    var csrftoken = Cookies.get('csrftoken');
+
+    // Send an Ajax request to update the delivery charge in the session
+    $.ajax({
+      type: 'POST',
+      url: '/payment/update_delivery_charge/',
+      data: {
+        'delivery_charge': deliveryCharge,
+        'csrfmiddlewaretoken': csrftoken
+      },
+      success: function (response) {
+        console.log('Delivery charge updated in session');
+      },
+      error: function (response) {
+        console.log('Error updating delivery charge in session');
+      }
+    });
+  });
+
+
+
     });
 
     // Set your publishable key
@@ -133,7 +154,7 @@
         }
       });
     });
-    
+
   });
 </script>
 {% endblock %}
@@ -229,10 +250,10 @@
         <td> {{ item.get_cost }}</td>
       </tr>
       {% endfor %}
-<tr>
+      <tr>
         <td colspan="3" class="text-right">Applied Coupon:</td>
         <td> <strong><span class="text-danger"> {{ coupon_code }} ({{ order.discount }}% off) </span></strong></td>
-</tr>
+      </tr>
 
       <tr>
         <td colspan="3" class="text-right">Delivery charge:</td>

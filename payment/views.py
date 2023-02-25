@@ -15,6 +15,17 @@ from django.http import HttpResponse
 stripe.api_key = settings.STRIPE_SECRET_KEY
 stripe.api_version = settings.STRIPE_API_VERSION
 
+from django.http import JsonResponse
+
+def update_delivery_charge(request):
+    if request.method == 'POST':
+        delivery_charge = request.POST.get('delivery_charge', 0)
+        request.session['delivery_charge'] = delivery_charge
+        return JsonResponse({'message': 'Delivery charge updated in session'})
+    return JsonResponse({'message': 'Error updating delivery charge in session'})
+
+
+
 def payment_process(request, order_id):
     order = get_object_or_404(Order, id=order_id)
     payment_method = request.POST.get('payment_method')
@@ -76,7 +87,7 @@ def payment_process(request, order_id):
 def payment_completed(request):
     order_id = request.session.get('order_id')
     order = Order.objects.get(id=order_id)
-    delivery_charge = float(request.POST.get('delivery_charge', 0))
+    delivery_charge = request.session.get('delivery_charge', 0)
     total_cost = order.get_total_cost() + Decimal(str(delivery_charge))
     order_items = order.items.all()
     coupon_code = order.coupon.code if order.coupon else None
@@ -93,7 +104,9 @@ def payment_form(request, order_id, session_id):
     order = get_object_or_404(Order, id=order_id)
     order_items = order.items.all()
     delivery_charge = request.session.get('delivery_charge', 0)
+    print(f"delivery_charge retrieved from session: {delivery_charge}")
     request.session['delivery_charge'] = delivery_charge
+    print(f"delivery_charge updated in session: {delivery_charge}")
     total = order.get_total_cost() + Decimal(str(delivery_charge))
     address = request.session.get('address')
     address2 = request.session.get('address2')
