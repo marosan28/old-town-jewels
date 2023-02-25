@@ -1,3 +1,4 @@
+from django.http import JsonResponse
 from django.shortcuts import render, redirect, get_object_or_404
 from django.core.mail import send_mail
 import os
@@ -11,11 +12,11 @@ from delivery.models import DeliveryOption
 from django_countries import countries
 from .forms import EmailPostForm
 from django.http import HttpResponse
+from django.utils import timezone
 
 stripe.api_key = settings.STRIPE_SECRET_KEY
 stripe.api_version = settings.STRIPE_API_VERSION
 
-from django.http import JsonResponse
 
 def update_delivery_charge(request):
     if request.method == 'POST':
@@ -25,11 +26,10 @@ def update_delivery_charge(request):
     return JsonResponse({'message': 'Error updating delivery charge in session'})
 
 
-
 def payment_process(request, order_id):
     order = get_object_or_404(Order, id=order_id)
     payment_method = request.POST.get('payment_method')
-    
+
     if request.method == 'POST':
         session_data = {
             'payment_method_types': ['card'],
@@ -54,7 +54,8 @@ def payment_process(request, order_id):
 
         # Add a line item for the delivery charge
         delivery_charge = request.session.get('delivery_charge', 0)
-        if delivery_charge > 0:
+        if delivery_charge:
+            delivery_charge = float(delivery_charge)
             session_data['line_items'].append({
                 'price_data': {
                     'currency': 'eur',
@@ -91,13 +92,28 @@ def payment_completed(request):
     total_cost = order.get_total_cost() + Decimal(str(delivery_charge))
     order_items = order.items.all()
     coupon_code = order.coupon.code if order.coupon else None
-    send_order_confirmation_email(order_id, delivery_charge, total_cost, order_items, coupon_code)
-    return render(request, 'payment/completed.html', {'order': order, 'delivery_charge': delivery_charge, 'total_cost': total_cost, 'order_items': order_items, 'coupon_code': coupon_code})
 
+    # Get the PaymentIntent and extract payment method and transaction ID
+    payment_intent = stripe.PaymentIntent.retrieve(order.payment_intent_id)
+    payment_method = payment_intent.payment_method
+    transaction_id = payment_intent.id
+
+    # Retrieve more details about the payment method
+    payment_method_details = stripe.PaymentMethod.retrieve(payment_method).card
+    payment_method_type = payment_method_details.brand.title()
+    payment_method_last4 = payment_method_details.last4
+
+    order.paid_date = timezone.now()
+    order.save()
+
+    send_order_confirmation_email(order_id, delivery_charge, total_cost,
+                                  order_items, coupon_code, payment_method, transaction_id, order.email)
+    return render(request, 'payment/completed.html', {'order': order, 'delivery_charge': delivery_charge, 'total_cost': total_cost, 'order_items': order_items, 'coupon_code': coupon_code, 'payment_method': payment_method, 'transaction_id': transaction_id, 'payment_method_type': payment_method_type, 'payment_method_last4': payment_method_last4})
 
 
 def payment_canceled(request):
     return render(request, 'payment/canceled.html')
+
 
 def payment_form(request, order_id, session_id):
     order_id = request.session.get('order_id')
@@ -111,7 +127,6 @@ def payment_form(request, order_id, session_id):
     postal_code = request.session.get('postal_code')
     city = request.session.get('city')
     shipping_country = request.session.get('shipping_country')
-    
 
     # Get or create a PaymentIntent
     payment_intent_id = order.payment_intent_id
@@ -146,9 +161,10 @@ def payment_form(request, order_id, session_id):
         'city': city,
         'shipping_country': shipping_country,
         'delivery_options': delivery_options,
-        'delivery_charge' : delivery_charge,
+        'delivery_charge': delivery_charge,
         'coupon_code': order.coupon.code if order.coupon else None,
     })
+
 
 intent = stripe.PaymentIntent.create(
     amount=1000,
@@ -157,7 +173,8 @@ intent = stripe.PaymentIntent.create(
 
 client_secret = intent.client_secret
 
-def send_order_confirmation_email(order_id, delivery_charge, total_cost, order_items, coupon_code):
+
+def send_order_confirmation_email(order_id, delivery_charge, total_cost, order_items, coupon_code, payment_method, transaction_id, email):
     order = Order.objects.get(id=order_id)
     subject = 'Order Confirmation'
     message = f'Thank you for your order. Your order number is {order.id}. \n\n'
@@ -168,10 +185,9 @@ def send_order_confirmation_email(order_id, delivery_charge, total_cost, order_i
     message += f'Total cost: {total_cost} \n'
     if coupon_code:
         message += f'Coupon code: {coupon_code} \n'
+    message += f'Payment method: {payment_method} \n'
+    message += f'Transaction ID: {transaction_id} \n'
     from_email = settings.DEFAULT_FROM_EMAIL
-    recipient_list = [order.email]
-    send_mail(subject, message, from_email, recipient_list, fail_silently=False)
-
-
-
-    
+    recipient_list = [email]
+    send_mail(subject, message, from_email,
+              recipient_list, fail_silently=False)
