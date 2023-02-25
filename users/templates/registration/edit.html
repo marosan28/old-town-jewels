@@ -2,46 +2,40 @@
 {% load static %}
 {% block subheader %} {% endblock %}
 {% block content %}
-  <div class="row">
-    <div class="col-lg-4 col-md-6 col-sm-8 mx-auto">
-      <div class="card card-body">
-        <div class="text-center mb-3">
-          {% if profile_form.instance.image %}
-            <img src="{{ profile_form.instance.image.url }}" class="rounded-circle" style="width: 150px; height: 150px;">
-          {% else %}
-            <img src="{% static 'img/default-profile.png' %}" class="rounded-circle" style="width: 150px; height: 150px;">
-          {% endif %}
-        </div>
+<div class="container mt-5">
+  <div class="row justify-content-center">
+    <div class="col-md-8">
+      <div class="card">
+        <div class="card-header">{{ user.username }}'s Profile</div>
+        <div class="card-body">
 
-        <form method="post" enctype="multipart/form-data">
-          {% csrf_token %}
-          <div class="form-group">
-            {{ user_form.username.label_tag }}
-            {{ user_form.username }}
-          </div>
-          <div class="form-group">
-            {{ user_form.first_name.label_tag }}
-            {{ user_form.first_name }}
-          </div>
-          <div class="form-group">
-            {{ user_form.last_name.label_tag }}
-            {{ user_form.last_name }}
-          </div>
-          <div class="form-group">
-            {{ user_form.email.label_tag }}
-            {{ user_form.email }}
-          </div>
-          <div class="form-group">
-            {{ profile_form.date_of_birth.label_tag }}
-            {{ profile_form.date_of_birth }}
-          </div>
-          <div class="form-group">
-            {{ profile_form.image.label_tag }}
-            {{ profile_form.image }}
-          </div>
-          <button type="submit" class="btn btn-primary btn-block">Save Changes</button>
-        </form>
+          <form method="post" enctype="multipart/form-data">
+            {% csrf_token %}
+            <div class="form-group">
+              {{ user_form.username.label_tag }}
+              {{ user_form.username }}
+            </div>
+            <div class="form-group">
+              {{ user_form.first_name.label_tag }}
+              {{ user_form.first_name }}
+            </div>
+            <div class="form-group">
+              {{ user_form.last_name.label_tag }}
+              {{ user_form.last_name }}
+            </div>
+            <div class="form-group">
+              {{ user_form.email.label_tag }}
+              {{ user_form.email }}
+            </div>
+            <div class="form-group">
+              {{ profile_form.date_of_birth.label_tag }}
+              {{ profile_form.date_of_birth }}
+            </div>
+            <button type="submit" class="btn btn-primary btn-block">Save Changes</button>
+          </form>
+        </div>
       </div>
     </div>
   </div>
+</div>
 {% endblock %}

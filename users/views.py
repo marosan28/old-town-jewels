@@ -18,6 +18,8 @@ from .forms import Login, UserRegistrationForm, UserEditForm, ProfileEditForm
 import cloudinary
 from cloudinary.forms import cl_init_js_callbacks
 from cloudinary import api
+import os
+import cloudinary.uploader
 
 
 # Password Reset 
@@ -69,6 +71,7 @@ def register(request):
                   'registration/register.html',
                   {'user_form': user_form})
 
+
 @login_required
 def edit(request):
     if request.method == 'POST':
@@ -79,14 +82,6 @@ def edit(request):
             profile = profile_form.save(commit=False)
             profile.user = request.user
 
-            # Check if the image file is uploaded
-            if 'image' in request.FILES:
-                # Upload the image file to Cloudinary
-                response = cloudinary.uploader.upload(request.FILES['image'], folder="profiles/")
-
-                # Set the image url in the profile model
-                profile.image = response['secure_url']
-
             profile.save()
             messages.success(request, 'Your profile has been updated successfully.')
             return redirect('users:edit')
@@ -94,6 +89,7 @@ def edit(request):
         user_form = UserEditForm(instance=request.user)
         profile_form = ProfileEditForm(instance=request.user.profile)
     return render(request, 'registration/edit.html', {'user_form': user_form, 'profile_form': profile_form})
+
 
 
 

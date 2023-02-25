@@ -25,7 +25,6 @@ User = get_user_model()
 class Profile(models.Model):
     user = models.OneToOneField(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
     date_of_birth = models.DateField(blank=True, null=True)
-    image = CloudinaryField('image')
     alt = models.CharField(max_length=200, default='')
 
     def __str__(self):
