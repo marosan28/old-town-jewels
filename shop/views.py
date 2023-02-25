@@ -118,12 +118,19 @@ def review_product(request, id, slug):
             review = form.save(commit=False)
             review.user = request.user
             review.product = product
+            review.rating = int(request.POST['rating'])
             review.save()
             messages.success(request, 'Your review was submitted successfully!')
             return redirect('shop:product_detail', id=id, slug=slug)
     else:
         form = ReviewForm()
-    context = {'product': product, 'form': form }
+    reviews = product.reviews.filter(active=True)
+    rating_stars_list = []
+    for review in reviews:
+        rating_stars = form.fields['rating'].widget.render('rating', review.rating)
+        rating_stars_list.append(rating_stars)
+
+    context = {'product': product, 'form': form, 'reviews': reviews, 'rating_stars_list': rating_stars_list}
     return render(request, 'shop/product/detail.html', context)
 
 @login_required
