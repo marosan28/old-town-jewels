@@ -3,48 +3,49 @@
 {% load static %}
 
 {% block content %}
-<div class="d-flex justify-content-center mt-5">
-	<div class="col-md-6 col-sm-12">
-		<div class="card border-0">
-			<div class="card-header bg-white border-0 text-center">
-				<h2 class="card-title mb-0">
-					<img src="{% static 'images/otj.png' %}" width="30" height="30" class="d-inline-block align-top"
-						alt="">
-					Log In
-				</h2>
-			</div>
-			<div class="card-body">
-				<form method="post" action="{% url 'users:login' %}" class="form">
+<div class="container my-5">
+  <div class="row justify-content-center align-items-center">
+    <div class="col-md-6">
+      <div class="card border-0">
+        <div class="card-header bg-white border-0 text-center">
+          <img src="{% static 'images/logo-otj.png' %}" width="auto" height="80"  alt="logo">
+          <h2 class="card-title mb-0">
+            Log In
+          </h2>
+        </div>
+        <div class="card-body">
+          <form method="post" action="{% url 'users:login' %}" class="form">
 
-					{% csrf_token %}
-					<div class="form-group">
-						{{ form.username|as_crispy_field }}
-					</div>
-					<div class="form-group">
-						{{ form.password|as_crispy_field }}
-					</div>
-					<div class="form-group mt-4">
-						<button name="submit" class="btn btn-primary btn-block" type="submit">Login</button>
-						<input type="hidden" name="next" value="{% url 'shop:home' %}">
-					</div>
-				</form>
-				<div class="d-flex justify-content-between align-items-center mt-4">
-					<div class="custom-control custom-checkbox">
-						<input type="checkbox" class="custom-control-input" id="remember-me">
-						<label class="custom-control-label" for="remember-me">Remember me</label>
-					</div>
-					<p class="mb-0">
-						<a href="{% url 'users:password_reset' %}">
-							Forgotten your password?
-						</a>
-					</p>
-				</div>
-				<hr class="mt-4 mb-4">
-				<p class="text-center mb-0">
-					Don't have an account? <a href="{% url 'users:register' %}">Sign Up</a>
-				</p>
-			</div>
-		</div>
-	</div>
+            {% csrf_token %}
+            <div class="form-group">
+              {{ form.username|as_crispy_field }}
+            </div>
+            <div class="form-group">
+              {{ form.password|as_crispy_field }}
+            </div>
+            <div class="form-group mt-4">
+              <button name="submit" class="btn btn-primary btn-block" type="submit">Login</button>
+              <input type="hidden" name="next" value="{% url 'shop:home' %}">
+            </div>
+          </form>
+          <div class="d-flex justify-content-between align-items-center mt-4">
+            <div class="custom-control custom-checkbox">
+              <input type="checkbox" class="custom-control-input" id="remember-me">
+              <label class="custom-control-label" for="remember-me">Remember me</label>
+            </div>
+            <p class="mb-0">
+              <a href="{% url 'users:password_reset' %}">
+                Forgotten your password?
+              </a>
+            </p>
+          </div>
+          <hr class="mt-4 mb-4">
+          <p class="text-center mb-0">
+            Don't have an account? <a href="{% url 'users:register' %}">Sign Up</a>
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
 </div>
 {% endblock content %}
