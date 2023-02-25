@@ -104,9 +104,7 @@ def payment_form(request, order_id, session_id):
     order = get_object_or_404(Order, id=order_id)
     order_items = order.items.all()
     delivery_charge = request.session.get('delivery_charge', 0)
-    print(f"delivery_charge retrieved from session: {delivery_charge}")
     request.session['delivery_charge'] = delivery_charge
-    print(f"delivery_charge updated in session: {delivery_charge}")
     total = order.get_total_cost() + Decimal(str(delivery_charge))
     address = request.session.get('address')
     address2 = request.session.get('address2')
