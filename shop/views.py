@@ -124,16 +124,16 @@ def review_product(request, id, slug):
     return render(request, 'shop/product/detail.html', context)
 
 @login_required
-def edit_review(request, product_id, review_id):
+def edit_review(request, product_id, product_slug, review_id):
     product = get_object_or_404(Product, id=product_id)
-    review = get_object_or_404(Review, id=review_id, product=product, user=request.user)
+    review = get_object_or_404(Review, id=review_id, user=request.user)
 
     if request.method == 'POST':
         form = ReviewForm(request.POST, instance=review)
         if form.is_valid():
             form.save()
             messages.success(request, 'Your review was updated successfully!')
-            return redirect('shop:product_detail', id=product.id, slug=product.slug)
+            return redirect('shop:product_detail', id=product_id, slug=product_slug)
     else:
         form = ReviewForm(instance=review)
 

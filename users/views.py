@@ -60,7 +60,6 @@ def register(request):
             # Save the User object
             new_user.save()
              # Create the user profile
-            Profile.objects.create(user=new_user)
             return render(request,
                           'registration/register_done.html',
                           {'new_user': new_user})
@@ -128,7 +127,4 @@ def subscribe(request):
         subscribe_model_instance.save()
         messages.success(request, "Thank you for subscribing! " + f'{email}, You have successfully subscribed to our newsletter!')
         return redirect(request.META.get("HTTP_REFERER", "/"))
-
-
-# Edit profile 
 
