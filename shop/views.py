@@ -22,8 +22,12 @@ def home(request):
 
 
 def index(request):
-    """The ladning page"""
-    return render(request, 'shop/index.html')
+    products = Product.objects.all()
+    product_list = products[:3]  
+    context = {
+        'product_list': product_list,
+    }
+    return render(request, 'shop/index.html', context)
 
 
 def product_list(request, category_slug=None):
@@ -100,16 +104,6 @@ def newsletter(request):
     form.fields['receivers'].initial = ','.join(
         [active.email for active in SubscribedUsers.objects.all()])
     return render(request=request, template_name='shop/newsletter.html', context={'form': form})
-
-
-def category_carousel(request, category_id):
-    category = Category.objects.get(id=category_id)
-    products = Product.objects.filter(category=category)
-    context = {
-        'category': category,
-        'products': products
-    }
-    return render(request, 'category_carousel.html', context)
 
 
 @login_required

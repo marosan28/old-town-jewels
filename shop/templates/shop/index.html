@@ -9,20 +9,57 @@
     </div>
 
     <section class="py-5">
-        <div class="container my-5">
-            <div class="row justify-content-center">
-                <div class="col-lg-6">
-                    <h2>Your one-stop shop for all things sparkling and beautiful</h2>
-                    <p class="mb-0">
-                        Our online jewelry store offers a wide selection of
-                        hand-picked pieces from some of the most talented designers in the industry.
-                        From classic diamond engagement rings to trendy fashion jewelry,
-                        we have something for everyone. Our collection includes a range of styles,
-                        from modern and minimalist to vintage-inspired.</p>
+
+        <div class="col-md-9">
+            <div id="productCarousel" class="carousel slide" data-ride="carousel">
+              <div class="carousel-inner">
+                {% for product in product_list %}
+                <div class="carousel-item{% if forloop.first %} active{% endif %}">
+                  <a href="{% url 'users:login' %}" class="text-decoration-none">
+                    <img src="{% if product.image %}{{ product.image.url }}{% else %}{% static 'img/no_image.png' %}{% endif %}" class="d-block w-100" alt="product-image">
+                    <div class="carousel-caption">
+                      <h5>{{ product.name }}</h5>
+                      <p>{{ product.description|truncatewords:10 }}</p>
+                    </div>
+                  </a>
                 </div>
+                {% endfor %}
+              </div>
+              <a class="carousel-control-prev" href="#productCarousel" role="button" data-slide="prev">
+                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                <span class="sr-only">Previous</span>
+              </a>
+              <a class="carousel-control-next" href="#productCarousel" role="button" data-slide="next">
+                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                <span class="sr-only">Next</span>
+              </a>
             </div>
-        </div>
+                <h1 class="mt-5">{% if category %}{{ category.name }}{% else %}Products{% endif %}</h1>
+                <div class="row">
+                  {% for product in products %}
+                  <div class="col-md-4">
+                    <div class="card mb-4 shadow-sm">
+                      <img class="card-img-top" src="{% if product.image %}{{ product.image.url }}{% else %}{% static 'img/no_image.png' %}{% endif %}" alt="product-image">
+                      <div class="card-body">
+                        <h5 class="card-title">{{ product.name }}</h5>
+                        <p class="card-text">{{ product.description|truncatewords:10 }}</p>
+                        <div class="d-flex justify-content-between align-items-center">
+                          <div class="btn-group">
+                            <a href="{{ product.get_absolute_url }}" class="btn btn-sm btn-outline-secondary"><i class="fas fa-eye"></i> View</a>
+                          </div>
+                          <small class="text-muted">€{{ product.price }}</small>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  {% endfor %}
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
     </section>
+    
     <div class="second-img">
         <div class="py-5 bg-image-full"
             style="background-image: url('https://res.cloudinary.com/dd9o1h7oh/image/upload/v1674638886/edgar-soto-gb0BZGae1Nk-unsplash_pitob7_1_yvh54e.jpg')">
