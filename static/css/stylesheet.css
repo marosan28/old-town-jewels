@@ -299,6 +299,10 @@ button.btn  {
 .form-title {
     margin-bottom: 20px;
 }
+
+.carousel-caption {
+    color: black!important;
+}
 /*------------Footer----------------*/
 
 
