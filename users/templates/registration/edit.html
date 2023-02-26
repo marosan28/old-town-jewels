@@ -8,31 +8,32 @@
       <div class="card">
         <div class="card-header">{{ user.username }}'s Profile</div>
         <div class="card-body">
-
           <form method="post" enctype="multipart/form-data">
             {% csrf_token %}
             <div class="form-group">
-              {{ user_form.username.label_tag }}
+              <label for="{{ user_form.username.id_for_label }}">Username:</label>
               {{ user_form.username }}
             </div>
             <div class="form-group">
-              {{ user_form.first_name.label_tag }}
+              <label for="{{ user_form.first_name.id_for_label }}">First name:</label>
               {{ user_form.first_name }}
             </div>
             <div class="form-group">
-              {{ user_form.last_name.label_tag }}
+              <label for="{{ user_form.last_name.id_for_label }}">Last name:</label>
               {{ user_form.last_name }}
             </div>
             <div class="form-group">
-              {{ user_form.email.label_tag }}
+              <label for="{{ user_form.email.id_for_label }}">Email:</label>
               {{ user_form.email }}
             </div>
             <div class="form-group">
-              {{ profile_form.date_of_birth.label_tag }}
+              <label for="{{ profile_form.date_of_birth.id_for_label }}">Date of birth:</label>
               {{ profile_form.date_of_birth }}
             </div>
             <button type="submit" class="btn btn-primary btn-block">Save Changes</button>
           </form>
+          <hr>
+          <p class="text-muted">Want to change your password? <a href="{% url 'users:password_change' %}">Click here</a></p>
         </div>
       </div>
     </div>
