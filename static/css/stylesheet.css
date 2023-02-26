@@ -354,6 +354,21 @@ button.btn  {
     color: rgb(167, 166, 166);
     text-align: center;
 }
+.image-with-centered-text {
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+    margin-bottom: 20px
+}
+.banner-bottom {
+    color: white;
+}
+.instagram-icon {
+    font-size: 2rem;
+    color: black;
+    text-align: center;
+}
+
 /*------------Footer----------------*/
 
 
