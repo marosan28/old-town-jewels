@@ -339,7 +339,21 @@ button.btn  {
     font-size: 12px;
 
 }
+.image-bg-with-button {
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+    margin-bottom: 20px;
+}
 
+.img-button {
+    margin-top: 20px;
+}
+.banner-black {
+    background-color: black;
+    color: rgb(167, 166, 166);
+    text-align: center;
+}
 /*------------Footer----------------*/
 
 
