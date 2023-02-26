@@ -17,6 +17,7 @@ from shop import views as shop_views
 from django.contrib import admin
 from django.urls import path, include
 from .views import handler404
+from . import views
 
 
 urlpatterns = [
@@ -28,6 +29,5 @@ urlpatterns = [
     path('coupons/', include('coupons.urls', namespace='coupons')),
     path('tinymce/', include('tinymce.urls')),
     path('', include('shop.urls', namespace='shop')),
+    path('404/', views.handler404, name='handler404'),
 ]
-
-handler404 = "myshop.views.handler404"
