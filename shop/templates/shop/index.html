@@ -7,10 +7,47 @@
     <div class="py-5 bg-image-full"
         style="background-image: url('https://res.cloudinary.com/dd9o1h7oh/image/upload/v1677369718/hero-image_1_wa8wl9.jpg')">
     </div>
+    <div class="bg-pink d-flex justify-content-center">
+        <div class="row w-100 m-0">
+            <div class="col-md-4 text-center bg-light-pink">
+                <p class="banner-middle"> <strong>HANDCRAFTED</strong> <br> Discover our collection of jewelry,
+                    handcrafted with love and care.</p>
+            </div>
+            <div class="col-md-4 text-center bg-medium-pink">
+                <p class="banner-middle"> <strong>GIFTS</strong> <br> Check out our curated selection of gift sets.</p>
+            </div>
+            <div class="col-md-4 text-center bg-dark-pink">
+                <p class="banner-middle"><strong>Special Offers</strong><br>Subscribe to our newsletter for exclusive
+                    offers.</p>
+            </div>
+        </div>
+    </div>
+    <section class="py-5">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-6 text-center">
+                    <img src="https://res.cloudinary.com/dd9o1h7oh/image/upload/v1677426820/model-demonstrating-earrings_1_1_u2ut7w.jpg"
+                        class="img-fluid mb-4" alt="Left image">
+                    <h2> <strong> SHOP OUR LATEST COLLECTION </strong></h2>
+                    <p class="text-muted">Discover our latest collection of beautiful, handcrafted jewelry. Each piece is carefully
+                        designed and made with high-quality materials to ensure both style and durability. Whether
+                        you're looking for something bold and statement-making or delicate and understated, we have
+                        something for everyone. Shop now to find your new favorite piece. </p>
+                        <div class="text-center">
+                    <a href="{% url 'users:login' %}" class="btn btn-primary">Shop Now</a></div>
+                </div>
+                <div class="col-md-6">
+                    <img src="https://res.cloudinary.com/dd9o1h7oh/image/upload/v1677426701/young-brunette-model-demonstrating-jewelry_1_1_bebmak.jpg"
+                        class="img-fluid" alt="Right image">
+                </div>
+            </div>
+        </div>
+    </section>
 
-    <section class="py-5 bg-light">
-        <div class="container d-flex justify-content-center">
-            <h1>Product Highlights</h1>
+    <section class="py-5 bg-pink">
+        <div class="text-center">
+            <strong>
+            <h2 class="banner-new">WHAT'S NEW | DIAMOND COLLECTION </h2></strong>
         </div>
         <div class="container">
             <div class="row justify-content-center">
@@ -23,7 +60,9 @@
                                     <img src="{% if product.image %}{{ product.image.url }}{% else %}{% static 'img/no_image.png' %}{% endif %}"
                                         class="d-block w-100" alt="{{ product.name }} Image">
                                     <div class="carousel-caption">
-                                        <strong><h5>{{ product.name }}</h5></strong>
+                                        <strong>
+                                            <h5>{{ product.name }}</h5>
+                                        </strong>
                                         <p>{{ product.description|truncatewords:10 }}</p>
                                     </div>
                                 </a>
@@ -48,8 +87,9 @@
                                     src="{% if product.image %}{{ product.image.url }}{% else %}{% static 'img/no_image.png' %}{% endif %}"
                                     alt="{{ product.name }} Image">
                                 <div class="card-body">
-                                <strong>
-                                    <h5 class="card-title">{{ product.name }}</h5></strong>
+                                    <strong>
+                                        <h5 class="card-title">{{ product.name }}</h5>
+                                    </strong>
                                     <p class="card-text">{{ product.description|truncatewords:10 }}</p>
                                     <div class="d-flex justify-content-between align-items-center">
                                         <div class="btn-group">

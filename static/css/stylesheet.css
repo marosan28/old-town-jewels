@@ -274,13 +274,22 @@ select#id_quantity {
     color: #fff;
   }
   
+.btn.btn-primary {
+    background-color: pink;
+    color: black;
+}
 button.btn  {
     background-color: pink;
     color: black;
     margin: 20px;
 }
-
-
+.banner-new {
+    letter-spacing: 1px;
+    text-decoration: double;
+}
+.py-5.bg-pink {
+    background-color: pink;
+}
 .neg {
     color: #dc1616;
 }
@@ -301,8 +310,36 @@ button.btn  {
 }
 
 .carousel-caption {
-    color: black!important;
+    color: gray!important;
 }
+
+.bg-medium-pink, .bg-dark-pink, .bg-light-pink {
+    height: 50px;
+}
+
+.bg-light-pink {
+    background-color: #FFC2C2;
+  }
+  
+  .bg-medium-pink {
+    background-color: #FF9AA2;
+  }
+  
+  .bg-dark-pink {
+    background-color:#e49191;
+  }
+
+.banner1 .col-md-4 {
+    padding: 1rem;
+  }
+  .banner1 h2, .banner1 p {
+    font-size: 14px;
+  }
+.banner-middle {
+    font-size: 12px;
+
+}
+
 /*------------Footer----------------*/
 
 
