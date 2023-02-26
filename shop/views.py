@@ -11,6 +11,10 @@ from django.contrib.auth.decorators import login_required
 from users.models import Profile
 
 
+def error_404(request, exception):
+    return render(request, 'shop/404.html', status=404)
+
+
 def home(request):
     category_slug = None
     products = product_list(request, category_slug)
@@ -157,6 +161,7 @@ def delete_review(request, product_id, product_slug, review_id):
     review.delete()
     messages.success(request, 'Your review was deleted successfully!')
     return redirect('shop:product_detail', id=product_id, slug=product_slug)
+
 
 
 
