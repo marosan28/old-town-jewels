@@ -63,7 +63,20 @@ a.button.light {
 }
 
 /* navbar */
+.banner {
+    background-color: pink;
+    font-size: 16px;
+    color: #333;
+    text-align: center;
+    padding: 10px;
+    position: relative;
+    overflow: hidden;
+  }  
 
+
+img.brand-logo {
+    height: 50px;
+}
 .navbar-brand {
     margin: 0 auto;
 }
