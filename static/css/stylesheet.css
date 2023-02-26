@@ -193,35 +193,15 @@ form p input {
     padding-top: 4px;
 }
 
-#sidebar {
-    width: inherit;
-    padding: 30px 20px 0 0;
-}
-
-#sidebar ul {
-    margin: 0;
-    padding: 0;
-}
-
-#sidebar ul li {
-    margin: 0;
-    list-style: none;
-    padding: 10px 14px;
-}
-
-
-#sidebar ul li a {
-    display: block;
-}
-
-#sidebar ul li.selected {
-    background: #111;
-    border-radius: 4px;
-}
-
 #sidebar ul li.selected a {
-    color: #fff;
+  color: gray;
 }
+.list-group-item.active {
+    color: black!important;
+    background-color: pink!important;
+    border-color: grey!important;
+}
+
 span.product-description {
     margin-top: 10px;
     display: flex;
