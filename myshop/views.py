@@ -1,3 +1,6 @@
 from django.shortcuts import render
-def page_not_found_view(request, exception):
-    return render(request, '404.html', status=404)
+
+def handler404(request, exception):
+    """ Error Handler 404 - Page Not Found """
+    print("Hello")
+    return render(request, "404.html", status=404)

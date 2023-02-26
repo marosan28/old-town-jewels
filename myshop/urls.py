@@ -16,6 +16,7 @@ Including another URLconf
 from shop import views as shop_views
 from django.contrib import admin
 from django.urls import path, include
+from .views import handler404
 
 
 urlpatterns = [
@@ -28,4 +29,5 @@ urlpatterns = [
     path('tinymce/', include('tinymce.urls')),
     path('', include('shop.urls', namespace='shop')),
 ]
-handler404 = "myshop.views.page_not_found_view"
+
+handler404 = "myshop.views.handler404"

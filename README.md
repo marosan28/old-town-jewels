@@ -384,9 +384,21 @@ Desktop Testing with Google Lightouse
 Mobile Testing with Google Lighthouse
 ![App Screenshot](static/images/features/lighthouse-mobile.png)
 
-# Bugs-found
+## Bugs Found
 
-Currently no bugs have been found on this project. 
+### Criterion 1.2
+- **Issue:** Insufficient feedback is relayed to the user in the event of successful and failed payment attempts. Confirmation e-mails are not sent on successful purchases.
+- **Status:** Fixed
+
+## Changes Made
+### Criterion 1.2
+- Added payment information on the payment_completed page after a successful payment.
+
+![App Screenshot](static/images/features/payment-confirmed.png)
+
+- Improved feedback to users on payment attempts by displaying relevant information such as payment method, transaction ID, and date. 
+
+- Added email functionality using SMTP to send confirmation emails to users on successful purchases.
 
 # Deployment
 

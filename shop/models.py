@@ -20,7 +20,7 @@ class Category(models.Model):
         verbose_name = 'category'
         verbose_name_plural = 'categories'
     def __str__(self):
-        return self.name
+        return str(self.name)
 
 
     def get_absolute_url(self):
@@ -50,13 +50,12 @@ class Product(models.Model):
             models.Index(fields=['-created']),
         ]
     def __str__(self):
-        return self.name
+        return str(self.name)
     
 
     def get_absolute_url(self):
         return reverse('shop:product_detail',
                        args=[self.id, self.slug])
-
 
 
 class Review(models.Model):
@@ -73,13 +72,3 @@ class Review(models.Model):
         indexes = [
             models.Index(fields=['created']),
         ]
-
-
-
-
-
-
-
-
-
-
