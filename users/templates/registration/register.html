@@ -5,33 +5,35 @@
 
 {% block content %}
 <div class="container my-5">
-  <div class="row justify-content-center align-items-center">
-    <div class="col-md-6">
-      <div class="card border-0">
-        <div class="card-header bg-white border-0 text-center">
-          <h2 class="card-title mb-0">
-            Create an account
-          </h2>
-        </div>
-        <div class="card-body">
-          <form method="post" class="form">
+	<div class="row justify-content-center align-items-center">
+		<div class="col-md-6">
+			<div class="card border-0">
+				<div class="card-header bg-white border-0 text-center">
+					<h2 class="card-title mb-0">
+						Create an account
+					</h2>
+				</div>
+				<div class="card-body">
+					<form method="post" class="form">
 
-            {% csrf_token %}
-            {{ user_form|crispy }}
-            <div class="form-group mt-4">
-              <button name="submit" class="btn btn-primary btn-block" type="submit">Create my account</button>
-            </div>
-          </form>
-          <hr class="mt-4 mb-4">
-          <p class="text-center mb-0">
-            Already have an account? <a href="{% url 'users:login' %}">Log In</a>
-          </p>
-        </div>
-      </div>
-    </div>
-    <div class="col-md-6">
-      <img src="https://res.cloudinary.com/dd9o1h7oh/image/upload/v1677436410/young-model-demonstrating-golden-necklace_1_1_qj4skr.jpg" class="img-fluid">
-    </div>
-  </div>
+						{% csrf_token %}
+						{{ user_form|crispy }}
+						<div class="form-group mt-4">
+							<button name="submit" class="btn btn-primary btn-block" type="submit">Create my
+								account</button>
+						</div>
+					</form>
+					<hr class="mt-4 mb-4">
+					<p class="text-center mb-0">
+						Already have an account? <a href="{% url 'users:login' %}">Log In</a>
+					</p>
+				</div>
+			</div>
+		</div>
+		<div class="col-md-6">
+			<img src="https://res.cloudinary.com/dd9o1h7oh/image/upload/v1677436611/young-model-demonstrating-golden-necklace_1_1_jiboh4.jpg"
+				class="img-fluid">
+		</div>
+	</div>
 </div>
 {% endblock %}
