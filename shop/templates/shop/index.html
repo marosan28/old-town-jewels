@@ -22,7 +22,7 @@
             </div>
         </div>
     </div>
-    <div class="py-5">
+    <section class="py-5">
         <div class="container">
             <div class="row">
                 <div class="col-md-6 text-center">
@@ -43,13 +43,15 @@
                 </div>
             </div>
         </div>
-    </div>
+    </section>
     <div class="banner-black">
         Use code <span class="code">FEBRUARY50</span> 50% OFF EVERYTHING. HURRY! OFFER LASTS TILL THE END OF FEBRUARY.
     </div>
-    <div class="py-5 bg-pink">
+    <section class="py-5 bg-pink">
         <div class="text-center">
-            <h2 class="banner-new">WHAT'S NEW | DIAMOND COLLECTION </h2>
+            <strong>
+                <h2 class="banner-new">WHAT'S NEW | DIAMOND COLLECTION </h2>
+            </strong>
         </div>
         <div class="container">
             <div class="row justify-content-center">
@@ -62,9 +64,9 @@
                                     <img src="{% if product.image %}{{ product.image.url }}{% else %}{% static 'img/no_image.png' %}{% endif %}"
                                         class="d-block w-100" alt="{{ product.name }} Image">
                                     <div class="carousel-caption">
-                                       
+                                        <strong>
                                             <h5>{{ product.name }}</h5>
-                                        
+                                        </strong>
                                         <p>{{ product.description|truncatewords:10 }}</p>
                                     </div>
                                 </a>
@@ -89,9 +91,9 @@
                                     src="{% if product.image %}{{ product.image.url }}{% else %}{% static 'img/no_image.png' %}{% endif %}"
                                     alt="{{ product.name }} Image">
                                 <div class="card-body">
-                                 
+                                    <strong>
                                         <h5 class="card-title">{{ product.name }}</h5>
-                                 
+                                    </strong>
                                     <p class="card-text">{{ product.description|truncatewords:10 }}</p>
                                     <div class="d-flex justify-content-between align-items-center">
                                         <div class="btn-group">
@@ -109,11 +111,11 @@
                 </div>
             </div>
         </div>
-    </div>
+    </section>
     <div class="banner-black">
         Use code <span class="code">FEBRUARY50</span> 50% OFF EVERYTHING. HURRY! OFFER LASTS TILL THE END OF FEBRUARY.
     </div>
-    <div class="py-5">
+    <section class="py-5">
         <div class="container">
             <div class="row">
                 <div class="col-md-6">
@@ -136,7 +138,7 @@
                 </div>
             </div>
         </div>
-    </div>
+    </section>
 
     <div class="bg-pink d-flex justify-content-center">
         <div class="row w-100 m-0">
@@ -151,13 +153,13 @@
         </div>
     </div>
 
-    <div class="py-5 bg-pink">
+    <section class="py-5 bg-pink">
         <div class="container">
             <div class="row">
                 <div class="col-md-4 d-flex flex-column justify-content-center">
                     <div class="image-with-centered-text"
                         style="background-image: url('https://res.cloudinary.com/dd9o1h7oh/image/upload/v1677435338/ot__jewels_xc0oyx.png'); min-height: 200px;">
-
+                        
                     </div>
                     <p style="text-align: center;">Never miss an offer and follow us on Instagram.</p>
                     <a href="https://www.instagram.com/ot__jewels/" class="btn btn-secondary mr-3"> FOLLOW US</a>
@@ -171,8 +173,8 @@
             </div>
         </div>
 
-    </div>
+    </section>
 
-</div>
 
-{% endblock %}
+
+    {% endblock %}
