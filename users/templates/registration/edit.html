@@ -1,6 +1,25 @@
 {% extends "shop/base.html" %}
+
 {% load static %}
 {% block subheader %} {% endblock %}
+
+{% block navDropdown %}
+  <li class="nav-item">
+    <a class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true"
+      aria-expanded="false">
+      <i class="fa fa-user"></i> Welcome, {{ user.username }}
+    </a>
+    <div class="dropdown-menu" aria-label="User menu">
+      <a class="dropdown-item" href="{% url 'users:edit' %}"><i class="fa fa-user-circle"></i> Edit Profile</a>
+      <div class="dropdown-divider"></div>
+      <a class="dropdown-item" href="{% url 'users:logout' %}"><i class="fa fa-sign-out"></i> Log Out</a>
+    </div>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link" href="{% url 'shop:home' %}">Shop</a>
+  </li>
+{% endblock %}
+
 {% block content %}
 <div class="container mt-5">
   <div class="row justify-content-center">

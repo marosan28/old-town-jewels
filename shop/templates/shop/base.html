@@ -44,13 +44,14 @@
     </button>
     <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
       <ul class="navbar-nav ml-auto">
+        {% block navDropdown %}
         {% if user.is_authenticated %}
         <li class="nav-item">
           <a class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true"
             aria-expanded="false">
             <i class="fa fa-user"></i> Welcome, {{ user.username }}
           </a>
-          <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+          <div class="dropdown-menu" aria-labelledby="navbarDropdown" role="menu">
             <a class="dropdown-item" href="{% url 'users:edit' %}"><i class="fa fa-user-circle"></i> Edit Profile</a>
             <div class="dropdown-divider"></div>
             <a class="dropdown-item" href="{% url 'users:logout' %}"><i class="fa fa-sign-out"></i> Log Out</a>
@@ -67,7 +68,10 @@
           <a class="nav-link" href="{% url 'users:register' %}">Register</a>
         </li>
         {% endif %}
+        {% endblock %}
       </ul>
+      
+      
     </div>
   </nav>
 
