@@ -154,7 +154,6 @@ USE_L10N = True
 USE_TZ = True
 
 
-
 AUTH_USER_MODEL = 'auth.User'
 
 # Static files (CSS, JavaScript, Images)
@@ -198,15 +197,6 @@ STRIPE_SECRET_KEY = os.environ.get('STRIPE_SECRET_KEY')
 STRIPE_API_VERSION = os.environ.get('STRIPE_API_VERSION')
 STRIPE_WEBHOOK_SECRET = os.environ.get('STRIPE_WEBHOOK_SECRET')
 
-# Celery and Rabbitmq settings
-
-BROKER_URL = os.environ.get("CLOUDAMQP_URL", "django://")
-BROKER_POOL_LIMIT = 1
-BROKER_CONNECTION_MAX_RETRIES = None
-
-CELERY_TASK_SERIALIZER = "json"
-CELERY_ACCEPT_CONTENT = ["json", "msgpack"]
-CELERYBEAT_SCHEDULER = 'djcelery.schedulers.DatabaseScheduler'
 
 
 # Email server configuration

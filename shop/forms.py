@@ -9,6 +9,7 @@ class NewsletterForm(forms.Form):
     receivers = forms.CharField()
     message = forms.CharField(widget=TinyMCE(), label="Email content")
 
+
 class ReviewForm(forms.ModelForm):
     class Meta:
         model = Review

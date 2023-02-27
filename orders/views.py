@@ -5,6 +5,7 @@ from .models import OrderItem, Order
 from .forms import OrderCreateForm
 from cart.cart import Cart
 
+
 def order_create(request):
     cart = Cart(request)
     if request.method == 'POST':
@@ -18,7 +19,8 @@ def order_create(request):
             request.session['address2'] = form.cleaned_data['address2']
             request.session['postal_code'] = form.cleaned_data['postal_code']
             request.session['city'] = form.cleaned_data['city']
-            request.session['shipping_country'] = form.cleaned_data['shipping_country']
+            request.session['shipping_country'] = \
+                form.cleaned_data['shipping_country']
             if cart.coupon:
                 order.coupon = cart.coupon
                 order.discount = cart.coupon.discount

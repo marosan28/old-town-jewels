@@ -515,4 +515,14 @@ button.btn-primary.edit{
         margin-top: 20px;
         font-size: x-large;
 }
+.btn.btn-primary {
+    margin-bottom: 10px;
+}
+h2 {
+    font-size: 1.5rem;
+}
+p {
+    font-size: small;
+}
+
 }

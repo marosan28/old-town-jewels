@@ -23,7 +23,7 @@ def home(request):
 
 def index(request):
     products = Product.objects.all()
-    product_list = products[:3]  
+    product_list = products[:3]
     context = {
         'product_list': product_list,
     }
@@ -44,6 +44,7 @@ def product_list(request, category_slug=None):
                    'categories': categories,
                    'products': products})
 
+
 @login_required
 def product_detail(request, id, slug):
     product = get_object_or_404(Product, id=id, slug=slug, available=True)
@@ -57,7 +58,8 @@ def product_detail(request, id, slug):
             review.product = product
             review.user = request.user
             review.save()
-            messages.success(request, 'Your review was submitted successfully!')
+            messages.success(
+                request, 'Your review was submitted successfully!')
             return redirect('shop:product_detail', id=id, slug=slug)
     else:
         if request.user.is_authenticated:
@@ -67,14 +69,17 @@ def product_detail(request, id, slug):
 
     rating_stars_list = []
     for review in reviews:
-        rating_stars = review_form.fields['rating'].widget.render('rating', review.rating)
+        rating_stars = review_form.fields['rating'].widget.render(
+            'rating', review.rating)
         rating_stars_list.append(rating_stars)
 
-    return render(request, 'shop/product/detail.html', {'product': product,
-                                                        'cart_product_form': cart_product_form,
-                                                        'reviews': reviews,
-                                                        'review_form': review_form,
-                                                        'rating_stars_list': rating_stars_list})
+    return render(request, 'shop/product/detail.html', {
+        'product': product,
+        'cart_product_form': cart_product_form,
+        'reviews': reviews,
+        'review_form': review_form,
+        'rating_stars_list': rating_stars_list
+    })
 
 
 def newsletter(request):
@@ -86,7 +91,11 @@ def newsletter(request):
             email_message = form.cleaned_data.get('message')
 
             mail = EmailMessage(
-                subject, email_message, f"Online Jewels <{request.user.email}>", bcc=receivers)
+                subject,
+                email_message,
+                f"Online Jewels <{request.user.email}>",
+                bcc=receivers
+            )
             mail.content_subtype = 'html'
 
             if mail.send():
@@ -103,7 +112,11 @@ def newsletter(request):
     form = NewsletterForm()
     form.fields['receivers'].initial = ','.join(
         [active.email for active in SubscribedUsers.objects.all()])
-    return render(request=request, template_name='shop/newsletter.html', context={'form': form})
+    return render(
+        request=request,
+        template_name='shop/newsletter.html',
+        context={'form': form}
+    )
 
 
 @login_required
@@ -118,18 +131,27 @@ def review_product(request, id, slug):
             review.product = product
             review.rating = int(request.POST['rating'])
             review.save()
-            messages.success(request, 'Your review was submitted successfully!')
-            return redirect('shop:product_detail', id=id, slug=slug)
+            messages.success(
+                request, 'Your review was submitted successfully!')
+            return redirect(
+                'shop:product_detail',
+                id=product_id,
+                slug=product_slug
+            )
+
     else:
         form = ReviewForm()
     reviews = product.reviews.filter(active=True)
     rating_stars_list = []
     for review in reviews:
-        rating_stars = form.fields['rating'].widget.render('rating', review.rating)
+        rating_stars = form.fields['rating'].widget.render(
+            'rating', review.rating)
         rating_stars_list.append(rating_stars)
 
-    context = {'product': product, 'form': form, 'reviews': reviews, 'rating_stars_list': rating_stars_list}
+    context = {'product': product, 'form': form,
+               'reviews': reviews, 'rating_stars_list': rating_stars_list}
     return render(request, 'shop/product/detail.html', context)
+
 
 @login_required
 def edit_review(request, product_id, product_slug, review_id):
@@ -141,12 +163,19 @@ def edit_review(request, product_id, product_slug, review_id):
         if form.is_valid():
             form.save()
             messages.success(request, 'Your review was updated successfully!')
-            return redirect('shop:product_detail', id=product_id, slug=product_slug)
+            return redirect(
+                'shop:product_detail',
+                id=product_id,
+                slug=product_slug
+            )
+
     else:
-        form = ReviewForm(instance=review, initial={'body': request.POST.get('body', '')})
+        form = ReviewForm(instance=review, initial={
+                          'body': request.POST.get('body', '')})
 
     context = {'form': form, 'product': product, 'review': review}
     return render(request, 'shop/edit_review.html', context)
+
 
 @login_required
 def delete_review(request, product_id, product_slug, review_id):
@@ -155,19 +184,3 @@ def delete_review(request, product_id, product_slug, review_id):
     review.delete()
     messages.success(request, 'Your review was deleted successfully!')
     return redirect('shop:product_detail', id=product_id, slug=product_slug)
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

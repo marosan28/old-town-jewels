@@ -23,7 +23,9 @@ def update_delivery_charge(request):
         delivery_charge = request.POST.get('delivery_charge', 0)
         request.session['delivery_charge'] = delivery_charge
         return JsonResponse({'message': 'Delivery charge updated in session'})
-    return JsonResponse({'message': 'Error updating delivery charge in session'})
+
+    return JsonResponse({'message':
+                         'Error updating delivery charge in session'})
 
 
 def payment_process(request, order_id):
@@ -36,8 +38,10 @@ def payment_process(request, order_id):
             'client_reference_id': order.id,
             'line_items': [],
             'mode': 'payment',
-            'success_url': request.build_absolute_uri(reverse('payment:completed')),
-            'cancel_url': request.build_absolute_uri(reverse('payment:canceled'))
+            'success_url': request.build_absolute_uri(
+                reverse('payment:completed')),
+            'cancel_url': request.build_absolute_uri(
+                reverse('payment:canceled'))
         }
 
         for item in order.items.all():
@@ -80,7 +84,10 @@ def payment_process(request, order_id):
         session = stripe.checkout.Session.create(**session_data)
         session_id = session.id
         request.session['order_id'] = order_id
-        return redirect('payment:payment_form', order_id=order_id, session_id=session_id)
+        return redirect('payment:payment_form',
+                        order_id=order_id,
+                        session_id=session_id)
+
     else:
         return render(request, 'payment/process.html', {'order': order})
 
@@ -110,7 +117,17 @@ def payment_completed(request):
                                   order_items, coupon_code, payment_method,
                                   transaction_id, order.email)
 
-    return render(request, 'payment/completed.html', {'order': order, 'delivery_charge': delivery_charge, 'total_cost': total_cost, 'order_items': order_items, 'coupon_code': coupon_code, 'payment_method': payment_method, 'transaction_id': transaction_id, 'payment_method_type': payment_method_type, 'payment_method_last4': payment_method_last4})
+    return render(request, 'payment/completed.html', {
+        'order': order,
+        'delivery_charge': delivery_charge,
+        'total_cost': total_cost,
+        'order_items': order_items,
+        'coupon_code': coupon_code,
+        'payment_method': payment_method,
+        'transaction_id': transaction_id,
+        'payment_method_type': payment_method_type,
+        'payment_method_last4': payment_method_last4
+    })
 
 
 def payment_canceled(request):
@@ -149,7 +166,6 @@ def payment_form(request, order_id, session_id):
         payment_intent = stripe.PaymentIntent.retrieve(payment_intent_id)
         customer_email = payment_intent.metadata.get('email')
     delivery_options = DeliveryOption.objects.all()
-    # Render the payment form with the client_secret and other necessary details
     return render(request, 'payment/payment_form.html', {
         'order_id': order_id,
         'payment_intent_id': payment_intent_id,
@@ -176,21 +192,35 @@ intent = stripe.PaymentIntent.create(
 client_secret = intent.client_secret
 
 
-def send_order_confirmation_email(order_id, delivery_charge, total_cost, order_items, coupon_code, payment_method_id, transaction_id, email):
+def send_order_confirmation_email(order_id, delivery_charge, total_cost,
+                                  order_items, coupon_code, payment_method_id,
+                                  transaction_id, email):
     order = Order.objects.get(id=order_id)
     subject = 'Order Confirmation'
-    message = f'Thank you for your order. Your order number is {order.id}. \n\n'
-    message += 'Order summary: \n'
+
+    message = f'Thank you for your order. Your order number is {order.id}.\n\n'
+    message += 'Order summary:\n'
+
     for item in order_items:
-        message += f'{item.product.name} x {item.quantity} - {item.price * item.quantity} \n'
-    message += f'Delivery charge: {delivery_charge} \n'
-    message += f'Total cost: {total_cost} \n'
+        item_total = item.price * item.quantity
+        item_summary = (
+            f'{item.product.name} x {item.quantity} - '
+            f'{item_total}\n'
+        )
+        message += item_summary
+
+    message += f'Delivery charge: {delivery_charge}\n'
+    message += f'Total cost: {total_cost}\n'
+
     if coupon_code:
-        message += f'Coupon code: {coupon_code} \n'
+        message += f'Coupon code: {coupon_code}\n'
+
     payment_method = stripe.PaymentMethod.retrieve(payment_method_id)
-    message += f'Payment method: {payment_method.card.brand} \n'
-    message += f'Transaction ID: {transaction_id} \n'
+    message += f'Payment method: {payment_method.card.brand}\n'
+    message += f'Transaction ID: {transaction_id}\n'
+
     from_email = settings.DEFAULT_FROM_EMAIL
     recipient_list = [email]
+
     send_mail(subject, message, from_email,
               recipient_list, fail_silently=False)
