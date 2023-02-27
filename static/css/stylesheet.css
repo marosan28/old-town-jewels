@@ -286,6 +286,7 @@ button.btn  {
 .banner-new {
     letter-spacing: 1px;
     text-decoration: double;
+    font-weight: bolder;
 }
 .py-5.bg-pink {
     background-color: pink;
