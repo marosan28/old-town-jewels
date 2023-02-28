@@ -8,7 +8,7 @@ Old Town Jewels is designed to be user-friendly and easy to navigate. The store 
 
 Whether you're looking for a special piece of jewellery for yourself or a gift for someone else, Old Town Jewels has something for everyone. We hope you enjoy shopping with us!
 
-![App Screenshot](static/images/am-i-responsive.png)
+![App Screenshot](static/images/responsive.png)
 
 [View the live project here](https://old-town-jewels.herokuapp.com/ "Link to deployed site - Old Town Jewels")
 
@@ -58,10 +58,20 @@ At Old Town Jewels, our goal is to provide an enjoyable and seamless shopping ex
 
 3. Secure checkout: We have implemented secure payment methods and encrypted data transmission to protect our customers' personal and financial information.
 
+### What's New
+
+4. User Profiles: Added User profiles for customers where they can modify their personal information, date of birth, name, email and also change a password.
+
+5. Reviews: Added reviews on each product where customers can rate the product themselves and see the average rating of each product. Users are allowed to modify/delete their c omments.
+
+6. User emails: Users are now getting emails after each completed order with their order summary, price and payment method.
+
 ## For Owner 
 1. Easy inventory management: We have provided tools for the owner to easily add, update, and delete products from the store's inventory.
 
 2. Detailed sales reports: The owner can access reports on sales data, including total revenue.
+
+3. Track payments: The owner can track payments on the admin dashboard and print a csv file of each order if desired.
 
 By following these strategies, we hope to create a positive user experience for our customers and encourage them to shop with us again in the future.
 
@@ -78,6 +88,7 @@ As the superuser of Old Town Jewels, I want to be able to:
 
 5. **Create and manage coupons**: I want to be able to create and manage coupons, including setting expiration dates and usage limits, and track their usage.
 
+
 By being able to perform these tasks, I can effectively manage and maintain the Old Town Jewels store.
 
 As a shopper at Old Town Jewels, I want to be able to:
@@ -90,7 +101,16 @@ As a shopper at Old Town Jewels, I want to be able to:
 
 4. **Apply coupons to my order**: I want to be able to enter a coupon code at checkout and have the discount applied to my order.
 
+### What's New
+
+5. **Log in and see my profile**: I want to be able to log in to the website, visit my profile and modify personal details.
+
+6. **Leave a review on the product, or check ratings of a product**: I want to be able to comment on a product, rate it and edit/delete the review. I want to see the average reviews of the selected product to help me bring a decision about buying.
+
+7. **Receive an email after purchase**: I want to receive an email after completing a purchase with my order summary, payment method, the amount I paid.
+
 By being able to perform these tasks, I can easily shop and make purchases at Old Town Jewels.
+
 
 # Scope
 
@@ -105,6 +125,22 @@ Customers can easily add items to their cart and complete their purchase securel
 
 # User Story 4: Apply coupons to my order
 Customers have the option to apply coupons to their orders at checkout by entering a coupon code.
+
+### What's new
+# User Story 5: User Profiles
+Customers can log in and view their profile. Customers are allowed to modify personal information including a password reset on the profile. 
+
+# User Story 6: Password Reset
+Customers can request a password reset and get an email with a link for a password change in case of a forgotten password. 
+
+# User Story 7: Reviews
+Customers are allowed to leave reviews on all products with a star rating, modify the reviews/delete accordingly. Customers are allowed to see the average rating of each product to help them make a decision before making a purchase.
+
+# User Story 8: Delivery
+Customers are allowed to add a delivery charge on their order. 
+
+# User Story 8: Payment Information
+Customers are getting a detailed overview of their purchase after successfull payments. All information is also forwareded onto the email address provided earlier in the checkout. 
 
 # Superuser
 
@@ -134,7 +170,8 @@ By providing these features, Old Town Jewels aims to create a positive shopping 
 
 # Structure
 
-This project is structured with a homepage with the website's logo and a message that greets the user with a clear navigation bar at the top of the page where the user can login or sign up. Old Town Jewels shop enables clients to browse products, add them to the cart, apply discount codes, go through the checkout process and pay with a credit a card.
+This project is structured with a homepage with the website's logo and a message that greets the user with a clear navigation bar at the top of the page where the user can login or sign up. When logging in user is allowed to request a email password reset in case of a forgotten password.
+After the User logs in he is able to visit his profile section and make modifications of his personal information, customer is also allowed to change his password while being logged in. Customers can inspect products and see average reviews on product details helping them make a decision while shopping. Customers are also allowed to leave their own comments and ratings below each product. Old Town Jewels shop enables clients to browse products, add them to the cart, apply discount codes, go through the checkout process and pay with a credit a card. After successfull payment has been made, customers are greeted with a message containing their order information, payment method, last 4 digits of the card they used on checkout, payment ID, date of purchase. The information is also forwarded to their emails. Additionally fully functional 404 error page has been added. 
 
 **The website is made of the following apps**:
 
@@ -145,41 +182,87 @@ This project is structured with a homepage with the website's logo and a message
 5. Orders
 6. Payment
 7. Shop
+8. Delivery
 
 ## Design
-The website was designed to be visually appealing and user-friendly, allowing for easy browsing and quick purchasing of desired items. To ensure an optimal layout, wireframes were created for various screen sizes including desktop, tablet, and mobile, and a limited color palette was utilized to maintain a cohesive appearance throughout the site.
+In addition to the visually appealing and user-friendly design, the website was also built with functionality in mind. The navigation menu was strategically placed to make it easy for users to find the products they are looking for. The search bar is prominently displayed to allow users to quickly search for specific products.
+
+To ensure a seamless user experience, the website was designed to be responsive, meaning that it can adapt to different screen sizes and devices, including desktops, laptops, tablets, and mobile phones. This was achieved through the use of fluid grids and flexible images, which allow the website to adjust to different screen sizes without sacrificing its overall design and functionality.
+
+To maintain a cohesive appearance throughout the site, a limited color palette was used, with careful consideration given to the colors chosen. This helps to ensure that the site looks professional and visually appealing, without overwhelming the user with too many colors and distracting elements.
+
+Overall, the website was designed with the user in mind, with the goal of creating a pleasant and intuitive shopping experience. The combination of a visually appealing design, user-friendly navigation, and responsive layout helps to achieve this goal, making the website an effective tool for selling products online.
+
 
 - ## Wireframes
 wireframes for the project were created using [Balsamiq](https://balsamiq.com/)
 
-Home Page 
+**Home Page**
+Hero Image
 
-![App Screenshot](static/images/home-page.png)
+![App Screenshot](static/images/hero-image.png)
+
+Section 1
+
+![App Screenshot](static/images/section-2.png)
+
+Section 2 
+
+![App Screenshot](static/images/section-3.png)
+
+Section 3
+
+![App Screenshot](static/images/section-4.png)
+
+Section 4 
+
+![App Screenshot](static/images/section-5.png)
+
+
 
 
 Login Page 
 
-![App Screenshot](static/images/log-in-page.png)
+![App Screenshot](static/images/log-in.png)
 
 Register Page 
 
-![App Screenshot](static/images/register-page.png)
+![App Screenshot](static/images/register.png)
+
+User Profile
+
+![App Screenshot](static/images/user-profile.png)
 
 Shop Page 
 
-![App Screenshot](static/images/shop-img.png)
+![App Screenshot](static/images/products.png)
 
 Product Detail Page
 
-![App Screenshot](static/images/detail-rpoduct.png)
+![App Screenshot](static/images/product-detail.png)
 
 Cart Detail Page
 
-![App Screenshot](static/images/checkout-image.png)
+![App Screenshot](static/images/shopping-cart.png)
 
-Pay Now Page
 
-![App Screenshot](static/images/pay-now.png)
+Order summary
+
+![App Screenshot](static/images/order-summary.png)
+
+Checkout Form
+
+![App Screenshot](static/images/checkout.png)
+
+Payment Form
+
+![App Screenshot](static/images/payment-form.png)
+
+Payment Confirmation
+
+![App Screenshot](static/images/payment-confirm.png)
+
+
 
 
 
@@ -215,6 +298,12 @@ Please note that the SQLite database will be created automatically when you run 
 The **Order** model has a one-to-many relationship with the **OrderItem** model, as defined by the ForeignKey field in the **OrderItem** model that references the **Order model**. The **Order** model also has a foreign key relationship with the **Coupon** model, which is a one-to-many relationship where one coupon can be used in multiple orders. The **Order** model has a get_total_cost_before_discount method that sums the cost of all associated **OrderItem** objects and a get_discount method that calculates a discount based on the discount field and the total cost before discount. The **Order** model also has a method get_stripe_url that returns a Stripe URL based on the stripe_id field. The **OrderItem** model has a one-to-one relationship with the **Product model**, as defined by the ForeignKey field in the **OrderItem** model that references the **Product model**, and it also has a method get_cost that calculates the cost of the item by multiplying the price and quantity fields.
 - **shop app**
 The **Category** model has a one-to-many relationship with the **Product model**, as defined by the ForeignKey field in the **Product** model that references the **Category model**. This means that one category can have multiple products associated with it. The **Category** model has a get_absolute_url method that returns the URL of a page that displays all products of that category. The **Product** model has a name, slug, image, description, price, available, created, and updated fields and a get_absolute_url method that returns the URL of the product detail page. Additionally, the **Product** model has a Meta class that contains the indexes, ordering and other metainformation about the model.
+
+**DeliveryOption model**: This model represents the delivery options available for the products. It has a name field that specifies the name of the delivery option, and a price field that specifies the delivery price. The price is stored as a decimal number with a maximum of 6 digits and 2 decimal places.
+
+**Profile model**: This model represents the user profile. It has a one-to-one relationship with the built-in User model in Django, as specified by the OneToOneField. The profile contains additional information about the user, such as their date of birth and alternate contact information. It has a get_absolute_url method that returns the URL of the user's profile detail page.
+
+**Review model**: This model represents the product reviews submitted by users. It has a foreign key relationship with the Product model, as defined by the ForeignKey field that references the Product model. It also has a foreign key relationship with the built-in User model in Django, as specified by the ForeignKey field that references the AUTH_USER_MODEL. The model includes a body field that contains the review text, a rating field that specifies the rating given by the user, and created and updated fields that record the date and time the review was created or last updated. The active field is a Boolean field that indicates whether the review is currently active or not. The Review model also has a Meta class that specifies the ordering and indexing options for the model.
 
 # Marketing Strategies
 
@@ -271,29 +360,68 @@ meta name="description"
 Users are able to easily subscribe to the monthly newsletter at the bottom of the site. 
 
 # Features
-Navigation bar with log in and register options to make it easy for users to log in/register as soon as they visit the site.
-![App Screenshot](static/images/features/nav%20bar.png)
 
-Minimalistic Design of a front page with accentuations on important parts (coupons)
-![App Screenshot](static/images/features/front.png)
+Landing Page
 
-Footer with all the social media and the name and year of the page which manually updates with the current year so is always up to date.
-![App Screenshot](static/images/features/footer.png)
+![App Screenshot](static/images/features/hero-main.png)
+![App Screenshot](static/images/features/sectiona.png)
+![App Screenshot](static/images/features/sectionb.png)
+![App Screenshot](static/images/features/sectionc.png)
+![App Screenshot](static/images/features/sectiond.png)
 
-Users can subscribe to newsletter.
-![App Screenshot](static/images/features/newsletter.png)
+Log in 
 
-After logging ing, users are able to browse the store and pick products to add them to cart. 
-![App Screenshot](static/images/features/browse.png)
+![App Screenshot](static/images/features/log-in.png)
 
-After logging ing, users are able to browse the store and pick products to add them to cart. 
-![App Screenshot](static/images/features/browse.png)
 
-Users can update and delete cart
-![App Screenshot](static/images/features/cart.png)
+Register
 
-Users can safely checkout
-![App Screenshot](static/images/features/checkout.png)
+![App Screenshot](static/images/features/register.png)
+
+Edit Profile
+
+![App Screenshot](static/images/features/edit-profile.png)
+
+Change Password
+
+![App Screenshot](static/images/features/change-password.png)
+![App Screenshot](static/images/features/pass-changed.png)
+
+Forgotten password
+
+![App Screenshot](static/images/features/forgot-password.png)
+![App Screenshot](static/images/features/email-sent.png)
+![App Screenshot](static/images/features/followed-link.png)
+
+Shop Products
+
+![App Screenshot](static/images/features/products.png)
+
+CRUD Reviews
+
+![App Screenshot](static/images/features/detailproduct.png)
+![App Screenshot](static/images/features/average-review-count.png)
+![App Screenshot](static/images/features/submitted-review.png)
+![App Screenshot](static/images/features/review-updated.png)
+![App Screenshot](static/images/features/edit-review-message.png)
+![App Screenshot](static/images/features/delete-review.png)
+
+Shopping Cart
+
+![App Screenshot](static/images/features/shopping-cart.png)
+![App Screenshot](static/images/features/applied-coupon.png)
+![App Screenshot](static/images/features/order-summary.png)
+
+Checkout and Payment
+
+![App Screenshot](static/images/features/checkout-form.png)
+![App Screenshot](static/images/features/checkout-form.png)
+![App Screenshot](static/images/features/stripe-form.png)
+![App Screenshot](static/images/features/stripe-form2.png)
+![App Screenshot](static/images/features/payment-confirmation.png)
+
+
+
 
 # Technologies Used
 
