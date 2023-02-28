@@ -829,6 +829,27 @@ Mobile Testing with Google Lighthouse
 ### Criterion 1.2
 - **Issue:** Insufficient feedback is relayed to the user in the event of successful and failed payment attempts. Confirmation e-mails are not sent on successful purchases.
 - **Status:** Fixed
+### Criterion 1.6
+- **Issue:** Code does not pass validation tools, indicating it may not adhere to best practices and standards for clean code.
+- **Status:** In Progress
+### Criterion 1.9
+- **Issue:** Custom logic is limited to expansions on core logic from course walkthrough projects.
+- **Status:** Fixed
+### Criterion 1.12
+- **Issue:**  Only two custom data models were created, falling short of the requirement to create at least three.
+- **Status:** Fixed
+### Criterion 1.13
+- **Issue:**  No CRUD functionality is implemented in the project.
+- **Status:** Fixed
+### Criterion 1.16
+- **Issue:**  Sensitive information exists in the code base and/or DEBUG mode is turned on.
+- **Status:** Fixed
+### Criterion 3.7
+- **Issue:**  404 page not functional
+- **Status:** Fixed
+### Criterion 4.6
+- **Issue:**  No frontend CRUD functionality
+- **Status:** Fixed
 
 ## Changes Made
 ### Criterion 1.2
@@ -840,7 +861,43 @@ Mobile Testing with Google Lighthouse
 
 - Added email functionality using SMTP to send confirmation emails to users on successful purchases.
 
+### Criterion 1.6
+- Conducted a thorough code review to identify areas of improvement.
+- Refactored code to adhere to best practices and standards for clean code, such as improving variable naming, reducing redundant code, and implementing consistent coding style.
+- Used linting tools such as PEP8 to identify and fix code style issues.
+- Made use of comments to improve code readability and maintainability.
+- Continuously monitored and evaluated code to ensure it adheres to clean code principles.
+Please refer to [testing section](##Testing) for more information.
 
+### Criterion 1.9
+- Demonstrated proficiency in Python by adding custom models to the project beyond those covered in course walkthrough projects.
+- Added two custom models to the project, expanding on core logic and functionality.
+- Successfully implemented the custom models by integrating them with existing views and templates, and ensuring that all database migrations were applied correctly.
+- Implemented custom authentication and authorization logic using Django's built-in User model
+- Continuously monitored and optimized the custom models to ensure they adhere to clean code principles and perform efficiently.
+
+### Criterion 1.12
+- Created three additional custom data models beyond the initial two, meeting the minimum requirement of three.
+- Added a DeliveryOption model to allow users to select from different delivery options with varying prices.
+- Implemented a UserProfile model to store additional user information such as date of birth and alternate address.
+- Created a Review model to allow users to leave reviews for products they have purchased.
+
+
+### Criterion 1.13
+- Implemented CRUD functionality in the Reviews model by allowing users to create, read, update, and delete reviews for products.
+- Created a form for users to submit reviews and displayed reviews on the product detail page.
+- Added functionality for users to edit and delete their own reviews.
+
+### Criterion 1.16
+- DEBUG set to development. All secret keys and links moved to env.py.
+
+### Criterion 3.7
+- 404.html page implemented and fully functional
+
+![App Screenshot](static/images/testing/404-page.png)
+
+### Criterion 4.6
+- CRUD functionality fully implemented in the Reviews model for frontend users. 
 
 # Deployment
 
