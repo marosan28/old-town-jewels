@@ -51,7 +51,7 @@
             aria-expanded="false">
             <i class="fa fa-user"></i> Welcome, {{ user.username }}
           </a>
-          <div class="dropdown-menu" aria-labelledby="navbarDropdown" role="menu">
+          <div class="dropdown-menu" aria-label="navbarDropdown" role="menu">
             <a class="dropdown-item" href="{% url 'users:edit' %}"><i class="fa fa-user-circle"></i> Edit Profile</a>
             <div class="dropdown-divider"></div>
             <a class="dropdown-item" href="{% url 'users:logout' %}"><i class="fa fa-sign-out"></i> Log Out</a>

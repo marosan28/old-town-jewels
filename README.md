@@ -496,9 +496,6 @@ Checkout and Payment
 ![App Screenshot](static/images/features/stripe-form2.png)
 ![App Screenshot](static/images/features/payment-confirmation.png)
 
-
-
-
 # Technologies Used
 
 ### Languages Used
@@ -531,23 +528,262 @@ Checkout and Payment
 
 ## Manual Testing
 
-|  Test Label                                   | Action         | Expected Outcome                                          | Test Outcome  |
-|-----------------------------------------------|----------------|-----------------------------------------------------------|---------------|
-|    Register Button                            | Page load      |  Visible on homepage                                      | PASS          |
-|    Login button in navigation bar             | Page load      |  Visible on homepage                                      | PASS          |
-|    Login functionality                        | User input     |  Successful login redirects to homepage                   | PASS          |
-|    Logout functionality                       | User input     |  Successful logs out and redirects to homepage            | PASS          |
-|    User greeting in navbar                    | User input     |  Correctly displays "Hello, [username]"	                 | PASS          |
-|    Shop link                                  | User input     |  Opens shop products                                      | PASS          |
-|    Categories                                 | User input     |  Displays refined categories                              | PASS          |
-|    Product details                            | User input     |  Displays product details on the page                     | PASS          |
-|    Quantity                                   | User input     |  User can select the quantity and update susccessfully    | PASS          |
-|    Add to cart button                         | User input     |  Product successfully updates the cart                    | PASS          |
-|    Checkout                                   | User input     |  Product successfully updates the cart                    | PASS          |
-|    Apply a coupon                             | User input     |  Coupon applies successfully to the cart                  | PASS          |
-|    Continue Shopping Button                   | User input     |  Redirects to products categories                         | PASS          |
-|    Checkout button                            | User input     |  Correctly displays form after clicking                   | PASS          |
-|    Pay now button                             | User input     |  Correctly displays form after clicking                   | PASS          |
+## Testing
+
+### Login Functionality
+
+**What the page is supposed to do:** The login page should allow users to enter their credentials and log in to the website. After logging in, they should be redirected to the home page.
+
+**What we observed:** We tested the login functionality by entering valid and invalid credentials. We observed that when we entered valid credentials, we were redirected to the home page as expected.
+
+### Shopping Cart Functionality
+
+**What the page is supposed to do:** The shopping cart page should display all the items that the user has added to their cart and allow them to update or remove items as needed. The page should also display the total cost of the items in the cart.
+
+**What we observed:** We tested the shopping cart functionality by adding and removing items to the cart and updating the quantity of items in the cart. We observed that the cart updated correctly and displayed the correct total cost of the items.
+
+### Checkout Functionality
+
+**What the page is supposed to do:** The checkout page should allow users to enter their personal and shipping information, as well as any coupon codes they have. The page should also display a summary of the user's order and the total cost.
+
+**What we observed:** We tested the checkout functionality by entering valid and invalid information. We observed that when we entered valid information, we were able to submit the form and were redirected to the payment page. However, when we entered invalid information, the form did not submit and we were shown error messages.
+
+### Payment Functionality
+
+**What the page is supposed to do:** The payment page should allow users to enter their credit card information and billing address, as well as select a delivery option. After submitting the form, users should be shown a confirmation page with the details of their order and payment.
+
+**What we observed:** We tested the payment functionality by entering valid and invalid information. We observed that when we entered valid information, we were able to submit the form and were redirected to the confirmation page. However, when we entered invalid information, the form did not submit and we were shown error messages.
+
+## Troubleshooting 
+
+Scenario 1: Adding a product to the cart
+  - User navigates to the product page
+  - User selects the quantity and clicks "Add to cart"
+  - The product is successfully added to the cart
+  - Expected behavior: The cart icon in the navbar shows the number of items in the cart
+
+Scenario 2: Applying a coupon code
+  - User navigates to the cart page
+  - User enters a valid coupon code and clicks "Apply"
+  - The discount is applied to the total price
+  - Expected behavior: The total price reflects the discount and the coupon code is shown in the order summary
+
+Scenario 3: Removing a product from the cart
+  - User navigates to the cart page
+  - User clicks the "Remove" button next to a product
+  - The product is successfully removed from the cart
+  - Expected behavior: The total price and the number of items in the cart are updated
+
+Scenario 4: Updating the quantity of a product in the cart
+  - User navigates to the cart page
+  - User changes the quantity of a product and clicks "Update"
+  - The quantity is successfully updated in the cart
+  - Expected behavior: The total price and the number of items in the cart are updated
+
+**Error**: When the user is adding a product to the cart, the quantity is not being updated.
+
+**Solution**: After checking the Cart model, it was found that the add_product method was not updating the quantity when the product is already in the cart. This was fixed by updating the add_product method to increase the quantity when the product is already in the cart.
+  
+Scenario 5: Completing the checkout process
+  - User navigates to the checkout page
+  - User enters their personal and shipping information
+  - User enters their payment information and clicks "Pay"
+  - The payment is successfully processed and the order is created
+  - Expected behavior: The user is redirected to the payment confirmation page and receives an email confirmation
+
+**Error**: When the user submits the checkout form, the email is not being saved.
+
+**Solution**: It was found that the email field was not added in the Order model. After adding the email field in the Order model and updating the checkout view to save the email, the email started being saved.
+
+Scenario 6: Updating user profile information
+
+- User logs in to their account
+- User navigates to their profile page
+- User updates their personal information such as their email address, password, or date of birth
+- User clicks the "Save Changes" button
+- If the form is valid, the changes are saved and the user is redirected to their updated profile page
+- If there are errors in the form, the user is shown an error message and asked to correct the fields with errors
+
+Scenario 7: Adding a new product to the website
+
+- Admin logs in to the website admin panel
+- Admin navigates to the "Products" section and clicks "Add Product"
+- Admin enters the product information such as name, description, and price
+- Admin uploads product images and assigns categories and tags to the product
+- Admin clicks "Save" to create the new product
+- The new product is added to the website and is visible to users on the product listing page
+
+Scenario 8: Editing an existing product on the website
+
+- Admin logs in to the website admin panel
+- Admin navigates to the "Products" section and selects the product they want to edit
+- Admin makes changes to the product information such as name, description, or price
+- Admin uploads new product images or deletes existing ones
+- Admin clicks "Save" to update the product
+- The updated product information is reflected on the website and visible to users who view the product page
+
+Scenario 9: Deleting a product from the website
+
+- Admin logs in to the website admin panel
+- Admin navigates to the "Products" section and selects the product they want to delete
+- Admin clicks the "Delete" button and confirms that they want to delete the product
+- The product is removed from the website and is no longer visible to users on the product listing page
+
+
+## Code Testing 
+
+The Python code was tested using the Code Institute's PEP8 linter to ensure compliance with Python coding standards.
+The linter was configured to report errors and warnings for all files in the project.
+The linter was run before committing any changes to the codebase to ensure that no new issues were introduced.
+All reported issues were reviewed and fixed as necessary to ensure clean, readable code.
+
+## Cart App
+
+cart.py
+
+![App Screenshot](static/images/testing/cart.png)
+
+context_processors.py
+
+![App Screenshot](static/images/testing/context_processors.png)
+
+forms.py
+
+![App Screenshot](static/images/testing/forms.png)
+
+urls.py
+
+![App Screenshot](static/images/testing/urls.png)
+
+views.py
+
+![App Screenshot](static/images/testing/views.png)
+
+## Coupons App
+
+admin.py
+
+![App Screenshot](static/images/testing/coupons/admin.png)
+
+
+apps.py
+
+![App Screenshot](static/images/testing/coupons/apps.png)
+
+forms.py
+
+![App Screenshot](static/images/testing/coupons/forms.png)
+
+models.py
+
+![App Screenshot](static/images/testing/coupons/models.png)
+
+
+urls.py
+
+![App Screenshot](static/images/testing/coupons/urls.png)
+
+views.py
+
+![App Screenshot](static/images/testing/coupons/views.png)
+
+## Delivery App
+
+admin.py
+
+![App Screenshot](static/images/testing/delivery/admin.png)
+
+apps.py
+
+![App Screenshot](static/images/testing/delivery/apps.png)
+
+models.py
+
+![App Screenshot](static/images/testing/delivery/models.png)
+
+## Myshop App
+
+urls.py
+
+![App Screenshot](static/images/testing/myshop/urls.png)
+
+views.py
+
+![App Screenshot](static/images/testing/myshop/views.png)
+
+
+## Orders App
+
+admin.py
+
+![App Screenshot](static/images/testing/orders/admin.png)
+
+apps.py
+
+![App Screenshot](static/images/testing/orders/apps.png)
+
+forms.py
+
+![App Screenshot](static/images/testing/orders/forms.png)
+
+models.py
+
+![App Screenshot](static/images/testing/orders/models.png)
+
+urls.py
+
+![App Screenshot](static/images/testing/orders/urls.png)
+
+views.py
+
+![App Screenshot](static/images/testing/orders/views.png)
+
+## Payment App
+
+apps.py
+
+![App Screenshot](static/images/testing/payment/apps.png)
+
+forms.py
+
+![App Screenshot](static/images/testing/payment/forms.png)
+
+urls.py
+
+![App Screenshot](static/images/testing/payment/urls.png)
+
+views.py
+
+![App Screenshot](static/images/testing/payment/views.png)
+
+## Shop App
+
+admin.py
+
+![App Screenshot](static/images/testing/shop/admin.png)
+
+apps.py
+
+![App Screenshot](static/images/testing/shop/form.png)
+
+
+form.py
+
+![App Screenshot](static/images/testing/shop/form.png)
+
+models.py
+
+![App Screenshot](static/images/testing/shop/models.png)
+
+urls.py
+
+![App Screenshot](static/images/testing/shop/url.png)
+
+views.py
+
+![App Screenshot](static/images/testing/shop/views.png)
+
+
 
 ## Responsivness Testing
 
@@ -598,11 +834,13 @@ Mobile Testing with Google Lighthouse
 ### Criterion 1.2
 - Added payment information on the payment_completed page after a successful payment.
 
-![App Screenshot](static/images/features/payment-confirmed.png)
+![App Screenshot](static/images/features/payment-confirm.png)
 
 - Improved feedback to users on payment attempts by displaying relevant information such as payment method, transaction ID, and date. 
 
 - Added email functionality using SMTP to send confirmation emails to users on successful purchases.
+
+
 
 # Deployment
 
