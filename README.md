@@ -8,7 +8,6 @@ Old Town Jewels is designed to be user-friendly and easy to navigate. The store 
 
 Whether you're looking for a special piece of jewellery for yourself or a gift for someone else, Old Town Jewels has something for everyone. We hope you enjoy shopping with us!
 
-![App Screenshot](static/images/responsive.png)
 
 [View the live project here](https://old-town-jewels.herokuapp.com/ "Link to deployed site - Old Town Jewels")
 
@@ -194,73 +193,6 @@ To maintain a cohesive appearance throughout the site, a limited color palette w
 Overall, the website was designed with the user in mind, with the goal of creating a pleasant and intuitive shopping experience. The combination of a visually appealing design, user-friendly navigation, and responsive layout helps to achieve this goal, making the website an effective tool for selling products online.
 
 
-- ## Wireframes
-wireframes for the project were created using [Balsamiq](https://balsamiq.com/)
-
-**Home Page**
-Hero Image
-
-![App Screenshot](static/images/hero-image.png)
-
-Section 1
-
-![App Screenshot](static/images/section-2.png)
-
-Section 2 
-
-![App Screenshot](static/images/section-3.png)
-
-Section 3
-
-![App Screenshot](static/images/section-4.png)
-
-Section 4 
-
-![App Screenshot](static/images/section-5.png)
-
-
-
-
-Login Page 
-
-![App Screenshot](static/images/log-in.png)
-
-Register Page 
-
-![App Screenshot](static/images/register.png)
-
-User Profile
-
-![App Screenshot](static/images/user-profile.png)
-
-Shop Page 
-
-![App Screenshot](static/images/products.png)
-
-Product Detail Page
-
-![App Screenshot](static/images/product-detail.png)
-
-Cart Detail Page
-
-![App Screenshot](static/images/shopping-cart.png)
-
-
-Order summary
-
-![App Screenshot](static/images/order-summary.png)
-
-Checkout Form
-
-![App Screenshot](static/images/checkout.png)
-
-Payment Form
-
-![App Screenshot](static/images/payment-form.png)
-
-Payment Confirmation
-
-![App Screenshot](static/images/payment-confirm.png)
 
 
 
