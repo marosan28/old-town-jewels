@@ -293,6 +293,66 @@ Users are able to easily subscribe to the monthly newsletter at the bottom of th
 
 # Features
 
+Landing Page
+
+![App Screenshot](static/images/features/hero-main.png)
+![App Screenshot](static/images/features/sectiona.png)
+![App Screenshot](static/images/features/sectionb.png)
+![App Screenshot](static/images/features/sectionc.png)
+![App Screenshot](static/images/features/sectiond.png)
+
+Log in 
+
+![App Screenshot](static/images/features/log-in.png)
+
+
+Register
+
+![App Screenshot](static/images/features/register.png)
+
+Edit Profile
+
+![App Screenshot](static/images/features/edit-profile.png)
+
+Change Password
+
+![App Screenshot](static/images/features/change-password.png)
+![App Screenshot](static/images/features/pass-changed.png)
+
+Forgotten password
+
+![App Screenshot](static/images/features/forgot-password.png)
+![App Screenshot](static/images/features/email-sent.png)
+![App Screenshot](static/images/features/followed-link.png)
+
+Shop Products
+
+![App Screenshot](static/images/features/products.png)
+
+CRUD Reviews
+
+![App Screenshot](static/images/features/detailproduct.png)
+![App Screenshot](static/images/features/average-review-count.png)
+![App Screenshot](static/images/features/submitted-review.png)
+![App Screenshot](static/images/features/review-updated.png)
+![App Screenshot](static/images/features/edit-review-message.png)
+![App Screenshot](static/images/features/delete-review.png)
+
+Shopping Cart
+
+![App Screenshot](static/images/features/shopping-cart.png)
+![App Screenshot](static/images/features/applied-coupon.png)
+![App Screenshot](static/images/features/order-summary.png)
+
+Checkout and Payment
+
+![App Screenshot](static/images/features/checkout-form.png)
+![App Screenshot](static/images/features/checkout-form.png)
+![App Screenshot](static/images/features/stripe-form.png)
+![App Screenshot](static/images/features/stripe-form2.png)
+![App Screenshot](static/images/features/payment-confirmation.png)
+
+
 
 
 # Technologies Used
