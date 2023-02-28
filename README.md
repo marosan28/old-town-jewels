@@ -8,6 +8,7 @@ Old Town Jewels is designed to be user-friendly and easy to navigate. The store 
 
 Whether you're looking for a special piece of jewellery for yourself or a gift for someone else, Old Town Jewels has something for everyone. We hope you enjoy shopping with us!
 
+![App Screenshot](static/images/responsive.png) 
 
 [View the live project here](https://old-town-jewels.herokuapp.com/ "Link to deployed site - Old Town Jewels")
 
@@ -169,8 +170,21 @@ By providing these features, Old Town Jewels aims to create a positive shopping 
 
 # Structure
 
-This project is structured with a homepage with the website's logo and a message that greets the user with a clear navigation bar at the top of the page where the user can login or sign up. When logging in user is allowed to request a email password reset in case of a forgotten password.
-After the User logs in he is able to visit his profile section and make modifications of his personal information, customer is also allowed to change his password while being logged in. Customers can inspect products and see average reviews on product details helping them make a decision while shopping. Customers are also allowed to leave their own comments and ratings below each product. Old Town Jewels shop enables clients to browse products, add them to the cart, apply discount codes, go through the checkout process and pay with a credit a card. After successfull payment has been made, customers are greeted with a message containing their order information, payment method, last 4 digits of the card they used on checkout, payment ID, date of purchase. The information is also forwarded to their emails. Additionally fully functional 404 error page has been added. 
+This project is a web-based application designed to provide customers with an easy-to-use and user-friendly online shopping experience. The application is built for an online jewelry store called Old Town Jewels.
+
+The homepage of the website is structured with the company's logo and a welcoming message that greets the user upon arrival. The page is designed to be visually appealing and provide easy navigation. At the top of the page, a clear and well-organized navigation bar is provided, which allows the user to log in or sign up for a new account.
+
+Once the user has logged in, they are directed to their personal profile section, where they can modify their personal information, such as their name, address, and contact details. In addition, the user is also allowed to change their password while being logged in. This feature adds an extra layer of security and privacy to the user's account.
+
+The customers can browse through the wide range of products available on the website. Each product is displayed with a detailed description, including the price, specifications, and features. Moreover, the website also displays the average ratings and reviews provided by previous customers, helping the users to make informed decisions while shopping.
+
+The website also allows customers to leave their own comments and ratings for each product. This feature provides an opportunity for customers to share their experiences and feedback, which can help other users to make more informed decisions while shopping.
+
+Old Town Jewels shop enables clients to add products to their cart, apply discount codes, go through the checkout process, and pay with a credit card. The checkout process is designed to be easy and straightforward, with clear instructions provided at each step.
+
+After the payment has been successfully processed, the customer is greeted with a message containing their order information, payment method, last 4 digits of the card they used on checkout, payment ID, and date of purchase. The order information is also forwarded to their email for their reference.
+
+Finally, the website also includes a fully functional 404 error page, which provides a user-friendly error message in case the user encounters any technical difficulties while using the website. This feature adds an extra layer of user experience and convenience to the website.
 
 **The website is made of the following apps**:
 
@@ -192,12 +206,142 @@ To maintain a cohesive appearance throughout the site, a limited color palette w
 
 Overall, the website was designed with the user in mind, with the goal of creating a pleasant and intuitive shopping experience. The combination of a visually appealing design, user-friendly navigation, and responsive layout helps to achieve this goal, making the website an effective tool for selling products online.
 
+- ## Wireframes
+wireframes for the project were created using [Balsamiq](https://balsamiq.com/)
+
+**Home Page**
+Hero Image
+
+![App Screenshot](static/images/hero-image.png)
+
+Section 1
+
+![App Screenshot](static/images/section-2.png)
+
+Section 2 
+
+![App Screenshot](static/images/section-3.png)
+
+Section 3
+
+![App Screenshot](static/images/section-4.png)
+
+Section 4 
+
+![App Screenshot](static/images/section-5.png)
+
+The wireframes show that the homepage has a hero image at the top, which is a large banner that spans the full width of the page. The hero image is used to showcase the main message of the website and to grab the attention of the users.
+
+Below the hero image, the wireframes show four different sections. The first section is an invitation to shop with the company, with some images of their products. This section is designed to encourage users to explore the website and make a purchase.
+
+The second section is a carousel of the company's products. This section showcases the company's products in a visually appealing and dynamic way, allowing users to browse through the different products easily.
+
+The third section is a big sale image, which is used to highlight any current sales or promotions that the company may be offering. This section is designed to catch the user's attention and encourage them to take advantage of the current sale.
+
+Finally, the fourth section is a call to action for users to follow the company on Instagram. This section includes the company's Instagram logo and an image from their Instagram feed, encouraging users to follow the company's social media page for more updates and promotions.
+
+Login Page 
+
+![App Screenshot](static/images/log-in.png)
+
+A wireframe of a login page  onsists of a login form and an accompanying image or graphic that adds visual interest to the page. The login form includes input fields for the user's email and password, as well as additional features such as a checkbox to remember the user's login information and a link to reset a forgotten password.
+
+The accompanying image or graphic is selected to convey the purpose and brand of the website. It is usually relevant to the website's content or theme and is intended to make the page visually appealing and engaging.
+
+Overall, the wireframe for the login page is designed to be user-friendly and easy to navigate. A clear and well-designed login form is essential to ensure a positive user experience, while an accompanying image or graphic helps to enhance the overall visual appeal of the page.
+
+Register Page 
+
+![App Screenshot](static/images/register.png)
+
+User Profile
+
+![App Screenshot](static/images/user-profile.png)
+
+The user profile page is designed to provide users with the ability to modify their personal information. The page is built upon an HTML template that extends the base template of the website.
+
+The user profile page includes a navigation bar at the top of the page, which displays the user's username and provides links to edit the user's profile or log out of the website. Additionally, the navigation bar also includes a link to the shop page.
+
+The main content of the user profile page is contained within a card. The card displays the user's username and includes a form where the user can modify their personal information, such as their first name, last name, email, and date of birth.
+
+The form includes input fields for each of the user's personal information, and a "Save Changes" button is provided to allow the user to save their modifications. Additionally, the user is provided with a link to change their password, in case they wish to update their login credentials.
+
+Shop Page 
+
+![App Screenshot](static/images/products.png)
+The shop page is designed to display the various products available for purchase on the website. The page is built on an HTML template that extends the base template of the website.
+
+The shop page includes a navigation bar at the top of the page, which provides links to various pages on the website, including the user's profile page and the shopping cart. The title of the page is dynamic and changes depending on whether the user is viewing all products or a specific category of products.
+
+The main content of the shop page is divided into two columns. The left column displays a list of product categories, allowing users to filter the products based on their preferences. The right column displays the products themselves, with a product image, name, description, and price.
+
+Users can click on a product to view its details, including additional images, specifications, and reviews. Additionally, users can add products to their cart and proceed to checkout to make a purchase.
 
 
+Product Detail Page
+
+![App Screenshot](static/images/product-detail.png)
+
+The product detail page provides users with detailed information about a specific product on the website. The page is built on an HTML template that extends the base template of the website.
+
+The product detail page displays a large image of the product, along with its name, category, and price. A brief description of the product is also provided, along with a form that allows users to add the product to their shopping cart.
+
+Below the product information, users can view any reviews that have been left for the product. The average rating of the product is also displayed, along with the total number of reviews.
+
+Users can add a new review by filling out a form and submitting it. The form includes fields for the user's rating and comments. Users can also edit or delete their own reviews if they are logged in. 
+
+The product detail page is designed to provide users with all the information they need to make an informed purchase decision. It allows users to view the product from multiple angles, read reviews from other customers, and add the product to their shopping cart with ease.
+
+Cart Detail Page
+
+![App Screenshot](static/images/shopping-cart.png)
+
+The cart detail page displays the items that the user has added to their shopping cart. The page features a table that shows the product name, price, quantity, and total price for each item in the cart. The user has the option to update the quantity or remove the item from the cart. The page also displays the subtotal and total price of all the items in the cart, including any discounts applied from a coupon code. There is a form at the bottom of the page where the user can apply a coupon code. The user can continue shopping or proceed to checkout from this page.
+
+Order summary
+
+![App Screenshot](static/images/order-summary.png)
+
+The Order Summary page is a page that provides users with a detailed overview of their purchase before proceeding to payment. The page features a simple, easy-to-read layout with a prominent header, clear product images, and concise product information including name, price, and quantity. The table format allows for easy comparison of individual product costs and the subtotal, discount, and total costs are clearly displayed at the bottom. The "Pay now" button is located prominently at the bottom of the page, encouraging users to complete their purchase
+
+Checkout Form
+
+![App Screenshot](static/images/checkout.png)
+
+The Checkout form wireframe is a user interface that enables customers to input their personal and shipping information when placing an order. The form is divided into two sections, personal information and shipping information, and has several input fields for each section.
+
+In the Personal Information section, customers are required to provide their first and last name and email address. The shipping information section has input fields for shipping country, postal code, address line 1 and 2, city and phone number. The form also includes an order summary section that displays the items in the customer's cart, the price of each item, the quantity, and the total price after discount (if any).
+
+At the bottom of the form, there is a "Submit" button that customers can use to submit their information to complete the order. The form also includes a CSRF token to ensure the security of the submission.
+
+Payment Form
+
+![App Screenshot](static/images/payment-form.png)
+
+Description: This page displays the payment form where the user can enter their credit or debit card information and billing address. The form includes the following fields:
+
+- Name on the card
+- Credit or debit card
+- Billing information:
+- Address 1
+- Address 2 (optional)
+- Postal code
+- City
+- Country
+- Checkbox for copying shipping address
+- Delivery option (if available)
+Order summary table showing the product name, quantity, price, and total amount
+Coupon code applied (if any)
+Delivery charge
+Total amount to be paid
+The user must fill in all the required fields to proceed with the payment. Once the form is submitted, the payment will be processed and the user will be redirected to the payment confirmation page.
 
 
+Payment Confirmation
 
+![App Screenshot](static/images/payment-confirm.png)
 
+The payment confirmation template includes blocks for the title, subheader, and content. The content block includes a card with two columns. The left column displays the order summary, including the products, quantities, prices, coupon code (if applicable), delivery charge, and total cost. The right column displays the payment details, including the email, payment method, transaction ID, and date of payment. The payment confirmation template uses custom filters to display the total price of each item.
 
 
 - ## Color Schema
